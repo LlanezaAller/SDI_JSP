@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings 
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+  	version="2.0">
+
+	<!-- User queries -->
+	<named-query name="User.findUserByLogin">
+		<query>
+			<![CDATA[
+			select u
+				from User u
+				where u.login like :login
+				]]>
+		</query>
+	</named-query>
+
+	<!-- Intervencion queries 
+	<named-query name="Intervencion.findIntervencionByMecanico">
+		<query>
+			<![CDATA[
+			select i 
+				from Intervencion i 
+				where i.mecanico.id like :id
+			]]>
+		</query>
+	</named-query>
+	 Averia queries  
+
+ 	<named-query name="Averia.findByIds">
+		<query>select a from Averia a where a.id in (?1)</query>
+	</named-query>
+
+	<named-query name="Averia.findNoFacturadasByDni">
+		<query>
+			select a 
+			from Averia a 
+			where a.vehiculo.cliente.dni = ?1 
+				and a.status = uo.ri.model.types.AveriaStatus.TERMINADA 
+		</query>
+	</named-query>
+ 
+	<named-query name="findItemsOnSaleByCategoryId">
+		<query>
+			<![CDATA[
+			select i 
+				from Item i join i.categories c
+				where c.id = ?2
+					and i.startDate <= ?1
+					and i.endDate >= ?1 
+			]]>
+		</query>
+	</named-query>
+ 		
+ 	<named-query name="Averias.findMecanicos">
+		<query>
+			<![CDATA[
+			select a.mecanico
+				from Averia a 
+				where a.status like 'ASIGNADA'
+			]]>
+		</query>
+	</named-query>
+	
+ Categoria queries 
+ 	
+ 	<named-query name="Categoria.findAll">
+		<query>
+			<![CDATA[
+			select cat 
+				from CategoriaContrato cat
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Categoria.findMechanicsById">
+		<query>
+			<![CDATA[
+			select cont.mecanico 
+				from  Contratos cont
+				where cont.mecanico.id like :id and
+				cont.contractStatus like 'ACTIVO'
+			]]>
+		</query>
+	</named-query>
+	
+  Mecanicos queries
+
+	<named-query name="Mecanico.findMecanicoById">
+		<query>
+			<![CDATA[
+			select mec 
+				from Mecanico mec
+				where mec.id like :id
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Mecanico.findAll">
+		<query>
+			<![CDATA[
+			select m 
+				from Mecanico m
+			]]>
+		</query>
+	</named-query>
+	<named-query name="Mecanico.findAllActives">
+		<query>
+			<![CDATA[
+			select m 
+				from Mecanico m, Contratos cont
+					where m = cont.mecanico and cont.contractStatus = 'ACTIVO'
+			]]>
+		</query>
+	</named-query>
+	<named-query name="Mecanico.AssertDeleteByID">
+		<query>
+			<![CDATA[
+			select m 
+				from Mecanico m, Contratos cont, Averia a
+					where m = cont.mecanico and m.id like :id and
+					cont.FechaContratacion <= a.fecha and 
+					cont.FechaTerminacion >= a.fecha and
+					cont.contractStatus like 'ACTIVO'
+					
+			]]>
+		</query>
+	</named-query>
+	
+ Contrato queries 
+	<named-query name="Contratos.findAll">
+		<query>
+			<![CDATA[
+			select cont 
+				from Contratos cont
+			]]>
+		</query>
+	</named-query>
+	<named-query name="Contratos.FindAllActive">
+		<query>
+			<![CDATA[
+			select cont 
+				from Contratos cont
+				where cont.contractStatus like 'ACTIVO'
+			]]>
+		</query>
+	</named-query>
+	<named-query name="Contratos.findById">
+		<query>
+			<![CDATA[
+			select cont 
+				from Contratos cont
+					where cont.id like :id
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Contratos.findActiveContractByMecanicId">
+		<query>
+			<![CDATA[
+			select cont 
+				from Contratos cont
+					where cont.mecanico.id like :id and
+					cont.contractStatus like 'ACTIVO'
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Contratos.findContractByMecanicId">
+		<query>
+			<![CDATA[
+			select cont 
+				from Contratos cont
+					where cont.mecanico.id like :id
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Contratos.findActiveContractByMechanicId">
+		<query>
+			<![CDATA[
+			select cont 
+				from Contratos cont
+					where cont.mecanico.id like :id and
+					cont.contractStatus like 'ACTIVO'
+			]]>
+		</query>
+	</named-query>
+	
+	
+	 Nomina queries 
+	<named-query name="Nominas.findAll">
+		<query>
+			<![CDATA[
+			select nom 
+				from Nominas nom
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Nominas.findAllPaysheetByContractId">
+		<query>
+			<![CDATA[
+			select nom 
+				from Nominas nom
+				where nom.contrato.id like :id
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Nominas.findLastByContractId">
+		<query>
+			<![CDATA[
+			select nom 
+				from Nominas nom
+				where nom.contrato.id like :id 
+				order by nom.fechaNomina DESC
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Nominas.findAllPaysheetByMechanictId">
+		<query>
+			<![CDATA[
+			select nom 
+				from Nominas nom
+				where nom.contrato.mecanico.id like :id 
+				order by nom.fechaNomina DESC
+			]]>
+		</query>
+	</named-query>
+	-->
+</entity-mappings>
