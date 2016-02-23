@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings 
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+  	version="2.0">
+
+	<!-- User queries -->
+	<named-query name="User.findUserByLogin">
+		<query>
+			<![CDATA[
+			select u
+				from User u
+				where u.login = ?1
+				]]>
+		</query>
+	</named-query>
+	<named-query name="User.findAll">
+		<query>
+			<![CDATA[
+			select u 
+				from User u
+			]]>
+		</query>
+	</named-query>
+
+	<!-- Trip queries -->
+	<named-query name="Trip.findByPromoterIdAndArrivalDate">
+		<query>
+			<![CDATA[
+			select t
+				from Trip t
+				where t.promoter.id = ?1 
+					and t.arrivalDate = ?2
+			]]>
+		</query>
+	</named-query>
+	<named-query name="Trip.findAll">
+		<query>
+			<![CDATA[
+			select t
+				from Trip t
+			]]>
+		</query>
+	</named-query>
+	
+	<!-- Seat queries -->
+	<named-query name="Seat.findByUserAndTrip">
+		<query>
+			<![CDATA[
+			select s
+				from Seat s
+				where s.user.id = ?1
+				and s.trip.id =?2
+			]]>
+		</query>
+	</named-query>
+	
+	<!-- Application queries -->
+	<named-query name="Application.findByUserId">
+		<query>
+			<![CDATA[
+				select a
+					from Application a
+					where a.user.id = ?1
+			]]>
+		</query>
+	</named-query>
+	
+	<named-query name="Application.findByTripId">
+		<query>
+			<![CDATA[
+				select a
+					from Application a
+					where a.trip.id = ?1
+			]]>
+		</query>
+	</named-query>
+	
+	<!-- Rating queries -->
+	<named-query name="Rating.findByAboutFrom">
+		<query>
+			<![CDATA[
+				select r
+					from Rating r
+					where r.aboutSeat.user.id = ?1
+					and r.aboutSeat.trip.id =?2
+			]]>
+		</query>
+	</named-query>
+	
+</entity-mappings>
