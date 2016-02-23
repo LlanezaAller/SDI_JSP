@@ -5,8 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.Trip;
-import uo.sdi.persistence.PersistenceFactory;
 import alb.util.log.Log;
 
 public class ListarViajesAction implements Accion {
@@ -18,7 +18,9 @@ public class ListarViajesAction implements Accion {
 		List<Trip> viajes;
 		
 		try {
-			viajes=PersistenceFactory.newTripDao().findAll();
+			viajes=Factories.persistence
+					.createTripGateway()
+					.findAll();
 			request.setAttribute("listaViajes", viajes);
 			Log.debug("Obtenida lista de viajes conteniendo [%d] viajes", viajes.size());
 		}
