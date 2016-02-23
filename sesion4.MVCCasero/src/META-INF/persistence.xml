@@ -12,11 +12,6 @@
 			<property name="jboss.entity.manager.factory.jndi.name" value="java:/ForumJpaFactory"/>
 			<property name="jdbc.initial.size" value="1"/>
 			
-			<!-- test -->
-			<!-- 
-			<property name="jdbc.min.idle" value="5"/>
-			<property name="jdb.max.idle" value="10"/>
-			 -->
 			
 <!--
 			<property name="hibernate.hbm2ddl.auto" value="create"/>
