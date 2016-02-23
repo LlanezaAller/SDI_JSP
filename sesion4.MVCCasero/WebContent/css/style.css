@@ -1,0 +1,123 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+
+/**Main color: #00d1a7;**/
+/**Global styles**/
+* {
+	box-sizing: border-box;
+}
+
+body{
+	color:white;
+	font-family: 'Roboto', sans-serif;
+    font-weight: 100;	
+}
+a {
+	color:#00d1a7;
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+input {
+	outline:none;
+}
+.animatedBackground {
+	animation-name: backgroundLoop;
+    animation-duration: 60s;
+    animation-iteration-count: infinite;
+    background-size:cover;
+}
+
+.inputLine {
+	margin: 10px 0;
+}
+.textInput {
+	background:transparent;
+	border:none;
+	border-bottom:solid 1px white;
+	color:white;
+	font-size:16px;
+	height:50px;
+	padding:0 10px;
+}
+
+.textInput:focus, .inputIcon + .textInputWithIcon:focus {
+	border-color:#00d1a7;
+	transition:0.15s ease-in-out all;
+}
+.textInputWithIcon {
+	width:calc(100% - 50px);
+}
+
+.inputIcon {
+	border:none;
+	border-bottom:solid 1px white;
+	float:left;
+	height:50px;
+	width:50px;
+}
+.inputIcon i {
+	line-height:50px;
+}
+
+.button {
+	background: #00d1a7;
+	border:solid 2px #00d1a7;
+	border-radius:23px;
+	color:white;
+	cursor:pointer;
+	font-size:20px;
+	height:46px;
+	min-width:200px;
+}
+.button:hover {
+	background:transparent;
+	color:#00d1a7;
+	transition:0.35s ease-in-out all;
+}
+
+.noScrollWrapper {
+	width:100vw;
+	height:100vh;
+	overflow:hidden;
+}
+.centeredWrapper {
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+}
+
+.transparentBox {
+	background:rgba(10,10,10,.70);
+	border-radius:3px;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,.5);
+}
+
+/**Login and register**/
+#loginForm, #registerForm {
+	padding:25px;
+	text-align:center;
+	width:400px;
+}
+#loginForm .button, #registerForm .button {
+	margin-top:30px;
+}
+#loginForm p {
+	margin:15px 0;
+}
+#loginForm a {
+	font-size:20px;
+}
+/*Animations*/
+@keyframes backgroundLoop {
+    0%   {background:url('../img/bg1.jpg')center no-repeat;}
+    18%  {background:url('../img/bg1.jpg')center no-repeat;}
+    25%  {background:url('../img/bg2.jpg')center no-repeat;}
+    43%  {background:url('../img/bg2.jpg')center no-repeat;}
+    50%  {background:url('../img/bg3.jpg')center no-repeat;}
+    68%  {background:url('../img/bg3.jpg')center no-repeat;}
+    75%  {background:url('../img/bg4.jpg')center no-repeat;}
+    93%  {background:url('../img/bg4.jpg')center no-repeat;}
+    100% {background:url('../img/bg1.jpg')center no-repeat;}
+}
