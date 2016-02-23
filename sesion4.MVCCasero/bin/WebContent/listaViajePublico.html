@@ -9,32 +9,21 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li id="activeLink"><a href="#">Viajes</a></li>
-        <li><a href="#">Mis Viajes</a></li>
-        <li><a href="#">Crear Viaje</a></li>
-      </ul>
-      <ul>
-        <li><a href="#">Entrar</a></li>
-        <li><a href="#">Crear cuenta</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <table class="table" id="tripsTable">
-      <thead>
-        <tr>
-          <th>Origen</th>
-          <th>Destino</th>
-          <th>Fecha de salida</th>
-          <th>Fecha de llegada</th>
-          <th>Fecha límite</th>
-          <th>Plazas libres</th>
-        </tr>
-      </thead>
-    </table>
-  </main>
+  <table border="1" align="center">
+      <tr>
+        <th>ID viaje</th>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>Plazas libres</th>
+      </tr>
+    <c:forEach var="entry" items="${listaViajes}" varStatus="i">
+      <tr id="item_${i.index}">
+        <td><a href="mostrarViaje?id=${entry.id}">${entry.id}</a></td>
+        <td>${entry.departure.city}</td>
+        <td>${entry.destination.city}</td>
+        <td>${entry.availablePax}</td>
+      </tr>
+    </c:forEach>
+  </table>
 </body>
 </html>
