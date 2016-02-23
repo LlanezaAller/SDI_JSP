@@ -1,9 +1,14 @@
 package uo.sdi.model;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.crypto.Data;
 
@@ -28,6 +33,12 @@ public class Seat {
 
 	private String comment;
 	private SeatStatus status;
+	
+	@OneToMany(mappedBy="fromSeat")
+	private Set<Rating> ratingsFrom = new HashSet<>();
+	
+	@OneToMany(mappedBy="aboutSeat")
+	private Set<Rating> ratingsAbout = new HashSet<>();
 
 	public Seat(){};
 
@@ -70,6 +81,24 @@ public class Seat {
 		return "Seat [userId=" + user + ", tripId=" 
 				+ trip + ", comment=" + comment 
 				+ ", status=" + status + "]";
+	}
+	
+	//Relaciones
+	
+	Set<Rating> _getRatingsFrom() {
+		return ratingsFrom;
+	}
+	
+	public Set<Rating> getRatingsFrom(){
+		return Collections.unmodifiableSet(ratingsFrom);
+	}
+	
+	Set<Rating> _getRatingsAbout(){
+		return ratingsAbout;
+	}
+	
+	public Set<Rating> getRatingsAbout(){
+		return Collections.unmodifiableSet(ratingsAbout);
 	}
 
 }

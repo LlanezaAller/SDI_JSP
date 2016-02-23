@@ -1,8 +1,10 @@
 package uo.sdi.model;
 
+import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.crypto.Data;
 
@@ -21,15 +23,35 @@ public class Rating {
 	@Id @GeneratedValue
 	private Long id;
 	
+	@ManyToOne
+	@Named("seat")
+	private Seat fromSeat;
+//	private Long seatFromTripId;
+//	private Long seatFromUserId;
 	
-
-	private Long seatFromTripId;
-	private Long seatFromUserId;
-	private Long seatAboutTripId;
-	private Long seatAboutUserId;
+	@ManyToOne
+	private Seat aboutSeat;
+//	private Long seatAboutTripId;
+//	private Long seatAboutUserId;
 
 	private String comment;
 	private Integer value = 0;
+
+	public Seat getFromSeat() {
+		return fromSeat;
+	}
+
+	public void setFromSeat(Seat fromSeat) {
+		this.fromSeat = fromSeat;
+	}
+
+	public Seat getAboutSeat() {
+		return aboutSeat;
+	}
+
+	public void setAboutSeat(Seat aboutSeat) {
+		this.aboutSeat = aboutSeat;
+	}
 
 	public Rating(){};
 	
@@ -41,37 +63,7 @@ public class Rating {
 		this.id = id;
 	}
 
-	public Long getSeatFromTripId() {
-		return seatFromTripId;
-	}
-
-	public void setSeatFromTripId(Long seatFromTripId) {
-		this.seatFromTripId = seatFromTripId;
-	}
-
-	public Long getSeatFromUserId() {
-		return seatFromUserId;
-	}
-
-	public void setSeatFromUserId(Long seatFromUserId) {
-		this.seatFromUserId = seatFromUserId;
-	}
-
-	public Long getSeatAboutTripId() {
-		return seatAboutTripId;
-	}
-
-	public void setSeatAboutTripId(Long seatAboutTripId) {
-		this.seatAboutTripId = seatAboutTripId;
-	}
-
-	public Long getSeatAboutUserId() {
-		return seatAboutUserId;
-	}
-
-	public void setSeatAboutUserId(Long seatAboutUserId) {
-		this.seatAboutUserId = seatAboutUserId;
-	}
+	
 
 	public String getComment() {
 		return comment;
@@ -89,31 +81,24 @@ public class Rating {
 		this.value = value;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "Rating [id=" + id 
+		return "Rating [fromSeat=" + fromSeat +
+				", aboutSeat=" + aboutSeat
 				+ ", comment=" + comment 
-				+ ", value=" + value 
-				+ ", seatFromTripId=" + seatFromTripId
-				+ ", seatFromUserId=" + seatFromUserId 
-				+ ", seatAboutTripId=" + seatAboutTripId 
-				+ ", seatAboutUserId=" + seatAboutUserId 
-			+ "]";
+				+ ", value=" + value + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result
-				+ ((seatAboutTripId == null) ? 0 : seatAboutTripId.hashCode());
+				+ ((aboutSeat == null) ? 0 : aboutSeat.hashCode());
 		result = prime * result
-				+ ((seatAboutUserId == null) ? 0 : seatAboutUserId.hashCode());
-		result = prime * result
-				+ ((seatFromTripId == null) ? 0 : seatFromTripId.hashCode());
-		result = prime * result
-				+ ((seatFromUserId == null) ? 0 : seatFromUserId.hashCode());
+				+ ((fromSeat == null) ? 0 : fromSeat.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
@@ -127,30 +112,15 @@ public class Rating {
 		if (getClass() != obj.getClass())
 			return false;
 		Rating other = (Rating) obj;
-		if (comment == null) {
-			if (other.comment != null)
+		if (aboutSeat == null) {
+			if (other.aboutSeat != null)
 				return false;
-		} else if (!comment.equals(other.comment))
+		} else if (!aboutSeat.equals(other.aboutSeat))
 			return false;
-		if (seatAboutTripId == null) {
-			if (other.seatAboutTripId != null)
+		if (fromSeat == null) {
+			if (other.fromSeat != null)
 				return false;
-		} else if (!seatAboutTripId.equals(other.seatAboutTripId))
-			return false;
-		if (seatAboutUserId == null) {
-			if (other.seatAboutUserId != null)
-				return false;
-		} else if (!seatAboutUserId.equals(other.seatAboutUserId))
-			return false;
-		if (seatFromTripId == null) {
-			if (other.seatFromTripId != null)
-				return false;
-		} else if (!seatFromTripId.equals(other.seatFromTripId))
-			return false;
-		if (seatFromUserId == null) {
-			if (other.seatFromUserId != null)
-				return false;
-		} else if (!seatFromUserId.equals(other.seatFromUserId))
+		} else if (!fromSeat.equals(other.fromSeat))
 			return false;
 		if (value == null) {
 			if (other.value != null)
