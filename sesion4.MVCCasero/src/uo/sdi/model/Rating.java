@@ -24,15 +24,10 @@ public class Rating {
 	private Long id;
 	
 	@ManyToOne
-	@Named("seat")
 	private Seat fromSeat;
-//	private Long seatFromTripId;
-//	private Long seatFromUserId;
 	
 	@ManyToOne
 	private Seat aboutSeat;
-//	private Long seatAboutTripId;
-//	private Long seatAboutUserId;
 
 	private String comment;
 	private Integer value = 0;
