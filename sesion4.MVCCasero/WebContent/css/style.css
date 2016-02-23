@@ -23,8 +23,9 @@ input {
 }
 .animatedBackground {
 	animation-name: backgroundLoop;
-    animation-duration: 60s;
+    animation-duration: 80s;
     animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
     background-size:cover;
 }
 
@@ -112,12 +113,12 @@ input {
 /*Animations*/
 @keyframes backgroundLoop {
     0%   {background:url('../img/bg1.jpg')center no-repeat;}
-    18%  {background:url('../img/bg1.jpg')center no-repeat;}
+    10%  {background:url('../img/bg1.jpg')center no-repeat;}
     25%  {background:url('../img/bg2.jpg')center no-repeat;}
-    43%  {background:url('../img/bg2.jpg')center no-repeat;}
+    35%  {background:url('../img/bg2.jpg')center no-repeat;}
     50%  {background:url('../img/bg3.jpg')center no-repeat;}
-    68%  {background:url('../img/bg3.jpg')center no-repeat;}
+    60%  {background:url('../img/bg3.jpg')center no-repeat;}
     75%  {background:url('../img/bg4.jpg')center no-repeat;}
-    93%  {background:url('../img/bg4.jpg')center no-repeat;}
+    85%  {background:url('../img/bg4.jpg')center no-repeat;}
     100% {background:url('../img/bg1.jpg')center no-repeat;}
 }
