@@ -4,9 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.User;
 import uo.sdi.persistence.PersistenceFactory;
-import uo.sdi.persistence.UserDao;
+import uo.sdi.persistence.UserFinder;
 import alb.util.log.Log;
 
 public class ValidarseAction implements Accion {
@@ -19,8 +20,8 @@ public class ValidarseAction implements Accion {
 		String nombreUsuario=request.getParameter("nombreUsuario");
 		HttpSession session=request.getSession();
 		if (session.getAttribute("user")==null) {
-			UserDao dao = PersistenceFactory.newUserDao();
-			User userByLogin = dao.findByLogin(nombreUsuario);
+			UserFinder uF = Factories.persistence.createUserGateway();
+			User userByLogin = uF.findByLogin(nombreUsuario);
 			if (userByLogin!=null) {
 				session.setAttribute("user", userByLogin);
 				int contador=Integer.parseInt((String)request.getServletContext().getAttribute("contador"));

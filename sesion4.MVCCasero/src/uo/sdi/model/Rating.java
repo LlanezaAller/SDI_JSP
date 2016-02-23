@@ -1,6 +1,5 @@
 package uo.sdi.model;
 
-import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

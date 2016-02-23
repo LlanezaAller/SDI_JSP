@@ -11,224 +11,82 @@
 			<![CDATA[
 			select u
 				from User u
-				where u.login like :login
+				where u.login = ?1
 				]]>
 		</query>
 	</named-query>
-
-	<!-- Intervencion queries 
-	<named-query name="Intervencion.findIntervencionByMecanico">
+	<named-query name="User.findAll">
 		<query>
 			<![CDATA[
-			select i 
-				from Intervencion i 
-				where i.mecanico.id like :id
+			select u 
+				from User u
 			]]>
 		</query>
-	</named-query>
-	 Averia queries  
-
- 	<named-query name="Averia.findByIds">
-		<query>select a from Averia a where a.id in (?1)</query>
 	</named-query>
 
-	<named-query name="Averia.findNoFacturadasByDni">
-		<query>
-			select a 
-			from Averia a 
-			where a.vehiculo.cliente.dni = ?1 
-				and a.status = uo.ri.model.types.AveriaStatus.TERMINADA 
-		</query>
-	</named-query>
- 
-	<named-query name="findItemsOnSaleByCategoryId">
+	<!-- Trip queries -->
+	<named-query name="Trip.findByPromoterIdAndArrivalDate">
 		<query>
 			<![CDATA[
-			select i 
-				from Item i join i.categories c
-				where c.id = ?2
-					and i.startDate <= ?1
-					and i.endDate >= ?1 
+			select t
+				from Trip t
+				where t.promoter.id = ?1 
+					and t.arrivalDate = ?2
 			]]>
 		</query>
 	</named-query>
- 		
- 	<named-query name="Averias.findMecanicos">
+	<named-query name="Trip.findAll">
 		<query>
 			<![CDATA[
-			select a.mecanico
-				from Averia a 
-				where a.status like 'ASIGNADA'
+			select t
+				from Trip t
 			]]>
 		</query>
 	</named-query>
 	
- Categoria queries 
- 	
- 	<named-query name="Categoria.findAll">
+	<!-- Seat queries -->
+	<named-query name="Seat.findByUserAndTrip">
 		<query>
 			<![CDATA[
-			select cat 
-				from CategoriaContrato cat
+			select s
+				from Seat s
+				where s.user.id = ?1
+				and s.trip.id =?2
 			]]>
 		</query>
 	</named-query>
 	
-	<named-query name="Categoria.findMechanicsById">
+	<!-- Application queries -->
+	<named-query name="Application.findByUserId">
 		<query>
 			<![CDATA[
-			select cont.mecanico 
-				from  Contratos cont
-				where cont.mecanico.id like :id and
-				cont.contractStatus like 'ACTIVO'
+				select a
+					from Application a
+					where a.user.id = ?1
 			]]>
 		</query>
 	</named-query>
 	
-  Mecanicos queries
-
-	<named-query name="Mecanico.findMecanicoById">
+	<named-query name="Application.findByTripId">
 		<query>
 			<![CDATA[
-			select mec 
-				from Mecanico mec
-				where mec.id like :id
+				select a
+					from Application a
+					where a.trip.id = ?1
 			]]>
 		</query>
 	</named-query>
 	
-	<named-query name="Mecanico.findAll">
+	<!-- Rating queries -->
+	<named-query name="Rating.findByAboutFrom">
 		<query>
 			<![CDATA[
-			select m 
-				from Mecanico m
-			]]>
-		</query>
-	</named-query>
-	<named-query name="Mecanico.findAllActives">
-		<query>
-			<![CDATA[
-			select m 
-				from Mecanico m, Contratos cont
-					where m = cont.mecanico and cont.contractStatus = 'ACTIVO'
-			]]>
-		</query>
-	</named-query>
-	<named-query name="Mecanico.AssertDeleteByID">
-		<query>
-			<![CDATA[
-			select m 
-				from Mecanico m, Contratos cont, Averia a
-					where m = cont.mecanico and m.id like :id and
-					cont.FechaContratacion <= a.fecha and 
-					cont.FechaTerminacion >= a.fecha and
-					cont.contractStatus like 'ACTIVO'
-					
+				select r
+					from Rating r
+					where r.aboutSeat.user.id = ?1
+					and r.aboutSeat.trip.id =?2
 			]]>
 		</query>
 	</named-query>
 	
- Contrato queries 
-	<named-query name="Contratos.findAll">
-		<query>
-			<![CDATA[
-			select cont 
-				from Contratos cont
-			]]>
-		</query>
-	</named-query>
-	<named-query name="Contratos.FindAllActive">
-		<query>
-			<![CDATA[
-			select cont 
-				from Contratos cont
-				where cont.contractStatus like 'ACTIVO'
-			]]>
-		</query>
-	</named-query>
-	<named-query name="Contratos.findById">
-		<query>
-			<![CDATA[
-			select cont 
-				from Contratos cont
-					where cont.id like :id
-			]]>
-		</query>
-	</named-query>
-	
-	<named-query name="Contratos.findActiveContractByMecanicId">
-		<query>
-			<![CDATA[
-			select cont 
-				from Contratos cont
-					where cont.mecanico.id like :id and
-					cont.contractStatus like 'ACTIVO'
-			]]>
-		</query>
-	</named-query>
-	
-	<named-query name="Contratos.findContractByMecanicId">
-		<query>
-			<![CDATA[
-			select cont 
-				from Contratos cont
-					where cont.mecanico.id like :id
-			]]>
-		</query>
-	</named-query>
-	
-	<named-query name="Contratos.findActiveContractByMechanicId">
-		<query>
-			<![CDATA[
-			select cont 
-				from Contratos cont
-					where cont.mecanico.id like :id and
-					cont.contractStatus like 'ACTIVO'
-			]]>
-		</query>
-	</named-query>
-	
-	
-	 Nomina queries 
-	<named-query name="Nominas.findAll">
-		<query>
-			<![CDATA[
-			select nom 
-				from Nominas nom
-			]]>
-		</query>
-	</named-query>
-	
-	<named-query name="Nominas.findAllPaysheetByContractId">
-		<query>
-			<![CDATA[
-			select nom 
-				from Nominas nom
-				where nom.contrato.id like :id
-			]]>
-		</query>
-	</named-query>
-	
-	<named-query name="Nominas.findLastByContractId">
-		<query>
-			<![CDATA[
-			select nom 
-				from Nominas nom
-				where nom.contrato.id like :id 
-				order by nom.fechaNomina DESC
-			]]>
-		</query>
-	</named-query>
-	
-	<named-query name="Nominas.findAllPaysheetByMechanictId">
-		<query>
-			<![CDATA[
-			select nom 
-				from Nominas nom
-				where nom.contrato.mecanico.id like :id 
-				order by nom.fechaNomina DESC
-			]]>
-		</query>
-	</named-query>
-	-->
 </entity-mappings>

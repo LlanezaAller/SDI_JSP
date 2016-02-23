@@ -3,7 +3,7 @@ package uo.sdi.persistence;
 import uo.sdi.model.Rating;
 import uo.sdi.persistence.util.GenericDao;
 
-public interface RatingDao extends GenericDao<Rating, Long> {
+public interface RatingFinder{
 
 	Rating findByAboutFrom(
 			Long aboutUserId, 
