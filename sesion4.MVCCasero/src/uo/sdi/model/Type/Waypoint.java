@@ -6,7 +6,6 @@ import javax.persistence.Embeddable;
  * This class represents a value type
  * @author alb
  */
-@Embeddable
 public class Waypoint {
 
 	private Double lat;

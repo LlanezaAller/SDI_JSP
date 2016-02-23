@@ -8,7 +8,6 @@ import javax.persistence.Embeddable;
  * 
  * @author alb
  */
-@Embeddable
 public class AddressPoint {
 	
 	private String address;
