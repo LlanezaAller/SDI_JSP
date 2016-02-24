@@ -10,6 +10,8 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumns;
@@ -42,6 +44,8 @@ public class Trip {
 	@AttributeOverride(name = "city", column = @Column(name = "departure_city")),
 	@AttributeOverride(name = "state", column = @Column(name = "departure_state")),
 	@AttributeOverride(name = "country", column = @Column(name = "departure_country")),
+//	@AttributeOverride(name = "lat", column = @Column(name = "departure_wpt_lat")),
+//	@AttributeOverride(name = "lon", column = @Column(name = "departure_wpt_lon")),
 	@AttributeOverride(name = "zipCode", column = @Column(name = "departure_zipCode"))
 	})
 	@Embedded
@@ -54,6 +58,8 @@ public class Trip {
 	@AttributeOverride(name = "city", column = @Column(name = "destination_city")),
 	@AttributeOverride(name = "state", column = @Column(name = "destination_state")),
 	@AttributeOverride(name = "country", column = @Column(name = "destination_country")),
+//	@AttributeOverride(name = "lat", column = @Column(name = "destination_wpt_lat")),
+//	@AttributeOverride(name = "lon", column = @Column(name = "destination_wpt_lon")),
 	@AttributeOverride(name = "zipCode", column = @Column(name = "destination_zipCode"))
 	})
 	@Embedded
@@ -66,6 +72,7 @@ public class Trip {
 	private Integer maxPax = 0;
 	private Double estimatedCost = 0.0;
 	private String comments;
+	@Enumerated(EnumType.STRING)
 	private TripStatus status;
 
 
@@ -172,6 +179,58 @@ public class Trip {
 	}
 
 	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((arrivalDate == null) ? 0 : arrivalDate.hashCode());
+		result = prime * result
+				+ ((closingDate == null) ? 0 : closingDate.hashCode());
+		result = prime * result
+				+ ((departure == null) ? 0 : departure.hashCode());
+		result = prime * result
+				+ ((destination == null) ? 0 : destination.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Trip other = (Trip) obj;
+		if (arrivalDate == null) {
+			if (other.arrivalDate != null)
+				return false;
+		} else if (!arrivalDate.equals(other.arrivalDate))
+			return false;
+		if (closingDate == null) {
+			if (other.closingDate != null)
+				return false;
+		} else if (!closingDate.equals(other.closingDate))
+			return false;
+		if (departure == null) {
+			if (other.departure != null)
+				return false;
+		} else if (!departure.equals(other.departure))
+			return false;
+		if (destination == null) {
+			if (other.destination != null)
+				return false;
+		} else if (!destination.equals(other.destination))
+			return false;
+		if (status != other.status)
+			return false;
+		return true;
+	}
+
 
 	@Override
 	public String toString() {

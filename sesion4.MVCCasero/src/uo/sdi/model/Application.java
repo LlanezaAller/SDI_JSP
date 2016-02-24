@@ -6,7 +6,7 @@ import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import uo.sdi.model.Type.ApplicationKey;
+import uo.sdi.model.keys.ApplicationKey;
 
 @Entity
 @Table(name="TAPPLICATION")

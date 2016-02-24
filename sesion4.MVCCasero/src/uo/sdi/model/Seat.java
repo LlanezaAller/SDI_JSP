@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.crypto.Data;
 
-import uo.sdi.model.Type.SeatKey;
 import uo.sdi.model.Type.SeatStatus;
+import uo.sdi.model.keys.SeatKey;
 
 /**
  * This class is not an entity, it is a DTO with the same fields as a row in the

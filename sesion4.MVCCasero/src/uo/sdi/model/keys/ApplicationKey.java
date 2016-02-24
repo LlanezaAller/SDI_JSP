@@ -1,4 +1,4 @@
-package uo.sdi.model.Type;
+package uo.sdi.model.keys;
 
 import java.io.Serializable;
 
