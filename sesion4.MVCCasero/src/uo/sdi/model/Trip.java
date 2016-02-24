@@ -5,9 +5,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -31,8 +36,29 @@ public class Trip {
 	@Id @GeneratedValue
 	private Long id;
 	
+	
+	@AttributeOverrides({
+	@AttributeOverride(name="address",column=@Column(name="departure_address")),
+	@AttributeOverride(name = "city", column = @Column(name = "departure_city")),
+	@AttributeOverride(name = "state", column = @Column(name = "departure_state")),
+	@AttributeOverride(name = "country", column = @Column(name = "departure_country")),
+	@AttributeOverride(name = "zipCode", column = @Column(name = "departure_zipCode"))
+	})
+	@Embedded
 	private AddressPoint departure;
+	
+	
+	
+	@AttributeOverrides( {
+	@AttributeOverride(name = "address", column = @Column(name = "destination_address")),
+	@AttributeOverride(name = "city", column = @Column(name = "destination_city")),
+	@AttributeOverride(name = "state", column = @Column(name = "destination_state")),
+	@AttributeOverride(name = "country", column = @Column(name = "destination_country")),
+	@AttributeOverride(name = "zipCode", column = @Column(name = "destination_zipCode"))
+	})
+	@Embedded
 	private AddressPoint destination;
+	
 	private Date arrivalDate;
 	private Date departureDate;
 	private Date closingDate;

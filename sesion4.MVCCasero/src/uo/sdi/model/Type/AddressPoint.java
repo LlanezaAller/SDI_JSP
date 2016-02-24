@@ -1,6 +1,9 @@
 package uo.sdi.model.Type;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
 
 
 /**
@@ -8,6 +11,7 @@ import javax.persistence.Embeddable;
  * 
  * @author alb
  */
+@Embeddable
 public class AddressPoint {
 	
 	private String address;
@@ -16,6 +20,7 @@ public class AddressPoint {
 	private String country;
 	private String zipCode;
 	
+	@Transient
 	private Waypoint waypoint;
 	
 
