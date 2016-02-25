@@ -16,34 +16,48 @@ public class RegistrarseAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 
+		boolean state = true;
+		
+		//Obtencion de datos
 		String resultado = "EXITO";
-		String nombreUsuario = request.getParameter("name");
-		String apellidosUsuario = request.getParameter("surname");
+		String name = request.getParameter("name");
+		String surname = request.getParameter("surname");
 		String email = request.getParameter("email");
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		String rePassword = request.getParameter("repeatPassword");
 		
+		//Comprobaciones
+		state = Asserts.assertCampos(name,surname
+				,email,login,password,rePassword);
+		state = Asserts.isEmail(email);
+		state = password == rePassword;
 		
 		HttpSession session = request.getSession();
-		if (Asserts.assertCampos(nombreUsuario,apellidosUsuario
-				,email,login,password,rePassword)) {
+		if (state) {
 			UserDao dao = PersistenceFactory.newUserDao();
-			User newUser = dao.findByLogin(nombreUsuario);
+			User newUser = dao.findByLogin(name);
 			if (newUser == null  ) {
+				
+				//Definicion de caracteristicas
 				newUser = new User();
+				newUser.setEmail(email);
+				newUser.setLogin(login);
+				newUser.setName(name);
+				newUser.setPassword(rePassword);
+				newUser.setSurname(surname);
+				newUser.setId(dao.save(newUser));
 				
-				
-				Log.info("El usuario [%s] ha creado su cuenta", nombreUsuario);
+				//Introducimos el usuario en sesion
+				session.setAttribute("user", newUser);
+				Log.info("El usuario [%s] ha creado su cuenta", name);
 			} else {
 				session.invalidate();
-				Log.info("El usuario [%s] no está registrado", nombreUsuario);
+				Log.info("Fallo en registro, login [%s] en uso", name);
 				resultado = "FRACASO";
 			}
-		} else if (!nombreUsuario.equals(session.getAttribute("user"))) {
-			Log.info(
-					"Login [%s] en uso.",
-					((User) session.getAttribute("user")).getLogin());
+		} else {
+			Log.info("Fallo en el registro, parametros erroneos");
 			resultado = "FRACASO";
 		}
 		return resultado;
