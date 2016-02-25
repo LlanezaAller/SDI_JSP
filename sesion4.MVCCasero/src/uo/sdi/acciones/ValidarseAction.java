@@ -26,7 +26,8 @@ public class ValidarseAction implements Accion {
 			if (userByLogin != null
 					&& userByLogin.getPassword().equals(password)) {
 				session.setAttribute("user", userByLogin);
-				
+				Message error = new Message(Message.OK, "¡Bienvenido de nuevo, " + nombreUsuario + "!");
+				request.setAttribute("message", error);
 				Log.info("El usuario [%s] ha iniciado sesión", nombreUsuario);
 			} else {
 				session.invalidate();
