@@ -1,5 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="uo.sdi.acciones.ListarViajesAction"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<% ListarViajesAction action = new ListarViajesAction();
+action.execute(request, response);%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,17 +51,19 @@
 					<th>Fecha de llegada</th>
 					<th>Fecha límite</th>
 					<th>Plazas libres</th>
+					<th>Ver</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="viaje" items="${listaViajes}">
 					<tr>
-						<th><c:out value="$(viaje.departure.city)"></c:out></th>
-						<th>Destino</th>
-						<th>Fecha de salida</th>
-						<th>Fecha de llegada</th>
-						<th>Fecha límite</th>
-						<th>Plazas libres</th>
+						<td>${viaje.departure.city}</td>
+						<td>${viaje.destination.city}</td>
+						<td>${viaje.departureDate}</td>
+						<td>${viaje.arrivalDate}</td>
+						<td>${viaje.closingDate}</td>
+						<td>${viaje.availablePax}</td>
+						<td><a href="#">Ver</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

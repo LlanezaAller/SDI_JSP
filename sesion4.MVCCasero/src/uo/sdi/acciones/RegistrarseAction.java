@@ -19,6 +19,7 @@ public class RegistrarseAction implements Accion {
 		boolean state = true;
 		
 		//Obtencion de datos
+		
 		String resultado = "EXITO";
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
