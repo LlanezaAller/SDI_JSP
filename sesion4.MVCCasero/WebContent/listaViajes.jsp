@@ -1,4 +1,5 @@
-<!--%@ page contentType="text/html" pageEncoding="UTF-8" %-->
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,18 +21,15 @@
             <li><a href="#"><i class="fa fa-2x fa-users"></i>Mis Viajes</a></li>
             <li><a href="#"><i class="fa fa-2x fa-plus-circle"></i>Crear Viaje</a></li>
           </ul>
-          <ul class="horizontalMenu_user_links">
-            <li><a href="#"><i class="fa fa-2x fa-sign-in"></i>Entrar</a></li>
-            <li><a href="#"><i class="fa fa-2x fa-user-plus"></i>Crear cuenta</a></li>
-          </ul>
+          <jsp:include page="snippets/menu.jsp"/>
           <div class="clear"></div>
         </div>
       </nav>
     </header>
-    <div class="message errorMessage"><div class="messageIcon"><i class="fa fa-2x"></i></div><div class="messageText">Se te ha olvidado aser cosas loko! xD xD xD</div></div>
+   <jsp:include page="snippets/messages.jsp"></jsp:include>
     <main>
       <h1>Viajes Disponibles</h1>
-      <p>¡Bienvenido!, en esta tabla encontrará las mejores ofertas con los mejores destinos. ¿Por que pagar más cuando puedes pagar menos?</p>
+      <p>¡Bienvenido! En esta tabla encontrará las mejores ofertas con los mejores destinos. ¿Por qué pagar mas cuando puedes pagar menos?</p>
       <table class="table" id="dataTable">
         <thead>
           <tr>
@@ -44,198 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
-          <tr>
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
-            <td>Plazas libres</td>
-          </tr>
+          
         </tbody>
       </table>
     </main>

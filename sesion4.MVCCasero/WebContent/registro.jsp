@@ -39,6 +39,7 @@
 			</form>
 		</div>
 	</div>
+	<jsp:include page="snippets/messages.jsp"></jsp:include>
 </body>
 
 </html>
