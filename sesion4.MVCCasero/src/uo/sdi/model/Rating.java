@@ -31,6 +31,8 @@ public class Rating {
 	private String comment;
 	private Integer value = 0;
 
+	public Rating(){};
+
 	public Seat getFromSeat() {
 		return fromSeat;
 	}
@@ -47,7 +49,6 @@ public class Rating {
 		this.aboutSeat = aboutSeat;
 	}
 
-	public Rating(){};
 	
 	public Long getId() {
 		return id;

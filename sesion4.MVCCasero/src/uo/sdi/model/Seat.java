@@ -89,6 +89,13 @@ public class Seat {
 		return ratingsFrom;
 	}
 	
+	public void unlink(){
+		user._getApplications().remove(this);
+		trip._getApplications().remove(this);
+		this.user = null;
+		this.trip = null;
+	}
+	
 	public Set<Rating> getRatingsFrom(){
 		return Collections.unmodifiableSet(ratingsFrom);
 	}
@@ -101,4 +108,40 @@ public class Seat {
 		return Collections.unmodifiableSet(ratingsAbout);
 	}
 
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((trip == null) ? 0 : trip.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Seat other = (Seat) obj;
+		if (trip == null) {
+			if (other.trip != null)
+				return false;
+		} else if (!trip.equals(other.trip))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	
 }

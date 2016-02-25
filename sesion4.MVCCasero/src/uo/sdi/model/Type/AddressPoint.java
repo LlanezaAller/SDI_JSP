@@ -1,8 +1,7 @@
 package uo.sdi.model.Type;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
+import javax.persistence.Embedded;
 
 
 
@@ -20,7 +19,7 @@ public class AddressPoint {
 	private String country;
 	private String zipCode;
 	
-	@Transient
+	@Embedded
 	private Waypoint waypoint;
 	
 

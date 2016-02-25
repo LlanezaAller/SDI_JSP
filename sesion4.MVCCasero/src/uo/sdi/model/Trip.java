@@ -18,6 +18,8 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.crypto.Data;
 
 import uo.sdi.model.Type.AddressPoint;
@@ -65,13 +67,20 @@ public class Trip {
 	@Embedded
 	private AddressPoint destination;
 	
+	@Temporal(TemporalType.DATE)
 	private Date arrivalDate;
+	
+	@Temporal(TemporalType.DATE)
 	private Date departureDate;
+	
+	@Temporal(TemporalType.DATE)
 	private Date closingDate;
+	
 	private Integer availablePax = 0; 
 	private Integer maxPax = 0;
 	private Double estimatedCost = 0.0;
 	private String comments;
+	
 	@Enumerated(EnumType.STRING)
 	private TripStatus status;
 
@@ -86,7 +95,7 @@ public class Trip {
 	@ManyToOne
 	private User promoter;
 	
-	//Metodos
+	
 	public Trip(){};
 	
 
