@@ -1,20 +1,6 @@
 package uo.sdi.model;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.crypto.Data;
-
-import uo.sdi.model.Type.AddressPoint;
-import uo.sdi.model.Type.TripStatus;
 
 /**
  * This class is not an entity, it is a DTO with the same fields as 
@@ -24,11 +10,8 @@ import uo.sdi.model.Type.TripStatus;
  * @author alb
  *
  */
-@Entity
-@Table (name="TTRIPS")
 public class Trip {
 	
-	@Id @GeneratedValue
 	private Long id;
 	
 	private AddressPoint departure;
@@ -41,21 +24,8 @@ public class Trip {
 	private Double estimatedCost = 0.0;
 	private String comments;
 	private TripStatus status;
-
-
-	//Relaciones
-	@OneToMany(mappedBy="trip")
-	private Set<Application> aplicaciones = new HashSet<>();
 	
-	@OneToMany(mappedBy="trip")
-	private Set<Seat> seats = new HashSet<>();
-
-	@ManyToOne
-	private User promoter;
-	
-	//Metodos
-	public Trip(){};
-	
+	private Long promoterId;
 
 	public AddressPoint getDeparture() {
 		return departure;
@@ -145,7 +115,13 @@ public class Trip {
 		this.comments = comments;
 	}
 
-	
+	public Long getPromoterId() {
+		return promoterId;
+	}
+
+	public void setPromoterId(Long promoterId) {
+		this.promoterId = promoterId;
+	}
 
 	@Override
 	public String toString() {
@@ -160,35 +136,8 @@ public class Trip {
 				+ ", estimatedCost=" + estimatedCost 
 				+ ", comments=" + comments 
 				+ ", status=" + status
-				+ ", promoterId=" + promoter 
+				+ ", promoterId=" + promoterId 
 			+ "]";
 	}
 
-	// Metodos de relacion
-	
-	Set<Application> _getApplications() {
-		return aplicaciones;
-	}
-	
-	public Set<Application> getApplications(){
-		return Collections.unmodifiableSet(aplicaciones);
-	}
-
-	Set<Seat> _getSeats() {
-		return seats;
-	}
-	
-	public Set<Seat> getSeats(){
-		return Collections.unmodifiableSet(seats);
-	}
-	
-	public User getPromoter(){
-		return promoter;
-	}
-	
-	void _setPromoter(User promoter){
-		this.promoter = promoter;
-	}
-	
-	
 }

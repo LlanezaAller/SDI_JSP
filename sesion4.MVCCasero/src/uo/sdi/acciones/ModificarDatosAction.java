@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.User;
-import uo.sdi.persistence.UserFinder;
+import uo.sdi.persistence.PersistenceFactory;
+import uo.sdi.persistence.UserDao;
 import alb.util.log.Log;
 
 public class ModificarDatosAction implements Accion {
@@ -20,14 +20,12 @@ public class ModificarDatosAction implements Accion {
 		User usuario=((User)session.getAttribute("user"));
 		usuario.setEmail(nuevoEmail);
 		try {
-			UserFinder uF = Factories.persistence.createUserGateway();
-			uF.update(usuario);
-			Log.debug("Modificado email de [%s] con el valor [%s]",
-					usuario.getLogin(), nuevoEmail);
+			UserDao dao = PersistenceFactory.newUserDao();
+			dao.update(usuario);
+			Log.debug("Modificado email de [%s] con el valor [%s]", usuario.getLogin(), nuevoEmail);
 		}
 		catch (Exception e) {
-			Log.error("Algo ha ocurrido actualizando el email de [%s]", 
-					usuario.getLogin());
+			Log.error("Algo ha ocurrido actualizando el email de [%s]", usuario.getLogin());
 		}
 		return "EXITO";
 	}

@@ -1,53 +1,49 @@
 package uo.sdi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import uo.sdi.model.Type.ApplicationKey;
-
-@Entity
-@Table(name="TAPPLICATION")
-@IdClass (ApplicationKey.class)
 public class Application {
 
-	@Id @ManyToOne private User user;
-	@Id @ManyToOne private Trip trip;
+	private Long userId;
+	private Long tripId;
 
 	public Application() {
 	}
 
-	public User getUser() {
-		return user;
+	public Application(Long userId, Long tripId) {
+		this.userId = userId;
+		this.tripId = tripId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public Trip getTrip() {
-		return trip;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public void setTrip(Trip trip) {
-		this.trip = trip;
+	public Long getTripId() {
+		return tripId;
 	}
-	
-	public void unlink(){
-		user._getApplications().remove(this);
-		trip._getApplications().remove(this);
-		this.user = null;
-		this.trip = null;
+
+	public void setTripId(Long tripId) {
+		this.tripId = tripId;
+	}
+
+	@Override
+	public String toString() {
+		return "Application [userId=" + userId + ", tripId=" + tripId + "]";
+	}
+
+	public Long[] makeKey() {
+		return new Long[] { userId, tripId };
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((trip == null) ? 0 : trip.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((tripId == null) ? 0 : tripId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -60,21 +56,17 @@ public class Application {
 		if (getClass() != obj.getClass())
 			return false;
 		Application other = (Application) obj;
-		if (trip == null) {
-			if (other.trip != null)
+		if (tripId == null) {
+			if (other.tripId != null)
 				return false;
-		} else if (!trip.equals(other.trip))
+		} else if (!tripId.equals(other.tripId))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
-
-	
-	
-	
 
 }

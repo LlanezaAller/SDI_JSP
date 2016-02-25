@@ -1,18 +1,5 @@
 package uo.sdi.model;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.crypto.Data;
-
-import uo.sdi.model.Type.UserStatus;
-
 /**
  * This class is not an entity, it is a DTO with the same fields as a row in the
  * table
@@ -21,30 +8,16 @@ import uo.sdi.model.Type.UserStatus;
  * @author alb
  *
  */
-@Entity
-@Table (name="TUSERS")
 public class User {
-	@Id @GeneratedValue
+
 	private Long id;
-	
 	private String login;
 	private String password;
 	private String name;
 	private String surname;
 	private String email;
 	
-	@OneToMany(mappedBy="user")
-	private Set<Application> aplicaciones = new HashSet<>();
-	
-	@OneToMany(mappedBy="user")
-	private Set<Seat> seats = new HashSet<>();
-	
-	@OneToMany(mappedBy="promoter")
-	private Set<Trip> trips = new HashSet<>();
-	
 	private UserStatus status;
-	
-	public User(){};
 
 	public String getEmail() {
 		return email;
@@ -114,31 +87,4 @@ public class User {
 			+ "]";
 	}
 
-	//Metodos de relacion 
-	
-	Set<Application> _getApplications() {
-		return aplicaciones;
-	}
-	
-	public Set<Application> getApplications(){
-		return Collections.unmodifiableSet(aplicaciones);
-	}
-	
-	Set<Seat> _getSeats() {
-		return seats;
-	}
-	
-	public Set<Seat> getSeats(){
-		return Collections.unmodifiableSet(seats);
-	}
-
-	Set<Trip> _getTrips(){
-		return trips;
-	}
-	
-	public Set<Trip> getTrips(){
-		return Collections.unmodifiableSet(trips);
-	}
-	
-	
 }

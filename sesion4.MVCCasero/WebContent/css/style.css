@@ -105,6 +105,12 @@ input {
 	line-height: 40px;
 	padding:0 25px;
 }
+.table > tbody > .myTrip {
+	background:rgba(105,182,52,.75) !important;
+}
+.table > tbody > .myTrip a {
+	color:#A45867;
+}
 
 
 /*Wrappers*/
@@ -161,6 +167,46 @@ footer{
 	height:75px;
 	width:100%;
 }
+/**Message*/
+.message {
+	cursor:pointer;
+	margin:0 auto;
+	padding:10px;
+	position:absolute;
+	top:75px;left:0;right:0;
+	width:40%;
+}
+
+
+.errorMessage > .messageIcon > i::before {
+	content:"\f057";
+}
+.warningMessage > .messageIcon > i::before {
+	content:"\f06a";
+}
+.okMessage > .messageIcon > i::before {
+	content:"\f058 ";
+}
+.errorMessage, .errorMessage > .messageIcon {
+	background:#ce4e54;
+}
+.warningMessage, .warningMessage > .messageIcon {
+	background:#d8a404;
+}
+.okMessage, .okMessage > .messageIcon {
+	background:#699852;
+}
+.messageIcon {
+	height:40px;
+	position:absolute;
+	text-align: center;
+	bottom:calc(-100% - 4px);left:0;
+	width:40px;
+}
+.messageIcon i{
+	line-height: 40px;
+}
+
 
 /**Menu**/
 .horizontalMenu {
