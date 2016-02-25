@@ -6,6 +6,7 @@
 
 	<persistence-unit name="ShareMyTrip.com" transaction-type="RESOURCE_LOCAL">
 		<jta-data-source>java:jboss/datasources/NotaneitorDS</jta-data-source>
+
 		<properties>
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>

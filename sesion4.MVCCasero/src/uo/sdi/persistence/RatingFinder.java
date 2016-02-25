@@ -1,7 +1,6 @@
 package uo.sdi.persistence;
 
 import uo.sdi.model.Rating;
-import uo.sdi.persistence.util.GenericDao;
 
 public interface RatingFinder{
 
