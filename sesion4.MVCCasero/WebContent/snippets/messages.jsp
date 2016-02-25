@@ -14,5 +14,4 @@
 		<div class="messageIcon"><i class="fa fa-2x"></i></div>
 		<div class="messageText"><c:out value="${message.text}" /></div>
 	</div>
-	<c:remove var="message"/>
 </c:if>

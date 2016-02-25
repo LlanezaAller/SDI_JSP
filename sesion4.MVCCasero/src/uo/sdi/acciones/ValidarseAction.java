@@ -31,7 +31,7 @@ public class ValidarseAction implements Accion {
 			} else {
 				session.invalidate();
 				Message error = new Message(Message.ERROR, "El usuario y/o contraseña son incorrectos.");
-				request.getSession().setAttribute("message", error);
+				request.setAttribute("message", error);
 				Log.info("El usuario [%s] no está registrado", nombreUsuario);
 				resultado = "FRACASO";
 			}
@@ -44,7 +44,7 @@ public class ValidarseAction implements Accion {
 			
 			session.invalidate();
 			Message error = new Message(Message.ERROR, "Has intentado iniciar sesión teniendo una sesión ya iniciada.");
-			request.getSession().setAttribute("message", error);
+			request.setAttribute("message", error);
 			resultado = "FRACASO";
 		}
 		return resultado;
