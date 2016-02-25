@@ -11,7 +11,7 @@
 <body>
 	<div class="noScrollWrapper animatedBackground">
 		<div class="centeredWrapper transparentBox">
-			<form id="registerForm">
+			<form id="registerForm" method="POST" action="registrarse">
 				<div class="inputLine"><img src="img/logo.png" height="200" width="200"></div>
 				<div class="inputLine">
 					<label class="inputIcon" for="name"><i class="fa fa-list-alt fa-2x"></i></label>
@@ -23,7 +23,7 @@
 				</div>
 				<div class="inputLine">
 					<label class="inputIcon" for="email"><i class="fa fa-envelope-o fa-2x"></i></label>
-					<input type="text" name="email" id="email" class="textInput textInputWithIcon" placeholder="Email">
+					<input type="email" name="email" id="email" class="textInput textInputWithIcon" placeholder="Email">
 				</div>
 				<div class="inputLine">
 					<label class="inputIcon" for="user"><i class="fa fa-user fa-2x"></i></label>
