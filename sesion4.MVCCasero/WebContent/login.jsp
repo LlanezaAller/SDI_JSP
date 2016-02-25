@@ -11,7 +11,7 @@
 <body>
 	<div class="noScrollWrapper animatedBackground">
 		<div class="centeredWrapper transparentBox">
-			<form id="loginForm">
+			<form id="loginForm" method="POST" action="validarse">
 				<div class="inputLine"><img src="img/logo.png" height="200" width="200"></div>
 				<div class="inputLine">
 					<label class="inputIcon" for="user"><i class="fa fa-user fa-2x"></i></label>

@@ -8,6 +8,13 @@ public class Message {
 	private String type;
 	private String text;
 	
+	
+	
+	public Message(String type, String text) {
+		super();
+		this.type = type;
+		this.text = text;
+	}
 	public String getType() {
 		return type;
 	}

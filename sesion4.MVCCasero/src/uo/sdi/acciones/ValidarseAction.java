@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uo.sdi.model.Message;
 import uo.sdi.model.User;
 import uo.sdi.persistence.PersistenceFactory;
 import uo.sdi.persistence.UserDao;
@@ -26,20 +27,24 @@ public class ValidarseAction implements Accion {
 					&& userByLogin.getPassword().equals(password)) {
 				session.setAttribute("user", userByLogin);
 				
-				
 				Log.info("El usuario [%s] ha iniciado sesión", nombreUsuario);
 			} else {
 				session.invalidate();
+				Message error = new Message(Message.ERROR, "El usuario y/o contraseña son incorrectos.");
+				request.getSession().setAttribute("message", error);
 				Log.info("El usuario [%s] no está registrado", nombreUsuario);
 				resultado = "FRACASO";
 			}
 		} else if (!nombreUsuario.equals(session.getAttribute("user"))) {
+			String userNick = ((User)session.getAttribute("user")).getLogin();
 			Log.info(
 					"Se ha intentado iniciar sesión como [%s] teniendo la "
 					+ "sesión iniciada como [%s]",
-					nombreUsuario,
-					((User) session.getAttribute("user")).getLogin());
+					nombreUsuario, userNick);
+			
 			session.invalidate();
+			Message error = new Message(Message.ERROR, "Has intentado iniciar sesión teniendo una sesión ya iniciada.");
+			request.getSession().setAttribute("message", error);
 			resultado = "FRACASO";
 		}
 		return resultado;
