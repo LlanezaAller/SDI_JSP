@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.User;
+import uo.sdi.model.type.UserStatus;
 import uo.sdi.persistence.UserFinder;
 import uo.sdi.view.Message;
 import alb.util.log.Log;
@@ -25,7 +26,7 @@ public class ValidarseAction implements Accion {
 			UserFinder uf = Factories.persistence.createUserGateway();
 			User userByLogin = uf.findByLogin(nombreUsuario);///dao.findByLogin(nombreUsuario);
 			if (userByLogin != null
-					&& userByLogin.getPassword().equals(password)) {
+					&& userByLogin.getPassword().equals(password) && userByLogin.getStatus().equals(UserStatus.ACTIVE)) {
 				session.setAttribute("user", userByLogin);
 				Message error = new Message(Message.OK, "¡Bienvenido de nuevo, " + nombreUsuario + "!");
 				request.setAttribute("message", error);

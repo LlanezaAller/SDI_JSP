@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.acciones.util.Asserts;
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.User;
+import uo.sdi.model.type.UserStatus;
 import uo.sdi.persistence.UserFinder;
 import uo.sdi.view.Message;
 import alb.util.log.Log;
@@ -47,6 +48,7 @@ public class RegistrarseAction implements Accion {
 				newUser.setEmail(email);
 				newUser.setLogin(login);
 				newUser.setName(name);
+				newUser.setStatus(UserStatus.ACTIVE);
 				newUser.setPassword(rePassword);
 				newUser.setSurname(surname);
 				
