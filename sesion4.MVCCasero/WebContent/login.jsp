@@ -1,4 +1,4 @@
-<!--%@ page contentType="text/html" pageEncoding="UTF-8" %-->
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
 					<input type="text" name="user" id="user" class="textInput textInputWithIcon" placeholder="Usuario"></div>
 				<div class="inputLine">
 					<label class="inputIcon" for="password"><i class="fa fa-lock fa-2x"></i></label>
-					<input type="password" name="password" id="password" class="textInput textInputWithIcon" placeholder="Contraseña"></div>
+					<input type="password" name="password" id="password" class="textInput textInputWithIcon" placeholder="ContraseÃ±a"></div>
 				<div class="inputLine"><input type="submit" value="Entrar" class="button"></div>
 				<p> o </p>
 				<a href="registro.jsp">Crear una cuenta</a>

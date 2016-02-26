@@ -1,4 +1,5 @@
-<!--%@ page contentType="text/html" pageEncoding="UTF-8" %-->
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,8 @@
     </header>
     <div class="message errorMessage"><div class="messageIcon"><i class="fa fa-2x"></i></div><div class="messageText">Se te ha olvidado aser cosas loko! xD xD xD</div></div>
     <main>
-      
+      <div class="floatLeft"></div><h2>Salida:</h2><c:out value="${viaje.destination.city}"></c:out></div>
+      <div class="floatRight"></div><h2>Salida:</h2><c:out value="${viaje.destination.city}"></c:out></div>
     </main>
     <footer>
     </footer>

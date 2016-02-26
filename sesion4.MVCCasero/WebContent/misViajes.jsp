@@ -1,4 +1,5 @@
-<!--%@ page contentType="text/html" pageEncoding="UTF-8" %-->
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@
             <td>Destino</td>
             <td>Fecha de salida</td>
             <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
+            <td>Fecha lÃ­mite</td>
             <td>Plazas libres</td>
             <td><a href="#">Modificar</a></td>
           </tr>
@@ -58,7 +59,7 @@
             <td>Destino</td>
             <td>Fecha de salida</td>
             <td>Fecha de llegada</td>
-            <td>Fecha límite</td>
+            <td>Fecha lÃ­mite</td>
             <td>Plazas libres</td>
             <td><a href="#">Ver</a></td>
           </tr>
