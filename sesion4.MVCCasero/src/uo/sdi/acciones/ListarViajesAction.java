@@ -18,9 +18,7 @@ public class ListarViajesAction implements Accion {
 		List<Trip> viajes;
 		
 		try {
-			viajes=Factories.persistence
-					.createTripGateway()
-					.findAll();
+			viajes = Factories.persistence.createTripGateway().findAll();
 			request.setAttribute("listaViajes", viajes);
 			Log.debug("Obtenida lista de viajes conteniendo [%d] viajes", viajes.size());
 		}
