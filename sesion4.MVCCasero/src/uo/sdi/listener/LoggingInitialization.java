@@ -3,9 +3,6 @@ package uo.sdi.listener;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import alb.util.log.Log;
-import alb.util.log.LogLevel;
-
 public class LoggingInitialization implements ServletContextListener {
 
 	@Override

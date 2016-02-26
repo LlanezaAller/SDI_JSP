@@ -8,7 +8,6 @@ import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.User;
 import uo.sdi.persistence.UserFinder;
 import uo.sdi.view.Message;
-import alb.util.log.Log;
 
 public class ValidarseAction implements Accion {
 
