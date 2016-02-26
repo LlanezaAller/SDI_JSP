@@ -6,11 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import uo.sdi.acciones.util.Asserts;
 import uo.sdi.infraestructure.factories.Factories;
-import uo.sdi.model.Message;
 import uo.sdi.model.User;
-import uo.sdi.persistence.PersistenceFactory;
-import uo.sdi.persistence.UserDao;
 import uo.sdi.persistence.UserFinder;
+import uo.sdi.view.Message;
 import alb.util.log.Log;
 
 public class RegistrarseAction implements Accion {
@@ -51,7 +49,8 @@ public class RegistrarseAction implements Accion {
 				newUser.setName(name);
 				newUser.setPassword(rePassword);
 				newUser.setSurname(surname);
-				newUser.setId(uf.save(newUser));
+				
+				uf.save(newUser);
 				
 				//Introducimos el usuario en sesion
 				session.setAttribute("user", newUser);

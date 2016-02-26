@@ -9,6 +9,6 @@ public interface UserFinder {
 	User findByLogin(String login);
 	List<User> findAll();
 	void update(User usuario);
-	
+	void save(User usuario);
 
 }

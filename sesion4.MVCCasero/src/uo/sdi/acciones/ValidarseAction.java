@@ -5,11 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import uo.sdi.infraestructure.factories.Factories;
-import uo.sdi.model.Message;
 import uo.sdi.model.User;
-import uo.sdi.persistence.PersistenceFactory;
-import uo.sdi.persistence.UserDao;
 import uo.sdi.persistence.UserFinder;
+import uo.sdi.view.Message;
 import alb.util.log.Log;
 
 public class ValidarseAction implements Accion {

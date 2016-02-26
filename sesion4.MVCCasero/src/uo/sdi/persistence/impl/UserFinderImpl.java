@@ -29,4 +29,9 @@ public class UserFinderImpl implements UserFinder {
 		Jpa.getManager().merge(usuario);
 	}
 
+
+	@Override
+	public void save(User usuario){
+		Jpa.getManager().persist(usuario);
+	}
 }
