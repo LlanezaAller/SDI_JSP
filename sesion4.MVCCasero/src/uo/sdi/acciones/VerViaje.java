@@ -18,8 +18,8 @@ public class VerViaje implements Accion {
 		long viajeID = (long) request.getAttribute("viajeID");
 		
 		if(request.getAttribute("user")!=null){
-			//Trip viaje = Factories.persistence.createTripGateway().findById(viajeID);
-			//request.setAttribute("viaje", viaje);
+			Trip viaje = Factories.persistence.createTripGateway().findById(viajeID);
+			request.setAttribute("viaje", viaje);
 		}
 		Message error = new Message(Message.ERROR, "Necesitas estar logueado para poder ver viajes");
 		Log.debug("Un visitante no autorizado ha intentado acceder a un viaje");

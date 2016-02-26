@@ -25,6 +25,17 @@
 	</named-query>
 
 	<!-- Trip queries -->
+	
+	<named-query name="Trip.findById">
+		<query>
+			<![CDATA[
+			select t
+				from Trip t
+				where t.id = ?1 
+			]]>
+		</query>
+	</named-query>
+	
 	<named-query name="Trip.findByPromoterIdAndArrivalDate">
 		<query>
 			<![CDATA[
