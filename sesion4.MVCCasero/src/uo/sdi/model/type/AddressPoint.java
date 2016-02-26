@@ -1,4 +1,4 @@
-package uo.sdi.model.type;
+package uo.sdi.model.Type;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
