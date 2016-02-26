@@ -6,6 +6,8 @@ import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import alb.util.log.Log;
+
 public class PersistentCounter implements ServletContextListener {
 
 	@Override

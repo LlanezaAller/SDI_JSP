@@ -13,7 +13,10 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.acciones.Accion;
 import uo.sdi.acciones.ListarViajesAction;
 import uo.sdi.acciones.ModificarDatosAction;
+import uo.sdi.acciones.RegistrarseAction;
 import uo.sdi.acciones.ValidarseAction;
+import uo.sdi.view.Message;
+import alb.util.log.Log;
 
 public class Controlador extends javax.servlet.http.HttpServlet {
 	
@@ -54,8 +57,9 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			req.getSession().invalidate();
 			
 			Log.error("Se ha producido alguna excepción no manejada [%s]",e);
-			
-			jspSiguiente="/login.jsp";
+			Message m = new Message(Message.ERROR, "Algo ha salido mal :(");
+			req.setAttribute("message", m);
+			jspSiguiente="/listaViajes.jsp";
 		}
 			
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(jspSiguiente); 
@@ -99,6 +103,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		Map<String,Accion> mapaPublico=new HashMap<String,Accion>();
 		mapaPublico.put("validarse", new ValidarseAction());
+		mapaPublico.put("registrarse", new RegistrarseAction());
 		mapaPublico.put("listarViajes", new ListarViajesAction());
 		mapaDeAcciones.put("PUBLICO", mapaPublico);
 		
@@ -120,6 +125,9 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resJSP.put("FRACASO","/login.jsp");
 		opcionResJSP.put("validarse", resJSP);
 		resJSP=new HashMap<String, String>();
+		resJSP.put("FRACASO","/registro.jsp");
+		opcionResJSP.put("registrarse", resJSP);
+		resJSP=new HashMap<String, String>();
 		resJSP.put("EXITO","/listaViajes.jsp");
 		opcionResJSP.put("listarViajes", resJSP);
 		
@@ -130,8 +138,10 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resJSP=new HashMap<String, String>();
 		
 		// Mapa de navegación de usuarios registrados
-		resJSP.put("EXITO","/principal.jsp");
+		resJSP.put("EXITO","/listaViajes.jsp");
 		opcionResJSP.put("validarse", resJSP);
+		resJSP.put("EXITO","/listaViajes.jsp");
+		opcionResJSP.put("registrarse", resJSP);
 		resJSP=new HashMap<String, String>();
 		resJSP.put("EXITO","/principal.jsp");
 		opcionResJSP.put("modificarDatos", resJSP);

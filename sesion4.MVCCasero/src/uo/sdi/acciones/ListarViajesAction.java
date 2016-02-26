@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.Trip;
+import alb.util.log.Log;
 
 public class ListarViajesAction implements Accion {
 

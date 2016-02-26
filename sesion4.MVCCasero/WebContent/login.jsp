@@ -21,7 +21,7 @@
 					<input type="password" name="password" id="password" class="textInput textInputWithIcon" placeholder="Contraseña"></div>
 				<div class="inputLine"><input type="submit" value="Entrar" class="button"></div>
 				<p> o </p>
-				<a href="/registro.jsp">Crear una cuenta</a>
+				<a href="registro.jsp">Crear una cuenta</a>
 			</form>
 		</div>
 	</div>
