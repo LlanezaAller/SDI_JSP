@@ -29,18 +29,69 @@
         </div>
       </nav>
     </header>
-    <div class="message errorMessage"><div class="messageIcon"><i class="fa fa-2x"></i></div><div class="messageText">Se te ha olvidado aser cosas loko! xD xD xD</div></div>
+    <jsp:include page="snippets/messages.jsp"></jsp:include>
     <main>
-      <div class="floatLeft"></div><h2>Salida:</h2><c:out value="${viaje.destination.city}"></c:out></div>
-      <div class="floatRight"></div><h2>Salida:</h2><c:out value="${viaje.destination.city}"></c:out></div>
+      <h1>Viaje a <span class="boldColored">${viaje.destination.city}</span> por <span class="boldColored">${viaje.promoter.nick}</span></h1>
+      <table class="table">
+      	<thead>
+      		<tr>
+      			<th></th>
+      			<th>Salida</th>
+      			<th>Llegada</th>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		<tr>
+      			<td class="titleColumn">País:</td>
+      			<td>${viaje.departure.country}</td>
+      			<td>${viaje.destination.country}</td>
+      		</tr>
+      		<tr>
+      			<td class="titleColumn">Ciudad:</td>
+      			<td>${viaje.departure.city}</td>
+      			<td>${viaje.destination.city}</td>
+      		</tr>
+      		<tr>
+      			<td class="titleColumn">Fecha:</td>
+      			<td>${viaje.departureDate}</td>
+      			<td>${viaje.arrivalDate}</td>
+      		</tr>
+      	</tbody>
+      </table>
+      <h1>Viajeros</h1>
+      <table class="table">
+      	<thead>
+      		<tr>
+      			<th></th>
+      			<th>Nombre</th>
+      			<th>Apellidos</th>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		<tr>
+      			<td class="titleColumn">País:</td>
+      			<td>${viaje.departure.country}</td>
+      			<td>${viaje.destination.country}</td>
+      		</tr>
+      		<tr>
+      			<td class="titleColumn">Ciudad:</td>
+      			<td>${viaje.departure.city}</td>
+      			<td>${viaje.destination.city}</td>
+      		</tr>
+      		<tr>
+      			<td class="titleColumn">Fecha:</td>
+      			<td>${viaje.departureDate}</td>
+      			<td>${viaje.arrivalDate}</td>
+      		</tr>
+      	</tbody>
+      </table>
     </main>
     <footer>
     </footer>
-    </div>
-
-    <script type="text/javascript" src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
-    <script type="text/javascript" src="js/datatables.js"></script>
-    <script type="text/javascript" src="js/messages.js"></script>
-  </body>
   </div>
+  <script type="text/javascript" src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
+  <script type="text/javascript" src="js/datatables.js"></script>
+  <script type="text/javascript" src="js/messages.js"></script>
+</body>
+  
 </html>

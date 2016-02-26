@@ -46,8 +46,6 @@ public class Seat {
 
 	public Seat(){};
 
-	
-
 	public User getUser() {
 		return user;
 	}

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
 /**Main color: #00d1a7;**/
 /**Global styles**/
@@ -22,13 +22,24 @@ a {
 a:hover {
 	text-decoration:underline;
 }
-
+.floatLeft {
+	float:left;
+	margin:0 25px;
+}
+.floatRight {
+	float:right;
+	margin:0 25px;
+}
 .clear {
 	clear:both;
 	display:block;
 	width:100%;
 }
-
+.boldColored {
+	color:#00d1a7;
+	font-weight: 400;
+	font-style:italic;
+}
 input {
 	outline:none;
 }
@@ -89,6 +100,11 @@ input {
 	font-size:20px;
 	line-height:50px;
 	height:50px;
+}
+.table > tbody > tr > td.titleColumn {
+	background:rgba(25,25,25,.65);
+	font-size:20px;
+	width:200px;
 }
 .table >tbody > tr {
 	background:rgba(50,50,50,.85) !important;

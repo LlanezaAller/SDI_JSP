@@ -63,7 +63,7 @@ action.execute(request, response);%>
 						<td>${viaje.arrivalDate}</td>
 						<td>${viaje.closingDate}</td>
 						<td>${viaje.availablePax}</td>
-						<td><a href="#">Ver</a></td>
+						<td><a href="verViaje.jsp?id=${viaje.id}">Ver</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

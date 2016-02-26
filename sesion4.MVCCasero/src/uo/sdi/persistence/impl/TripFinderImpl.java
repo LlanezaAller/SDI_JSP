@@ -20,11 +20,25 @@ public class TripFinderImpl implements TripFinder {
 		return (trips.size() > 0) ? trips.get(0) : null;
 	}
 	
+	
+	
 	@Override
 	public List<Trip> findAll() {
 		return Jpa.getManager()
 				.createNamedQuery("Trip.findAll", Trip.class)
 				.getResultList();
+	}
+
+
+
+	@Override
+	public Trip findById(Long id) {
+		List<Trip> trips = Jpa.getManager()
+				.createNamedQuery("Trip.findById",
+						Trip.class)
+				.setParameter(1, id)
+				.getResultList();
+		return (trips.size() > 0) ? trips.get(0) : null;
 	}
 
 }

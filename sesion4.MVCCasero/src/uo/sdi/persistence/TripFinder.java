@@ -8,7 +8,7 @@ import uo.sdi.model.Trip;
 public interface TripFinder {
 
 	Trip findByPromoterIdAndArrivalDate(Long id, Date arrivalDate);
-
+	Trip findById(Long id);
 	List<Trip> findAll();
 
 }
