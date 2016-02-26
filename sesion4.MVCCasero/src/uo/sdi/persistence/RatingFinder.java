@@ -1,5 +1,7 @@
 package uo.sdi.persistence;
 
+import java.util.List;
+
 import uo.sdi.model.Rating;
 
 public interface RatingFinder{
@@ -10,5 +12,7 @@ public interface RatingFinder{
 			Long fromUserId, 
 			Long fromTripId
 		); 
+	
+	List<Rating> findRatingsByUserAboutId (Long id);
 	
 }
