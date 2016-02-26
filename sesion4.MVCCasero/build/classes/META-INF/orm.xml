@@ -81,4 +81,14 @@
 		</query>
 	</named-query>
 	
+	<named-query name="Rating.findRatingsByUserAboutId">
+		<query>
+			<![CDATA[
+				select r
+					from Rating r
+					where r.aboutSeat.user.id = ?1
+			]]>
+		</query>
+	</named-query>
+	
 </entity-mappings>
