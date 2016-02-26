@@ -23,6 +23,7 @@ public class AddressPoint {
 	private Waypoint waypoint;
 	
 
+	
 	public AddressPoint(String address, String city, String state,
 			String country, String zipCode, Waypoint waypoint) {
 
@@ -35,7 +36,8 @@ public class AddressPoint {
 		this.waypoint = waypoint;
 	}
 
-	
+	public AddressPoint() {
+	};	
 
 	public void setAddress(String address) {
 		this.address = address;
@@ -61,8 +63,6 @@ public class AddressPoint {
 		this.waypoint = waypoint;
 	}
 
-	public AddressPoint() {
-	};
 
 	public String getAddress() {
 		return address;
