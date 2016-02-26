@@ -1,4 +1,4 @@
-package uo.sdi.model.Type;
+package uo.sdi.model.type;
 
 public enum TripStatus {
 	OPEN, 
