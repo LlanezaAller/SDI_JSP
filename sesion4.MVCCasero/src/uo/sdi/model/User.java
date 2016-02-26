@@ -9,11 +9,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.crypto.Data;
 
-import uo.sdi.model.Type.UserStatus;
+import uo.sdi.model.type.UserStatus;
 
 /**
  * This class is not an entity, it is a DTO with the same fields as a row in the
@@ -38,8 +39,8 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
 	
-	@OneToMany(mappedBy="user")
-	private Set<Application> aplicaciones = new HashSet<>();
+	@ManyToMany(mappedBy="aplicadores")
+	private Set<Trip> aplicaciones = new HashSet<>();
 	
 	@OneToMany(mappedBy="user")
 	private Set<Seat> seats = new HashSet<>();
@@ -147,11 +148,11 @@ public class User {
 
 	//Metodos de relacion 
 	
-	Set<Application> _getApplications() {
+	Set<Trip> _getApplications() {
 		return aplicaciones;
 	}
 	
-	public Set<Application> getApplications(){
+	public Set<Trip> getApplications(){
 		return Collections.unmodifiableSet(aplicaciones);
 	}
 	

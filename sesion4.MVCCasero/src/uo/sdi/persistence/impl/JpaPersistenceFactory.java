@@ -1,6 +1,5 @@
 package uo.sdi.persistence.impl;
 
-import uo.sdi.persistence.ApplicationFinder;
 import uo.sdi.persistence.PersistenceFactory;
 import uo.sdi.persistence.RatingFinder;
 import uo.sdi.persistence.SeatFinder;
@@ -23,9 +22,5 @@ public class JpaPersistenceFactory implements PersistenceFactory{
 	@Override
 	public UserFinder createUserGateway() {
 		return new UserFinderImpl();
-	}
-	@Override
-	public ApplicationFinder createApplicationDao() {
-		return new ApplicationFinderImpl();
 	}
 }

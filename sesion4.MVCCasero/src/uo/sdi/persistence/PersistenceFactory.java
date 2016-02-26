@@ -7,5 +7,4 @@ public interface PersistenceFactory {
 	TripFinder createTripGateway();
 	SeatFinder createSeatGateway();
 	RatingFinder createRatingGateway();
-	ApplicationFinder createApplicationDao();
 }

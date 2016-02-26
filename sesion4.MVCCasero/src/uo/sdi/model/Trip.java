@@ -14,6 +14,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,8 +22,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.crypto.Data;
 
-import uo.sdi.model.Type.AddressPoint;
-import uo.sdi.model.Type.TripStatus;
+import uo.sdi.model.type.AddressPoint;
+import uo.sdi.model.type.TripStatus;
 
 /**
  * This class is not an entity, it is a DTO with the same fields as 
@@ -45,13 +46,12 @@ public class Trip {
 	@AttributeOverride(name = "city", column = @Column(name = "departure_city")),
 	@AttributeOverride(name = "state", column = @Column(name = "departure_state")),
 	@AttributeOverride(name = "country", column = @Column(name = "departure_country")),
-//	@AttributeOverride(name = "lat", column = @Column(name = "departure_wpt_lat")),
-//	@AttributeOverride(name = "lon", column = @Column(name = "departure_wpt_lon")),
+	@AttributeOverride(name = "waypoint.lat", column = @Column(name = "departure_wpt_lat")),
+	@AttributeOverride(name = "waypoint.lon", column = @Column(name = "departure_wpt_lon")),
 	@AttributeOverride(name = "zipCode", column = @Column(name = "departure_zipCode"))
 	})
 	@Embedded
 	private AddressPoint departure;
-	
 	
 	
 	@AttributeOverrides( {
@@ -59,8 +59,8 @@ public class Trip {
 	@AttributeOverride(name = "city", column = @Column(name = "destination_city")),
 	@AttributeOverride(name = "state", column = @Column(name = "destination_state")),
 	@AttributeOverride(name = "country", column = @Column(name = "destination_country")),
-//	@AttributeOverride(name = "lat", column = @Column(name = "destination_wpt_lat")),
-//	@AttributeOverride(name = "lon", column = @Column(name = "destination_wpt_lon")),
+	@AttributeOverride(name = "waypoint.lat", column = @Column(name = "destination_wpt_lat")),
+	@AttributeOverride(name = "waypoint.lon", column = @Column(name = "destination_wpt_lon")),
 	@AttributeOverride(name = "zipCode", column = @Column(name = "destination_zipCode"))
 	})
 	@Embedded
@@ -85,8 +85,8 @@ public class Trip {
 
 
 	//Relaciones
-	@OneToMany(mappedBy="trip")
-	private Set<Application> aplicaciones = new HashSet<>();
+	@ManyToMany
+	private Set<User> aplicadores = new HashSet<>();
 	
 	@OneToMany(mappedBy="trip")
 	private Set<Seat> seats = new HashSet<>();
@@ -259,12 +259,12 @@ public class Trip {
 
 	// Metodos de relacion
 	
-	Set<Application> _getApplications() {
-		return aplicaciones;
+	Set<User> _getApplications() {
+		return aplicadores;
 	}
 	
-	public Set<Application> getApplications(){
-		return Collections.unmodifiableSet(aplicaciones);
+	public Set<User> getApplications(){
+		return Collections.unmodifiableSet(aplicadores);
 	}
 
 	Set<Seat> _getSeats() {

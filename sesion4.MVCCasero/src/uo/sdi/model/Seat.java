@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
@@ -12,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.crypto.Data;
 
-import uo.sdi.model.Type.SeatStatus;
 import uo.sdi.model.keys.SeatKey;
+import uo.sdi.model.type.SeatStatus;
 
 /**
  * This class is not an entity, it is a DTO with the same fields as a row in the
@@ -32,6 +34,8 @@ public class Seat {
 	@Id @ManyToOne private Trip trip;
 
 	private String comment;
+
+	@Enumerated(EnumType.STRING)
 	private SeatStatus status;
 	
 	@OneToMany(mappedBy="fromSeat")

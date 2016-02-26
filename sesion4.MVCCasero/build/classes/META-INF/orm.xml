@@ -56,26 +56,7 @@
 		</query>
 	</named-query>
 	
-	<!-- Application queries -->
-	<named-query name="Application.findByUserId">
-		<query>
-			<![CDATA[
-				select a
-					from Application a
-					where a.user.id = ?1
-			]]>
-		</query>
-	</named-query>
 	
-	<named-query name="Application.findByTripId">
-		<query>
-			<![CDATA[
-				select a
-					from Application a
-					where a.trip.id = ?1
-			]]>
-		</query>
-	</named-query>
 	
 	<!-- Rating queries -->
 	<named-query name="Rating.findByAboutFrom">

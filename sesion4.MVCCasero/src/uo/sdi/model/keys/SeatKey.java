@@ -21,6 +21,7 @@ public class SeatKey implements Serializable{
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -29,7 +30,7 @@ public class SeatKey implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ApplicationKey other = (ApplicationKey) obj;
+		SeatKey other = (SeatKey) obj;
 		if (trip == null) {
 			if (other.trip != null)
 				return false;
@@ -42,5 +43,6 @@ public class SeatKey implements Serializable{
 			return false;
 		return true;
 	}
+	
 
 }

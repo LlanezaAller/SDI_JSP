@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+	<datasource 
+		jndi-name="java:jboss/datasources/NotaneitorDS"
+		enabled="true" 
+		use-java-context="true" 
+		pool-name="NotaneitorDS">
+		
+		<connection-url>jdbc:hsqldb:hsql://localhost</connection-url>
+		<driver>hsqldb.jar</driver>
+		<pool>
+            <min-pool-size>5</min-pool-size>
+            <max-pool-size>15</max-pool-size>
+            <prefill>true</prefill>
+        </pool>
+		<security>
+			<user-name>sa</user-name>
+			<password></password>
+		</security>
+		
+	</datasource>
+</datasources>
