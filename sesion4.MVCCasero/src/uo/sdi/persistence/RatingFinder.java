@@ -14,5 +14,7 @@ public interface RatingFinder{
 		); 
 	
 	List<Rating> findRatingsByUserAboutId (Long id);
+	void newRating(Rating rating);
+	void updateRating(Rating rating);
 	
 }

@@ -40,5 +40,15 @@ public class TripFinderImpl implements TripFinder {
 				.getResultList();
 		return (trips.size() > 0) ? trips.get(0) : null;
 	}
+	
+	@Override
+	public void newTrip(Trip trip){
+		Jpa.getManager().persist(trip);
+	}
+	
+	@Override
+	public void updateTrip(Trip trip){
+		Jpa.getManager().merge(trip);
+	}
 
 }
