@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import uo.sdi.acciones.Accion;
+import uo.sdi.acciones.ActionExecuter;
 import uo.sdi.acciones.ListarViajesAction;
 import uo.sdi.acciones.ModificarDatosAction;
 import uo.sdi.acciones.RegistrarseAction;
@@ -21,6 +22,7 @@ import alb.util.log.Log;
 public class Controlador extends javax.servlet.http.HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private ActionExecuter executor = new ActionExecuter();
 	private Map<String, Map<String, Accion>> mapaDeAcciones; // <rol, <opcion, objeto Accion>>
 	private Map<String, Map<String, Map<String, String>>> mapaDeNavegacion; // <rol, <opcion, <resultado, JSP>>>
 
@@ -44,7 +46,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			
 			accion=buscarAccionParaOpcion(rolAntes, opcion);
 				
-			resultado=accion.execute(req,res);
+			resultado=executor.execute(accion, req, res);
 				
 			rolDespues=obtenerRolDeSesion(req);
 			
