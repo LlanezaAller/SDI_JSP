@@ -27,9 +27,9 @@ action.execute(request, response);%>
 					<ul class="horizontalMenu_links">
 						<li class="activeLink"><a href="#"><i
 								class="fa fa-2x fa-car"></i>Viajes</a></li>
-						<li><a href="#"><i class="fa fa-2x fa-users"></i>Mis
+						<li><a href="misViajes"><i class="fa fa-2x fa-users"></i>Mis
 								Viajes</a></li>
-						<li><a href="#"><i class="fa fa-2x fa-plus-circle"></i>Crear
+						<li><a href="crearViaje.jsp"><i class="fa fa-2x fa-plus-circle"></i>Crear
 								Viaje</a></li>
 					</ul>
 					<jsp:include page="snippets/menu.jsp" />

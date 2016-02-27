@@ -31,10 +31,10 @@
 				</div>
 				<div class="inputLine">
 					<label class="inputIcon" for="password"><i class="fa fa-lock fa-2x"></i></label>
-					<input type="password" name="password" id="password" class="textInput textInputWithIcon" placeholder="ContraseÃ±a"></div>
+					<input type="password" name="password" id="password" class="textInput textInputWithIcon" placeholder="Contraseña"></div>
 				<div class="inputLine">
 					<label class="inputIcon" for="repeatPassword"><i class="fa fa-lock fa-2x"></i></label>
-					<input type="password" name="repeatPassword" id="repeatPassword" class="textInput textInputWithIcon" placeholder="Repita su contraseÃ±a"></div>
+					<input type="password" name="repeatPassword" id="repeatPassword" class="textInput textInputWithIcon" placeholder="Repita su contraseña"></div>
 				<div class="inputLine"><input type="submit" value="Crear cuenta" class="button"></div>
 			</form>
 		</div>

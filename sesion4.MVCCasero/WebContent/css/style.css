@@ -1,12 +1,12 @@
-import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
 /**Main color: #00d1a7;**/
 /**Global styles**/
 * {
 	box-sizing: border-box;
 }
-
-body{
+body {
 	color:white;
 	font-family: 'Open Sans', sans-serif;
     font-weight: 300;
@@ -15,20 +15,13 @@ body{
 body, html {
 	height: 100%;
 }
+
 a {
 	color:#00d1a7;
 	text-decoration:none;
 }
 a:hover {
 	text-decoration:underline;
-}
-.floatLeft {
-	float:left;
-	margin:0 25px;
-}
-.floatRight {
-	float:right;
-	margin:0 25px;
 }
 .clear {
 	clear:both;
@@ -56,6 +49,20 @@ input {
 	padding:0 10px;
 }
 
+.formDark {
+	margin: 0 auto;
+	width:40%;
+}
+.formDark .textInput {
+	border-color:rgb(25,25,25);
+	color:rgb(25,25,25);
+	width:calc(100% - 50px);
+}
+.formDark .inputIcon {
+	border-color:rgb(25,25,25);
+	color:rgb(25,25,25);
+}
+
 .textInput:focus, .inputIcon + .textInputWithIcon:focus {
 	border-color:#00d1a7;
 	transition:0.15s ease-in-out all;
@@ -69,6 +76,7 @@ input {
 	border-bottom:solid 1px white;
 	float:left;
 	height:50px;
+	text-align:center;
 	width:50px;
 }
 .inputIcon i {
@@ -258,7 +266,7 @@ footer{
 	float:left;
 	height:75px;
 	margin-right:15px;
-	padding:12px 0;
+	padding:10px 0;
 }
 .horizontalMenuInnerWrapper > ul > li {
 	float:left;

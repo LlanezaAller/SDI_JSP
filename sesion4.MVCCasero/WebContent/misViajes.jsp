@@ -17,15 +17,15 @@
         <div class="horizontalMenuInnerWrapper">
           <div class="menuLogo"><a href="#"><img src="img/logo.png">Share My Trip</a></div>
           <ul class="horizontalMenu_links">
-            <li class="activeLink"><a href="#"><i class="fa fa-2x fa-car"></i>Viajes</a></li>
-            <li><a href="#"><i class="fa fa-2x fa-users"></i>Mis Viajes</a></li>
-            <li><a href="#"><i class="fa fa-2x fa-plus-circle"></i>Crear Viaje</a></li>
-          </ul>
-          <ul class="horizontalMenu_user_links">
-            <li><a href="#"><i class="fa fa-2x fa-sign-in"></i>Entrar</a></li>
-            <li><a href="#"><i class="fa fa-2x fa-user-plus"></i>Crear cuenta</a></li>
-          </ul>
-          <div class="clear"></div>
+						<li><a href="#"><i
+								class="fa fa-2x fa-car"></i>Viajes</a></li>
+						<li class="activeLink"><a href="misViajes"><i class="fa fa-2x fa-users"></i>Mis
+								Viajes</a></li>
+						<li><a href="crearViaje.jsp"><i class="fa fa-2x fa-plus-circle"></i>Crear
+								Viaje</a></li>
+					</ul>
+					<jsp:include page="snippets/menu.jsp" />
+					<div class="clear"></div>
         </div>
       </nav>
     </header>
