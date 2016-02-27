@@ -17,9 +17,9 @@
         <div class="horizontalMenuInnerWrapper">
           <div class="menuLogo"><a href="#"><img src="img/logo.png">Share My Trip</a></div>
           <ul class="horizontalMenu_links">
-						<li><a href="#"><i
+						<li><a href="listarViajes"><i
 								class="fa fa-2x fa-car"></i>Viajes</a></li>
-						<li class="activeLink"><a href="misViajes"><i class="fa fa-2x fa-users"></i>Mis
+						<li class="activeLink"><a href="listarMisViajes"><i class="fa fa-2x fa-users"></i>Mis
 								Viajes</a></li>
 						<li><a href="crearViaje.jsp"><i class="fa fa-2x fa-plus-circle"></i>Crear
 								Viaje</a></li>
@@ -29,42 +29,40 @@
         </div>
       </nav>
     </header>
-    
+    <jsp:include page="snippets/messages.jsp"></jsp:include>
     <main>
       <h1>Mis Viajes</h1>
       <table class="table" id="dataTable">
-        <thead>
-          <tr>
-            <th>Origen</th>
-            <th>Destino</th>
-            <th>Fecha de salida</th>
-            <th>Fecha de llegada</th>
-            <th>Promotor</th>
-            <th>Plazas</th>
-            <th>Ver/Modificar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="myTrip">
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha lÃ­mite</td>
-            <td>Plazas libres</td>
-            <td><a href="#">Modificar</a></td>
-          </tr>
-          <tr class="myTrip">
-            <td>Origen</td>
-            <td>Destino</td>
-            <td>Fecha de salida</td>
-            <td>Fecha de llegada</td>
-            <td>Fecha lÃ­mite</td>
-            <td>Plazas libres</td>
-            <td><a href="#">Ver</a></td>
-          </tr>
-        </tbody>
-      </table>
+			<thead>
+				<tr>
+					<th>Origen</th>
+					<th>Destino</th>
+					<th>Fecha de salida</th>
+					<th>Fecha de llegada</th>
+					<th>Fecha límite</th>
+					<th>Plazas libres</th>
+					<th>Ver</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="viaje" items="${listaViajes}">
+					<c:when test="${user.id eq viaje.promoter.id}">
+						<tr class=".myTrip">
+					</c:when>
+					<c:otherwise>
+						<tr>
+					</c:otherwise>
+						<td>${viaje.departure.city}</td>
+						<td>${viaje.destination.city}</td>
+						<td>${viaje.departureDate}</td>
+						<td>${viaje.arrivalDate}</td>
+						<td>${viaje.closingDate}</td>
+						<td>${viaje.availablePax}</td>
+						<td><a href="verViaje.jsp?id=${viaje.id}">Ver</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
     </main>
     <footer>
     </footer>

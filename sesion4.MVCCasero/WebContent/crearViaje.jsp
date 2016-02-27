@@ -17,12 +17,12 @@
 			<nav class="horizontalMenu">
 				<div class="horizontalMenuInnerWrapper">
 					<div class="menuLogo">
-						<a href="#"><img src="img/logo.png">Share My Trip</a>
+						<a href="listarViajes"><img src="img/logo.png">Share My Trip</a>
 					</div>
 					<ul class="horizontalMenu_links">
 						<li><a href="verViajes"><i
 								class="fa fa-2x fa-car"></i>Viajes</a></li>
-						<li><a href="misViajes"><i class="fa fa-2x fa-users"></i>Mis
+						<li><a href="listarMisViajes"><i class="fa fa-2x fa-users"></i>Mis
 								Viajes</a></li>
 						<li class="activeLink"><a href="crearViaje.jsp"><i class="fa fa-2x fa-plus-circle"></i>Crear
 								Viaje</a></li>
