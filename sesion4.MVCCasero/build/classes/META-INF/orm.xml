@@ -32,6 +32,17 @@
 			]]>
 		</query>
 	</named-query>
+	<named-query name="User.findAllAplicantsByTrip">
+		<query>
+			<![CDATA[
+			select u 
+			from User u 
+				join u.aplicaciones a 
+				where a.id = ?1 
+				group by u
+			]]>
+		</query>
+	</named-query>
 
 	<!-- Trip queries -->
 	
