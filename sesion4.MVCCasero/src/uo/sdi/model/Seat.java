@@ -45,6 +45,14 @@ public class Seat {
 	private Set<Rating> ratingsAbout = new HashSet<>();
 
 	public Seat(){};
+	
+	public Seat(User user, Trip trip){
+		this.user = user;
+		this.trip = trip;
+		
+		user._getSeats().add(this);
+		trip._getSeats().add(this);
+	}
 
 	public User getUser() {
 		return user;

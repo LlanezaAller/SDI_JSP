@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import uo.sdi.acciones.exception.BusinessException;
 import uo.sdi.acciones.util.Asserts;
+import uo.sdi.infraestructure.factories.Factories;
+import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 import uo.sdi.model.type.AddressPoint;
+import uo.sdi.model.type.SeatStatus;
 import uo.sdi.model.type.TripStatus;
 import uo.sdi.model.type.Waypoint;
 import uo.sdi.view.Message;
@@ -102,6 +105,8 @@ public class CrearViajeAction implements Accion {
 					arrivalStreet);
 			if (hasAllData) {
 				// TODO Pala db
+				user = Factories.persistence.createUserGateway().findByLogin(
+						user.getLogin());
 				AddressPoint departure = new AddressPoint(departureStreet,
 						departureCity, departureState, departureCountry,
 						departureZip, new Waypoint(departureLat, departureLon));
@@ -110,8 +115,16 @@ public class CrearViajeAction implements Accion {
 						new Waypoint(arrivalLat, arrivalLon));
 
 				Trip viaje = new Trip(departure, arrival, arrivalDatetime,
-						departureDatetime, limitDatetime, freeSeats, freeSeats,
-						totalCost, description, TripStatus.OPEN, user);
+						departureDatetime, limitDatetime, freeSeats,
+						freeSeats + 1, totalCost, description, TripStatus.OPEN,
+						user);
+
+				Factories.persistence.createTripGateway().newTrip(viaje);
+
+				Seat seat = new Seat(user, viaje);
+				seat.setStatus(SeatStatus.ACCEPTED);
+
+				Factories.persistence.createSeatGateway().newSeat(seat);
 
 				Message ok = new Message(Message.OK, "Viaje creado con éxito");
 				request.setAttribute("message", ok);

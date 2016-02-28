@@ -1,9 +1,11 @@
 package uo.sdi.persistence.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import uo.sdi.model.Trip;
+import uo.sdi.model.type.TripStatus;
 import uo.sdi.persistence.TripFinder;
 import uo.sdi.persistence.util.Jpa;
 
@@ -24,17 +26,28 @@ public class TripFinderImpl implements TripFinder {
 	
 	@Override
 	public List<Trip> findAll() {
-		return Jpa.getManager()
+		List<Trip> trips = Jpa.getManager()
 				.createNamedQuery("Trip.findAll", Trip.class)
 				.getResultList();
+		return (trips == null) ? trips : new ArrayList<Trip>();
+	}
+	
+	@Override
+	public List<Trip> findAllStatus(TripStatus status) {
+		List<Trip> trips = Jpa.getManager()
+				.createNamedQuery("Trip.findAllOpen", Trip.class)
+				.setParameter(1, status)
+				.getResultList();
+		return (trips == null) ? trips : new ArrayList<Trip>();
 	}
 
 	@Override
 	public List<Trip> findAllTripsByPromoterId(Long id) {
-		return Jpa.getManager()
+		List<Trip> trips = Jpa.getManager()
 		.createNamedQuery("Trip.findAllTripByPromoterId", Trip.class)
 		.setParameter(1, id)
 		.getResultList();
+		return (trips == null) ? trips : new ArrayList<Trip>();
 	}
 
 

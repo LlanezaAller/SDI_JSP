@@ -1,9 +1,12 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="uo.sdi.acciones.ListarViajesAction"%>
+<%@ page import="uo.sdi.acciones.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<% ListarViajesAction action = new ListarViajesAction();
-action.execute(request, response);%>
+<% 
+ActionExecuter executor = new ActionExecuter();
+ListarViajesAction action = new ListarViajesAction();
+executor.execute(action, request, response);
+%>
 <!DOCTYPE html>
 <html>
 <head>

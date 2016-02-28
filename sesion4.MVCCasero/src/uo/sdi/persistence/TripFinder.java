@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import uo.sdi.model.Trip;
+import uo.sdi.model.type.TripStatus;
 
 public interface TripFinder {
 
@@ -13,5 +14,6 @@ public interface TripFinder {
 	List<Trip> findAllTripsByPromoterId(Long id);
 	void newTrip(Trip trip);
 	void updateTrip(Trip trip);
+	List<Trip> findAllStatus(TripStatus status);
 
 }

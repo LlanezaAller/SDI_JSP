@@ -18,4 +18,11 @@ public class SeatFinderImpl implements SeatFinder {
 		return (seats.size() > 0) ? seats.get(0) : null;
 	}
 
+	@Override
+	public void newSeat(Seat seat) {
+		Jpa.getManager().persist(seat);
+	}
+	
+	
+
 }
