@@ -28,7 +28,7 @@ executor.execute(action, request, response);
 						<a href="listarViajes"><img src="img/logo.png">Share My Trip</a>
 					</div>
 					<ul class="horizontalMenu_links">
-						<li class="activeLink"><a href="#"><i
+						<li class="activeLink"><a href="listarViaje"><i
 								class="fa fa-2x fa-car"></i>Viajes</a></li>
 						<li><a href="listarMisViajes"><i class="fa fa-2x fa-users"></i>Mis
 								Viajes</a></li>
@@ -66,7 +66,7 @@ executor.execute(action, request, response);
 						<td>${viaje.arrivalDate}</td>
 						<td>${viaje.closingDate}</td>
 						<td>${viaje.availablePax}</td>
-						<td><a href="verViaje.jsp?id=${viaje.id}">Ver</a></td>
+						<td><a href="verViaje?viajeID=${viaje.id}">Ver</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
