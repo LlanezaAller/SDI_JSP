@@ -29,16 +29,16 @@ public class TripFinderImpl implements TripFinder {
 		List<Trip> trips = Jpa.getManager()
 				.createNamedQuery("Trip.findAll", Trip.class)
 				.getResultList();
-		return (trips == null) ? trips : new ArrayList<Trip>();
+		return (trips != null) ? trips : new ArrayList<Trip>();
 	}
 	
 	@Override
 	public List<Trip> findAllStatus(TripStatus status) {
 		List<Trip> trips = Jpa.getManager()
-				.createNamedQuery("Trip.findAllOpen", Trip.class)
+				.createNamedQuery("Trip.findAllStatus", Trip.class)
 				.setParameter(1, status)
 				.getResultList();
-		return (trips == null) ? trips : new ArrayList<Trip>();
+		return (trips != null) ? trips : new ArrayList<Trip>();
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class TripFinderImpl implements TripFinder {
 		.createNamedQuery("Trip.findAllTripByPromoterId", Trip.class)
 		.setParameter(1, id)
 		.getResultList();
-		return (trips == null) ? trips : new ArrayList<Trip>();
+		return (trips != null) ? trips : new ArrayList<Trip>();
 	}
 
 

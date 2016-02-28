@@ -1,7 +1,0 @@
-/*C15*/SET SCHEMA PUBLIC
-INSERT INTO TTRIPS VALUES(2,'2016-02-02',2,'2016-02-29','mi super pito','chupicalle','chupivilla','chupilandia','chupiprovincia',69.0E0,69.0E0,'69','2016-02-01','cutrecalle','cutreciudad','cutrecountry','cutreprovincia',4.0E0,4.0E0,'23',2.0E0,2,'OPEN',1)
-INSERT INTO TSEATS VALUES(NULL,NULL,2,1)
-COMMIT
-ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 3
-/*C3*/SET SCHEMA PUBLIC
-DISCONNECT
