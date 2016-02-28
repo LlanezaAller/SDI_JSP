@@ -54,6 +54,16 @@
 			]]>
 		</query>
 	</named-query>
+	<named-query name="Trip.findAllTripByPromoterId">
+		<query>
+			<![CDATA[
+			select t
+				from Trip t
+				where t.promoter.id = ?1
+			]]>
+		</query>
+	</named-query>
+	
 	
 	<!-- Seat queries -->
 	<named-query name="Seat.findByUserAndTrip">

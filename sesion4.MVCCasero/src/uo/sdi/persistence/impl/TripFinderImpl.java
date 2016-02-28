@@ -29,6 +29,13 @@ public class TripFinderImpl implements TripFinder {
 				.getResultList();
 	}
 
+	@Override
+	public List<Trip> findAllTripsByPromoterId(Long id) {
+		return Jpa.getManager()
+		.createNamedQuery("Trip.findAllTripByPromoterId", Trip.class)
+		.setParameter(1, id)
+		.getResultList();
+	}
 
 
 	@Override
@@ -50,5 +57,8 @@ public class TripFinderImpl implements TripFinder {
 	public void updateTrip(Trip trip){
 		Jpa.getManager().merge(trip);
 	}
+
+
+
 
 }
