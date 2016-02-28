@@ -49,6 +49,15 @@ public class TripFinderImpl implements TripFinder {
 		.getResultList();
 		return (trips != null) ? trips : new ArrayList<Trip>();
 	}
+	
+	@Override
+	public List<Trip> findAllAplicantsByUserId(Long id) {
+		List<Trip> trips = Jpa.getManager()
+				.createNamedQuery("User.findAllAplicantsByTrip", Trip.class)
+				.setParameter(1, id)
+				.getResultList();
+		return (trips != null) ? trips : new ArrayList<Trip>();
+	}
 
 
 	@Override

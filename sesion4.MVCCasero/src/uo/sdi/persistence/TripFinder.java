@@ -15,5 +15,6 @@ public interface TripFinder {
 	void newTrip(Trip trip);
 	void updateTrip(Trip trip);
 	List<Trip> findAllStatus(TripStatus status);
+	List<Trip> findAllAplicantsByUserId(Long id);
 
 }
