@@ -33,8 +33,6 @@ public class VerViajeAction implements Accion {
 				List<User> users = Factories
 						.persistence.createUserGateway()
 						.findUsersByTrip(viaje.getId());
-				// TODO meter dentro de users una lista de los usuarios que hay
-				// dentro de seats
 				request.setAttribute("users", users);
 				request.setAttribute("viaje", viaje);
 				return "EXITO";

@@ -2,10 +2,12 @@
 <%@ page import="uo.sdi.acciones.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<% 
-ActionExecuter executor = new ActionExecuter();
-ListarViajesAction action = new ListarViajesAction();
-executor.execute(action, request, response);
+<%
+if(request.getAttribute("listaViajes")==null){
+	ActionExecuter executor = new ActionExecuter();
+	ListarViajesAction action = new ListarViajesAction();
+	executor.execute(action, request, response);
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +30,7 @@ executor.execute(action, request, response);
 						<a href="listarViajes"><img src="img/logo.png">Share My Trip</a>
 					</div>
 					<ul class="horizontalMenu_links">
-						<li class="activeLink"><a href="listarViaje"><i
+						<li class="activeLink"><a href="listarViajes"><i
 								class="fa fa-2x fa-car"></i>Viajes</a></li>
 						<li><a href="listarMisViajes"><i class="fa fa-2x fa-users"></i>Mis
 								Viajes</a></li>

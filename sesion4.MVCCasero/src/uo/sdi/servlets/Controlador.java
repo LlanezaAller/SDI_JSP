@@ -14,6 +14,7 @@ import uo.sdi.acciones.Accion;
 import uo.sdi.acciones.ActionExecuter;
 import uo.sdi.acciones.CrearViajeAction;
 import uo.sdi.acciones.ListarMisViajesAction;
+import uo.sdi.acciones.ListarRatingsAction;
 import uo.sdi.acciones.ListarViajesAction;
 import uo.sdi.acciones.ModificarDatosAction;
 import uo.sdi.acciones.RegistrarseAction;
@@ -62,6 +63,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			req.getSession().invalidate();
 			
 			Log.error("Se ha producido alguna excepción no manejada [%s]",e);
+			e.printStackTrace();
 			Message m = new Message(Message.ERROR, "Algo ha salido mal :(");
 			req.setAttribute("message", m);
 			jspSiguiente="/listaViajes.jsp";
@@ -114,9 +116,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		Map<String,Accion> mapaRegistrado=new HashMap<String,Accion>();
 		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
+		mapaRegistrado.put("listarViajes", new ListarViajesAction());
 		mapaRegistrado.put("crearViaje", new CrearViajeAction());
 		mapaRegistrado.put("verViaje", new VerViajeAction());
 		mapaRegistrado.put("listarMisViajes", new ListarMisViajesAction());
+		mapaRegistrado.put("listarRatings", new ListarRatingsAction());
 		mapaDeAcciones.put("REGISTRADO", mapaRegistrado);
 	}
 	
@@ -153,11 +157,17 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResJSP.put("registrarse", resJSP);
 		resJSP=new HashMap<String, String>();
 		resJSP.put("EXITO","/listaViajes.jsp");
+		opcionResJSP.put("listarViajes", resJSP);
+		resJSP=new HashMap<String, String>();
+		resJSP.put("EXITO","/listaViajes.jsp");
 		resJSP.put("FRACASO","/crearViaje.jsp");
 		opcionResJSP.put("crearViaje", resJSP);
 		resJSP=new HashMap<String, String>();
 		resJSP.put("EXITO","/verViaje.jsp");
 		opcionResJSP.put("verViaje", resJSP);
+		resJSP=new HashMap<String, String>();
+		resJSP.put("EXITO","/listarRatings.jsp");
+		opcionResJSP.put("listarRatings", resJSP);
 		resJSP=new HashMap<String, String>();
 		resJSP.put("EXITO","/misViajes.jsp");
 		opcionResJSP.put("listarMisViajes", resJSP);

@@ -4,9 +4,9 @@ import java.util.regex.Pattern;
 
 public class Asserts {
 	
-	public static boolean assertCampos(Object... o){
+	public static boolean assertCampos(String... o){
 		for (int i=0 ; i < o.length ; i++) {
-			if(o[i] == null)
+			if(o[i] == null || o[i].isEmpty())
 				return false;
 	    }
 		return true;

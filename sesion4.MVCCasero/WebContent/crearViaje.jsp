@@ -20,7 +20,7 @@
 						<a href="listarViajes"><img src="img/logo.png">Share My Trip</a>
 					</div>
 					<ul class="horizontalMenu_links">
-						<li><a href="verViajes"><i
+						<li><a href="listarViajes"><i
 								class="fa fa-2x fa-car"></i>Viajes</a></li>
 						<li><a href="listarMisViajes"><i class="fa fa-2x fa-users"></i>Mis
 								Viajes</a></li>

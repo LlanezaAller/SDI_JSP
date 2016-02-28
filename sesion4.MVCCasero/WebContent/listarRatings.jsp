@@ -42,48 +42,20 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th></th>
-					<th>Salida</th>
-					<th>Llegada</th>
+					<th>Valoración</th>
+					<th>Comentario</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="titleColumn">País:</td>
-					<td>${viaje.departure.country}</td>
-					<td>${viaje.destination.country}</td>
-				</tr>
-				<tr>
-					<td class="titleColumn">Ciudad:</td>
-					<td>${viaje.departure.city}</td>
-					<td>${viaje.destination.city}</td>
-				</tr>
-				<tr>
-					<td class="titleColumn">Fecha:</td>
-					<td>${viaje.departureDate}</td>
-					<td>${viaje.arrivalDate}</td>
-				</tr>
-			</tbody>
-		</table>
-		<h1>Viajeros</h1>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Apellidos</th>
-					<th>Comentarios</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="u" items="${users}">
+				<c:forEach var="r" items="${listaRatings}">
 					<tr>
-						<td>${u.name}</td>
-						<td>${u.surname}</td>
-						<td><a href="listarRatings?userLogin=${user.login}">Ver valoraciones</a></td>
+						<td>${r.value}</td>
+						<td>${r.comment}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		
 		</main>
 		<footer> </footer>
 	</div>

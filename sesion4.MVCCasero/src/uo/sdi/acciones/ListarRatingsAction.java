@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.Rating;
 import uo.sdi.model.User;
+import uo.sdi.view.Message;
 import alb.util.log.Log;
 
 public class ListarRatingsAction implements Accion {
@@ -19,16 +20,19 @@ public class ListarRatingsAction implements Accion {
 
 		List<Rating> ratings = null;
 
-		try {
-			HttpSession s = request.getSession();
-			User u = (User) s.getAttribute("user");
+		if (request.getParameter("userLogin") != null) {
+			User u = Factories.persistence.createUserGateway().findByLogin(
+					request.getParameter("userLogin"));
 			ratings = Factories.persistence.createRatingGateway()
 					.findRatingsByUserAboutId(u.getId());
 			request.setAttribute("listaRatings", ratings);
-			Log.debug("Obtenida lista de viajes" + " conteniendo [%d] viajes",
-					ratings.size());
-		} catch (Exception e) {
-			Log.error("Algo ha ocurrido obteniendo lista de viajes");
+			Log.debug(
+					"Obtenida lista de valoraciones de [%s] conteniendo [%d] valoraciones",
+					u.getName(), ratings.size());
+		} else {
+			Message m = new Message(Message.ERROR,
+					"No se ha especificado ningún usuario");
+			request.setAttribute("message", m);
 		}
 		return "EXITO";
 	}
