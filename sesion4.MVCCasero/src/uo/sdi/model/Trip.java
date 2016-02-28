@@ -36,7 +36,26 @@ import uo.sdi.model.type.TripStatus;
 @Entity
 @Table (name="TTRIPS")
 public class Trip {
-	
+
+	public Trip(AddressPoint departure, AddressPoint destination,
+			Date arrivalDate, Date departureDate, Date closingDate,
+			Integer availablePax, Integer maxPax, Double estimatedCost,
+			String comments, TripStatus status, User promoter) {
+		super();
+
+		this.departure = departure;
+		this.destination = destination;
+		this.arrivalDate = arrivalDate;
+		this.departureDate = departureDate;
+		this.closingDate = closingDate;
+		this.availablePax = availablePax;
+		this.maxPax = maxPax;
+		this.estimatedCost = estimatedCost;
+		this.comments = comments;
+		this.status = status;
+		this.promoter = promoter;
+	}
+
 	@Id @GeneratedValue
 	private Long id;
 	
