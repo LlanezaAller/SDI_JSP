@@ -1,14 +1,17 @@
 package uo.sdi.acciones;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.jboss.resteasy.spi.HttpRequest;
+
+import uo.sdi.acciones.exception.BusinessException;
 import uo.sdi.acciones.util.Asserts;
-import uo.sdi.infraestructure.factories.Factories;
-import uo.sdi.model.User;
-import uo.sdi.model.type.UserStatus;
-import uo.sdi.persistence.UserFinder;
 import uo.sdi.view.Message;
 import alb.util.log.Log;
 
@@ -16,67 +19,86 @@ public class CrearViajeAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws BusinessException {
+		
+		if(request.getSession().getAttribute("user")!=null){
+			boolean hasAllData = Asserts.assertCampos(request.getParameter("freeSeats"), request.getParameter("totalCost"), request.getParameter("limitDatetime"), request.getParameter("departureDatetime"), request.getParameter("arrivalDatetime"));
+			if(!hasAllData)
+				return faltanCampos(request);
+			
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-		boolean state = true;
-		
-		//Obtencion de datos 
-		
-		String resultado = "EXITO";
-		String name = request.getParameter("departure_address");
-		String surname = request.getParameter("departure_city");
-		String email = request.getParameter("departure_country");
-		String login = request.getParameter("user");
-		String password = request.getParameter("password");
-		String rePassword = request.getParameter("repeatPassword");
-		
-		//Comprobaciones
-		state = Asserts.assertCampos(name,surname
-				,email,login,password,rePassword);
-		state = Asserts.isEmail(email);
-		state = password.equals(rePassword);
-		
-		HttpSession session = request.getSession();
-		if (state) {
-//			UserDao dao = PersistenceFactory.newUserDao();
-			UserFinder uf = Factories.persistence.createUserGateway();
-			User newUser = uf.findByLogin(login);//dao.findByLogin(login);
-			if (newUser == null  ) {
-				
-				//Definicion de caracteristicas
-				newUser = new User();
-				newUser.setEmail(email);
-				newUser.setLogin(login);
-				newUser.setName(name);
-				newUser.setStatus(UserStatus.ACTIVE);
-				newUser.setPassword(rePassword);
-				newUser.setSurname(surname);
-				
-				uf.save(newUser);
-				
-				//Introducimos el usuario en sesion
-				session.setAttribute("user", newUser);
-				Log.info("El usuario [%s] ha creado su cuenta", name);
-				Message error = new Message(Message.OK, "Bienvenido,  " + name);
-				request.setAttribute("message", error);
-			} else {
-				Message error = new Message(Message.ERROR, "El nombre de usuario " + name + " ya está en uso.");
-				request.setAttribute("message", error);
-				Log.info("Fallo en registro, login [%s] en uso", name);
-				resultado = "FRACASO";
+			int freeSeats = Integer.parseInt(request.getParameter("freeSeats"));
+			float totalCost = Float.parseFloat(request.getParameter("totalCost"));
+			Log.debug(request.getParameter("limitDatetime"));
+			Date limitDatetime = null;
+			try {
+				 limitDatetime = simpleDateFormat.parse(request.getParameter("limitDatetime").replace('T', ' '));
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
-		} else {
-			Log.info("Fallo en el registro, parametros erroneos");
-			Message error = new Message(Message.ERROR, "No ha sido posible crear tu cuenta, revisa los campos.");
-			request.setAttribute("message", error);
-			resultado = "FRACASO";
+			Log.debug(limitDatetime.toString());
+			//Departure
+			String departureCountry =  request.getParameter("departureCountry");
+			String departureState =  request.getParameter("departureState");
+			String departureCity =  request.getParameter("departureCity");
+			String departureZip =  request.getParameter("departureZip");
+			String departureStreet =  request.getParameter("departureStreet");
+			
+			float departureLat,departureLon;
+			departureLat=departureLon=-1;
+			if(Asserts.assertCampos(request.getParameter("departureLat"), request.getParameter("departureLon"))) {
+				departureLat = Float.parseFloat(request.getParameter("departureLat"));
+				departureLon = Float.parseFloat(request.getParameter("departureLon"));
+			}
+			Date departureDatetime;
+			try {
+				departureDatetime = simpleDateFormat.parse(request.getParameter("departureDatetime").replace('T', ' '));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			//Destination
+			String arrivalCountry =  request.getParameter("arrivalCountry");
+			String arrivalState =  request.getParameter("arrivalState");
+			String arrivalCity =  request.getParameter("arrivalCity");
+			String arrivalZip =  request.getParameter("arrivalZip");
+			String arrivalStreet =  request.getParameter("arrivalStreet");
+			float arrivalLat,arrivalLon;
+			arrivalLat=arrivalLon=-1;
+			if(Asserts.assertCampos(request.getParameter("arrivalLat"), request.getParameter("arrivalLon"))) {
+				arrivalLat = Float.parseFloat(request.getParameter("arrivalLat"));
+				arrivalLon = Float.parseFloat(request.getParameter("arrivalLon"));
+			}
+			Date arrivalDatetime;
+			try {
+				arrivalDatetime = simpleDateFormat.parse(request.getParameter("arrivalDatetime").replace('T', ' '));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			//Description
+			String description =  request.getParameter("description");
+			
+			hasAllData =  Asserts.assertCampos(departureCountry, departureState, departureCity, departureZip, departureStreet, arrivalCountry, arrivalState, arrivalCity, arrivalZip, arrivalStreet);
+			if(hasAllData){
+				//TODO Pala db
+				Message ok = new Message(Message.OK, "Viaje creado con éxito");
+				request.setAttribute("message", ok);
+				return "EXITO";
+			}else {
+				return faltanCampos(request);
+			}
+			
 		}
-		return resultado;
+		Message error = new Message(Message.ERROR, "Necesitas estar logueado para poder crear viajes");
+		request.setAttribute("message", error);
+		Log.debug("Un visitante no autorizado ha intentado crear un viaje");
+		return "FRACASO";
+		
+		
 	}
-
-	@Override
-	public String toString() {
-		return getClass().getName();
+	private String faltanCampos(HttpServletRequest request){
+		Message error = new Message(Message.ERROR, "Rellena todos los campos necesarios");
+		request.setAttribute("message", error);
+		return "FRACASO";
 	}
-	
 }

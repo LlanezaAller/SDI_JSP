@@ -23,6 +23,7 @@ public class ListarViajesAction implements Accion {
 			Log.debug("Obtenida lista de viajes conteniendo [%d] viajes", viajes.size());
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			Log.error("Algo ha ocurrido obteniendo lista de viajes");
 		}
 		return "EXITO";
