@@ -84,6 +84,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+
 		</main>
 		<footer> </footer>
 	</div>
