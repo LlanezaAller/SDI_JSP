@@ -23,6 +23,15 @@
 			]]>
 		</query>
 	</named-query>
+	<named-query name="User.findAllByTrip">
+		<query>
+			<![CDATA[
+			select s.user 
+				from Seat s
+				where s.trip.id = ?1
+			]]>
+		</query>
+	</named-query>
 
 	<!-- Trip queries -->
 	

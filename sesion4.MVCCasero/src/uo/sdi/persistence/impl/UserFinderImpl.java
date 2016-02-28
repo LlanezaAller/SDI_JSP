@@ -1,5 +1,6 @@
 package uo.sdi.persistence.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uo.sdi.model.User;
@@ -22,6 +23,15 @@ public class UserFinderImpl implements UserFinder {
 						User.class)
 				.setParameter(1, login).getResultList();
 		return (usuarios.size() > 0) ? usuarios.get(0) : null;
+	}
+	@Override
+	public List<User> findUsersByTrip(Long id) {
+		List<User> usuarios = Jpa.getManager()
+				.createNamedQuery("User.findAllByTrip",
+						User.class)
+						.setParameter(1, id)
+						.getResultList();
+		return (usuarios != null) ? usuarios : new ArrayList<User>();
 	}
 
 	@Override

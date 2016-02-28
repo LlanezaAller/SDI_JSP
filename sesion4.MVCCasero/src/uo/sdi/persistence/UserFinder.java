@@ -10,5 +10,6 @@ public interface UserFinder {
 	List<User> findAll();
 	void update(User usuario);
 	void save(User usuario);
+	List<User> findUsersByTrip(Long id);
 
 }
