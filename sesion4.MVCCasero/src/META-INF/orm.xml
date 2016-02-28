@@ -106,6 +106,15 @@
 			]]>
 		</query>
 	</named-query>
+	<named-query name="Seat.findByUser">
+		<query>
+			<![CDATA[
+			select s
+				from Seat s
+				where s.user.id = ?1
+			]]>
+		</query>
+	</named-query>
 	
 	
 	
