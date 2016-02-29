@@ -59,11 +59,11 @@ public class ModificarDatosAction implements Accion {
 				usuario.setName(newName);
 				usuario.setSurname(newSurname);
 
-				// Factories.persistence.createUserGateway().update(usuario);
 				Log.debug("Modificado email de [%s] con el valor [%s]",
 						usuario.getLogin(), newEmail);
 				Message m = new Message(Message.OK, "Perfil editado con éxito");
 				request.setAttribute("message", m);
+				request.getSession().setAttribute("user", usuario);
 				return "EXITO";
 			} catch (Exception e) {
 				Log.error("Algo ha ocurrido actualizando el usuario de [%s]",

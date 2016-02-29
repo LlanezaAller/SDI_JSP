@@ -20,7 +20,7 @@ public class SeatFinderImpl implements SeatFinder {
 		return (seats.size() > 0) ? seats.get(0) : null;
 	}
 	@Override
-	public List<Seat> findByUserAndTrip(Long userId) {
+	public List<Seat> findByUser(Long userId) {
 		List<Seat> seats = Jpa.getManager()
 				.createNamedQuery("Seat.findByUser",
 						Seat.class)

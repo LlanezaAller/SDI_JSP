@@ -8,6 +8,6 @@ public interface SeatFinder {
 
 	Seat findByUserAndTrip(Long userId, Long tripId);
 	void newSeat(Seat seat);
-	List<Seat> findByUserAndTrip(Long userId);
+	List<Seat> findByUser(Long userId);
 
 }

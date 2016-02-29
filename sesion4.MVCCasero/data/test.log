@@ -1,100 +1,15 @@
-/*C3*/SET SCHEMA PUBLIC
-drop table TRATING if exists
-drop table TSEATS if exists
-drop table TTRIPS if exists
-drop table TTRIPS_TUSERS if exists
-drop table TUSERS if exists
-create table TRATING (id bigint not null, comment varchar(255), value integer, aboutSeat_trip_id bigint, aboutSeat_user_id bigint, fromSeat_trip_id bigint, fromSeat_user_id bigint, primary key (id))
-create table TSEATS (comment varchar(255), status varchar(255), trip_id bigint, user_id bigint, primary key (trip_id, user_id))
-create table TTRIPS (id bigint not null, arrivalDate date, availablePax integer, closingDate date, comments varchar(255), departure_address varchar(255), departure_city varchar(255), departure_country varchar(255), departure_state varchar(255), departure_wpt_lat double, departure_wpt_lon double, departure_zipCode varchar(255), departureDate date, destination_address varchar(255), destination_city varchar(255), destination_country varchar(255), destination_state varchar(255), destination_wpt_lat double, destination_wpt_lon double, destination_zipCode varchar(255), estimatedCost double, maxPax integer, status varchar(255), promoter_id bigint, primary key (id))
-create table TTRIPS_TUSERS (aplicaciones_id bigint not null, aplicadores_id bigint not null, primary key (aplicaciones_id, aplicadores_id))
-create table TUSERS (id bigint not null, email varchar(255), login varchar(255), name varchar(255), password varchar(255), status varchar(255), surname varchar(255), primary key (id))
-alter table TRATING add constraint FK_rph64g079fuoml9537rbapieb foreign key (aboutSeat_trip_id, aboutSeat_user_id) references TSEATS
-alter table TRATING add constraint FK_ne4hjsjk77ff4swatuhyjcj72 foreign key (fromSeat_trip_id, fromSeat_user_id) references TSEATS
-alter table TSEATS add constraint FK_jnphy74vsqigr4ctfo1pfona2 foreign key (trip_id) references TTRIPS
-alter table TSEATS add constraint FK_h42slqb9hwqgi60soq8oiyhu foreign key (user_id) references TUSERS
-alter table TTRIPS add constraint FK_3mh75mm706i021clje0veu10y foreign key (promoter_id) references TUSERS
-alter table TTRIPS_TUSERS add constraint FK_inrh0m78r8bjvngx615a8m9i4 foreign key (aplicadores_id) references TUSERS
-alter table TTRIPS_TUSERS add constraint FK_rgqqfbtnempbm3o2vp6h0fkv9 foreign key (aplicaciones_id) references TTRIPS
-create sequence hibernate_sequence start with 1 increment by 1
-/*C2*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C3*/INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user1')
-COMMIT
-ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 2
-/*C6*/SET SCHEMA PUBLIC
-INSERT INTO TTRIPS VALUES(2,'2016-05-05',1,'2016-02-28','','Departure Street','Departure City','Departure Country','Departure State',-1.0E0,-1.0E0,'69696','2016-02-02','Destination Street','Destination City','Destination Country','Destination State',-1.0E0,-1.0E0,'33333',69.0E0,2,'OPEN',1)
-INSERT INTO TSEATS VALUES(NULL,'ACCEPTED',2,1)
-COMMIT
-ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 3
-/*C12*/SET SCHEMA PUBLIC
-INSERT INTO TTRIPS VALUES(3,'2016-06-28',1,'2016-04-04','','Departure Street','Departure City','Departure Country','Departure State',-1.0E0,-1.0E0,'69696','2016-06-02','Destination Street','Destination City','Destination Country','Destination State',-1.0E0,-1.0E0,'33333',69.0E0,2,'OPEN',1)
-INSERT INTO TSEATS VALUES(NULL,'ACCEPTED',3,1)
-COMMIT
-ALTER SEQUENCE PUBLIC.HIBERNATE_SEQUENCE RESTART WITH 4
-/*C3*/DISCONNECT
-/*C5*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C6*/DISCONNECT
-/*C7*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C8*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C9*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C10*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C11*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C12*/DISCONNECT
-/*C13*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C14*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C15*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C16*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C17*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C18*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C19*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C20*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C21*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C22*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C23*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C24*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C34*/SET SCHEMA PUBLIC
-DELETE FROM TUSERS WHERE ID=1
-INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user12')
-COMMIT
-DELETE FROM TUSERS WHERE ID=1
-INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user')
-COMMIT
-/*C35*/SET SCHEMA PUBLIC
-DELETE FROM TUSERS WHERE ID=1
-INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','pene','ACTIVE','user')
-COMMIT
-/*C37*/SET SCHEMA PUBLIC
-DELETE FROM TUSERS WHERE ID=1
-INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user')
-COMMIT
+/*C27*/SET SCHEMA PUBLIC
 DELETE FROM TUSERS WHERE ID=1
 INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user1')
 COMMIT
-DELETE FROM TUSERS WHERE ID=1
-INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user')
-COMMIT
-DELETE FROM TUSERS WHERE ID=1
-INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user1')
-COMMIT
-DELETE FROM TUSERS WHERE ID=1
-INSERT INTO TUSERS VALUES(1,'user1@gmail.com','user1','user1','user1','ACTIVE','user69')
-COMMIT
+/*C31*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C32*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C28*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C27*/DISCONNECT
+/*C30*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C29*/SET SCHEMA PUBLIC
+DISCONNECT
