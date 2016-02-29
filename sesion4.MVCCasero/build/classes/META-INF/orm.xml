@@ -129,6 +129,16 @@
 			]]>
 		</query>
 	</named-query>
+	<named-query name="Rating.findByUserAndTrip">
+		<query>
+			<![CDATA[
+				select r
+					from Rating r
+					where r.fromSeat.user.id = ?1
+					and r.fromSeat.trip.id =?2
+			]]>
+		</query>
+	</named-query>
 	
 	<named-query name="Rating.findRatingsByUserAboutId">
 		<query>
@@ -136,6 +146,15 @@
 				select r
 					from Rating r
 					where r.aboutSeat.user.id = ?1
+			]]>
+		</query>
+	</named-query>
+	<named-query name="Rating.findRatingsByUserFromId">
+		<query>
+			<![CDATA[
+				select r
+					from Rating r
+					where r.fromSeat.user.id = ?1
 			]]>
 		</query>
 	</named-query>

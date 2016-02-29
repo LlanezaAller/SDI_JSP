@@ -1,8 +1,5 @@
 package uo.sdi.acciones;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,39 +23,46 @@ public class ValorarAction implements Accion {
 				User user = (User) request.getSession().getAttribute("user");
 				Trip viaje = Factories.persistence
 						.createTripGateway()
-						.findById(Long.valueOf(request.getParameter("viajeID")));
-				boolean canRate=false;
-				Seat mySeat=null;
-				for(Seat s:viaje.getSeats())
-					if(s.getUser().getId()==user.getId() && s.getStatus()==SeatStatus.ACCEPTED){
-						if(s.getRatingsFrom()==null || s.getRatingsFrom().isEmpty()){
-							canRate=true;
-							mySeat=s;
+						.findById(
+								Long.valueOf(request.getParameter("viajeID")));
+				boolean canRate = false;
+				Seat mySeat = null;
+				for (Seat s : viaje.getSeats())
+					if (s.getUser().getId() == user.getId()
+							&& s.getStatus() == SeatStatus.ACCEPTED) {
+						if (s.getRatingsFrom() == null
+								|| s.getRatingsFrom().isEmpty()) {
+							canRate = true;
+							mySeat = s;
 						}
 					}
-				if(canRate){//Valoremos pues
-					
-					for(Seat s:viaje.getSeats()){
-						List<Rating> ratings = new ArrayList<Rating>();
-						if(s.getUser().getId()!=user.getId()){
-							String comment = request.getParameter("comment-user-" + s.getUser().getId());
-							String ratingString = request.getParameter("rating-user-" + s.getUser().getId());
-							if(ratingString==null){
+				if (canRate) {// Valoremos pues
+					for (Seat s : viaje.getSeats()) {
+						if (s.getUser().getId() != user.getId()) {
+							String comment = request
+									.getParameter("comment-user-"
+											+ s.getUser().getId());
+							String ratingString = request
+									.getParameter("rating-user-"
+											+ s.getUser().getId());
+							if (ratingString == null) {
 								Message error = new Message(Message.ERROR,
-										"Necesitas valorar a toda la gente del viaje");
+										"Necesitas valorar"
+										+ " a toda la gente del viaje");
 								request.setAttribute("message", error);
 								return "FRACASO";
 							}
-							int ratingValue=Integer.valueOf(ratingString);
-							ratings.add(new Rating(mySeat, s, comment, ratingValue));
+							int ratingValue = Integer.valueOf(ratingString);
+							Factories.persistence.createRatingGateway()
+							.newRating(new Rating(mySeat, s, comment,
+									ratingValue));
 						}
 					}
-					//TODO add ratings to db
 					Message error = new Message(Message.OK,
 							"Has valorado este viaje");
 					request.setAttribute("message", error);
 					return "EXITO";
-				}else{
+				} else {
 					Message error = new Message(Message.ERROR,
 							"Ya has valorado a los miembros de este viaje");
 					request.setAttribute("message", error);

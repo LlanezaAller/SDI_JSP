@@ -39,6 +39,11 @@ public class Rating {
 		this.aboutSeat = aboutSeat;
 		this.comment = comment;
 		this.value = value;
+		fromSeat._getRatingsAbout().add(this);
+		fromSeat._getRatingsFrom().add(this);
+		
+		aboutSeat._getRatingsAbout().add(this);
+		aboutSeat._getRatingsFrom().add(this);
 	}
 
 	public Rating(){};

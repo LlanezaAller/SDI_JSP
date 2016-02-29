@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uo.sdi.model.Seat;
-import uo.sdi.model.Trip;
 import uo.sdi.persistence.SeatFinder;
 import uo.sdi.persistence.util.Jpa;
 
