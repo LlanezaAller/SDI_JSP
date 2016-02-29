@@ -35,7 +35,12 @@ public class CrearViajeAction implements Accion {
 					request.getParameter("arrivalDatetime"));
 			if (!hasAllData)
 				return faltanCampos(request);
-
+			
+			String viajeID = request.getParameter("viajeID");
+			Trip viaje=null;
+			if(SdiUtil.assertCampos(viajeID))
+				viaje = Factories.persistence.createTripGateway().findById(Long.valueOf(viajeID));
+				
 
 			int freeSeats = Integer.parseInt(request.getParameter("freeSeats"));
 			double totalCost = Float.parseFloat(request
@@ -91,13 +96,18 @@ public class CrearViajeAction implements Accion {
 				AddressPoint arrival = new AddressPoint(arrivalStreet,
 						arrivalCity, arrivalState, arrivalCountry, arrivalZip,
 						new Waypoint(arrivalLat, arrivalLon));
-
-				Trip viaje = new Trip(departure, arrival, arrivalDatetime,
+				if(viaje==null) {
+					viaje = new Trip(departure, arrival, arrivalDatetime,
 						departureDatetime, limitDatetime, freeSeats,
 						freeSeats + 1, totalCost, description, TripStatus.OPEN,
 						user);
+					Factories.persistence.createTripGateway().newTrip(viaje);
+				} else {
+					viaje.setArrivalDate(arrivalDatetime);
+					viaje.setClosingDate(closingDate);
+				}
 
-				Factories.persistence.createTripGateway().newTrip(viaje);
+				
 
 				Seat seat = new Seat(user, viaje);
 				seat.setStatus(SeatStatus.ACCEPTED);
