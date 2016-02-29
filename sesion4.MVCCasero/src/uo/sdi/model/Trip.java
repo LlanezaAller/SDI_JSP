@@ -14,6 +14,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -88,6 +89,7 @@ public class Trip {
 
 	//Relaciones
 	@ManyToMany
+	@JoinTable(name="TAPLICATIONS")
 	private Set<User> aplicadores = new HashSet<>();
 	
 	@OneToMany(mappedBy="trip")
