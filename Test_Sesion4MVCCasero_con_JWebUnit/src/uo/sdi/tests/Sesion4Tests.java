@@ -5,7 +5,7 @@ import org.junit.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 
 public class Sesion4Tests {
-
+	//TODO cambiar el nombre al proyecto
     @Before
     public void prepare() {
         setBaseUrl("http://localhost:8280/sesion4.MVCCasero");
@@ -18,6 +18,7 @@ public class Sesion4Tests {
         clickLink("listarViajes"); // Seguir el hipervínculo
 
         assertTitleEquals("ShareMyTrip - Listado de viajes");  // Comprobar título de la página
+        
 
         // La base de datos contiene 2 viajes tal y como se entrega
         assertElementPresent("item_0"); // Comprobar elemento presente en la página
@@ -27,13 +28,17 @@ public class Sesion4Tests {
     @Test
     public void testIniciarSesionConExito() {
     	// Rellenando el formulario HTML
-        beginAt("/");  // Navegar a la URL
-        setTextField("nombreUsuario", "user1"); // Rellenar primer campo de formulario
+    	
+        beginAt("/login.jsp");  // Navegar a la URL
+        setTextField("user", "user1"); // Rellenar primer campo de formulario
+        setTextField("password", "user1");
+        assertTextInElement("user","user1");
+        assertTextInElement("password","user1");
         submit(); // Enviar formulario
-        assertTitleEquals("ShareMyTrip - Página principal del usuario");  // Comprobar título de la página
-        assertTextInElement("login", "user1");  // Comprobar cierto elemento contiene cierto texto
-        assertTextInElement("name", "Fernando");  // Comprobar cierto elemento contiene cierto texto
-        assertTextPresent("Es Vd el usuario número:"); // Comprobar cierto texto está presente
+        assertTitleEquals("Viajes");  // Comprobar título de la página
+        assertTextInElement("message okMessage", "¡Bienvenido de nuevo, user1!");  // Comprobar cierto elemento contiene cierto texto
+        //assertTextInElement("name", "Fernando");  // Comprobar cierto elemento contiene cierto texto
+        //assertTextPresent("Es Vd el usuario número:"); // Comprobar cierto texto está presente
     }
 
     @Test
