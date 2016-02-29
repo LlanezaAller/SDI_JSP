@@ -30,6 +30,16 @@ public class Rating {
 
 	private String comment;
 	private Integer value = 0;
+	
+	
+	public Rating(Seat fromSeat, Seat aboutSeat, String comment,
+			Integer value) {
+		super();
+		this.fromSeat = fromSeat;
+		this.aboutSeat = aboutSeat;
+		this.comment = comment;
+		this.value = value;
+	}
 
 	public Rating(){};
 

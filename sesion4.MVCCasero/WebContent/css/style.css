@@ -89,9 +89,14 @@ input {
 	border-radius:23px;
 	color:white;
 	cursor:pointer;
+	display:block;
 	font-size:20px;
 	height:46px;
+	line-height:46px;
+	margin: 15px auto;
 	min-width:200px;
+	text-align:center;
+	width:80%;
 }
 .button:hover {
 	background:transparent;

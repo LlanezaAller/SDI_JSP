@@ -21,12 +21,11 @@
 						<a href="#"><img src="img/logo.png">Share My Trip</a>
 					</div>
 					<ul class="horizontalMenu_links">
-						<li><a href="listarViajes"><i
-								class="fa fa-2x fa-car"></i>Viajes</a></li>
-						<li><a href="listarMisViajes"><i class="fa fa-2x fa-users"></i>Mis
-								Viajes</a></li>
-						<li><a href="crearViaje.jsp"><i class="fa fa-2x fa-plus-circle"></i>Crear
-								Viaje</a></li>
+						<li><a href="listarViajes"><i class="fa fa-2x fa-car"></i>Viajes</a></li>
+						<li><a href="listarMisViajes"><i
+								class="fa fa-2x fa-users"></i>Mis Viajes</a></li>
+						<li><a href="crearViaje.jsp"><i
+								class="fa fa-2x fa-plus-circle"></i>Crear Viaje</a></li>
 					</ul>
 					<jsp:include page="snippets/menu.jsp" />
 					<div class="clear"></div>
@@ -72,20 +71,140 @@
 					<th>Nombre</th>
 					<th>Apellidos</th>
 					<th>Comentarios</th>
+					<c:if
+						test="${viaje.closingDate.time > today.time and viaje.promoter.id == user.id}">
+						<th>Estado</th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="u" items="${users}">
+				<c:forEach var="seat" items="${seats}">
 					<tr>
-						<td>${u.name}</td>
-						<td>${u.surname}</td>
-						<td><a href="listarRatings?userLogin=${user.login}">Ver valoraciones</a></td>
+						<td>${seat.user.name}</td>
+						<td>${seat.user.surname}</td>
+						<td><a href="listarRatings?userLogin=${seat.user.login}">Ver
+								valoraciones</a></td>
+						<c:if
+							test="${viaje.closingDate.time > today.time and viaje.promoter.id == user.id}">
+							<td><c:choose>
+									<c:when test="${seat.user.id==viaje.promoter.id}">
+										Promotor
+									</c:when>
+									<c:when test="${seat.status=='ACCEPTED'}">
+										Aceptado
+									</c:when>
+									<c:otherwise>
+										Excluido
+									</c:otherwise>
+								</c:choose> <c:if test="${seat.user.id != viaje.promoter.id}">
+									<form method="POST">
+										<input type="hidden" value="${seat.user.id}" name="userID">
+										<input type="hidden" value="${viaje.id}" name="tripID">
+										<button type="submit" formaction="aceptarUsuarioViaje">
+											<i class="fa fa-check"></i>
+										</button>
+										<button type="submit" formaction="excluirUsuarioViaje">
+											<i class="fa fa-times"></i>
+										</button>
+									</form>
+								</c:if></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<c:if
+			test="${viaje.closingDate.time > today.time and viaje.promoter.id == user.id}">
+			<h1>Solicitudes</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Comentarios</th>
+						<c:if
+							test="${viaje.closingDate.time > today.time and viaje.promoter.id == user.id}">
+							<th>Estado</th>
+						</c:if>
+					</tr>
+				</thead>
+				<tbody>
+					<%--<c:forEach var="u" items="${applicants}">
+						<tr>
+							<td>${u.name}</td>
+							<td>${u.surname}</td>
+							<td><a href="listarRatings?userLogin=${u.login}">Ver
+									valoraciones</a></td>
+							<c:if
+								test="${viaje.closingDate.time > today.time and viaje.promoter.id == user.id}">
+								<td>
+									<form method="POST">
+										<input type="hidden" value="${u.id}" name="userID"> <input
+											type="hidden" value="${viaje.id}" name="tripID">
+										<button type="submit" formaction="aceptarUsuarioViaje">
+											<i class="fa fa-check"></i>
+										</button>
+										<button type="submit" formaction="excluirUsuarioViaje">
+											<i class="fa fa-times"></i>
+										</button>
+									</form>
+								</td>
+							</c:if>
+						</tr>
+					</c:forEach>--%>
+				</tbody>
+			</table>
+		</c:if> <c:choose>
+			<c:when test="${viaje.closingDate.time > today.time}">
+				<%-- Viaje abierto, los promotores pueden editar y el resto de la people pedir plazas --%>
+				<c:choose>
+					<c:when test="${viaje.promoter.id == user.id}">
+						<%-- El usuario es promotor --%>
+						<h1>Administrar viaje</h1>
+						<form method="POST" action="modificarViaje" class="formDark">
+							<input type="hidden" value="${viaje.id}" /> <input type="submit"
+								class="button" value="Modificar viaje" />
+						</form>
+						<form method="POST" action="cancelarViaje" class="formDark">
+							<input type="hidden" value="${viaje.id}" /> <input type="submit"
+								class="button" value="Cancelar viaje" />
+						</form>
+					</c:when>
+					<c:otherwise>
+						<%-- El usuario es un viajero que no tiene plaza pedida, puede pedir plaza --%>
+						<c:if test="${viaje.availablePax > 0 and !hasSeatOrApplication}">
+							<form method="POST" action="solicitarPlaza" class="formDark">
+								<input type="hidden" name="viajeID" value="${viaje.id}" /> <input
+									type="submit" class="button" value="Solicitar plaza" />
+							</form>
+						</c:if>
+					</c:otherwise>
 
-		</main>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<%-- Viaje cerrado, si es un participante y el viaje está realizado ofrecer la posibilidad de valorar --%>
+				<c:if
+					test="${viaje.status=='DONE' and isParticipante and not hasRated}">
+					<form action="valorarViaje" method="POST" class="formDark">
+						<input type="hidden" name="viajeID" value="${viaje.id}" />
+						<c:forEach var="seat" items="${seats}">
+							<c:if test="${user.id!=seat.user.id and seat.status=='ACCEPTED'}">
+								<div class="inputLine">
+									<label class="inputIcon" for="rating-user-${seat.user.id}"><i class="fa fa-star fa-2x"></i></label>
+									<input class="textInput textInputWithIcon" placeholder="Valoración sobre ${seat.user.name}" type="number" name="rating-user-${seat.user.id}" id="rating-user-${seat.user.id}" min="0" max="10" />
+								</div>
+								<div class="inputLine">
+									<label class="inputIcon" for="comment-user-${seat.user.id}"><i class="fa fa-comment fa-2x"></i></label>
+									<input class="textInput textInputWithIcon" placeholder="Comentario sobre ${seat.user.name}" type="text" name="comment-user-${seat.user.id}" id="comment-user-${seat.user.id}" min="0" max="10" />
+								</div>
+								<input type="submit" value="Enviar valoraciones" />
+							</c:if>
+						</c:forEach>
+					</form>
+				</c:if>
+			</c:otherwise>
+		</c:choose></main>
 		<footer> </footer>
 	</div>
 	<script type="text/javascript"
