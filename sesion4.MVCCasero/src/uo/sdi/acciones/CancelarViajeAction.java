@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import uo.sdi.acciones.util.Asserts;
+import uo.sdi.acciones.util.SdiUtil;
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;
@@ -22,7 +22,7 @@ public class CancelarViajeAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (request.getSession().getAttribute("user") != null) {
-			if (Asserts.assertCampos(request.getParameter("viajeID"))) {
+			if (SdiUtil.assertCampos(request.getParameter("viajeID"))) {
 				User user = (User) request.getSession().getAttribute("user");
 				Long viajeID = Long.valueOf(request.getParameter("viajeID"));
 				Trip viaje = Factories.persistence.createTripGateway().findById(viajeID);

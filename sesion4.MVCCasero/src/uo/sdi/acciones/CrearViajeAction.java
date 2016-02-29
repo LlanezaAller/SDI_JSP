@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import uo.sdi.acciones.exception.BusinessException;
-import uo.sdi.acciones.util.Asserts;
+import uo.sdi.acciones.util.SdiUtil;
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;
@@ -27,7 +27,7 @@ public class CrearViajeAction implements Accion {
 			HttpServletResponse response) throws BusinessException {
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
-			boolean hasAllData = Asserts.assertCampos(
+			boolean hasAllData = SdiUtil.assertCampos(
 					request.getParameter("freeSeats"),
 					request.getParameter("totalCost"),
 					request.getParameter("limitDatetime"),
@@ -60,7 +60,7 @@ public class CrearViajeAction implements Accion {
 
 			double departureLat, departureLon;
 			departureLat = departureLon = -1;
-			if (Asserts.assertCampos(request.getParameter("departureLat"),
+			if (SdiUtil.assertCampos(request.getParameter("departureLat"),
 					request.getParameter("departureLon"))) {
 				departureLat = Float.parseFloat(request
 						.getParameter("departureLat"));
@@ -82,7 +82,7 @@ public class CrearViajeAction implements Accion {
 			String arrivalStreet = request.getParameter("arrivalStreet");
 			double arrivalLat, arrivalLon;
 			arrivalLat = arrivalLon = -1;
-			if (Asserts.assertCampos(request.getParameter("arrivalLat"),
+			if (SdiUtil.assertCampos(request.getParameter("arrivalLat"),
 					request.getParameter("arrivalLon"))) {
 				arrivalLat = Float.parseFloat(request
 						.getParameter("arrivalLat"));
@@ -99,7 +99,7 @@ public class CrearViajeAction implements Accion {
 			// Description
 			String description = request.getParameter("description");
 
-			hasAllData = Asserts.assertCampos(departureCountry, departureState,
+			hasAllData = SdiUtil.assertCampos(departureCountry, departureState,
 					departureCity, departureZip, departureStreet,
 					arrivalCountry, arrivalState, arrivalCity, arrivalZip,
 					arrivalStreet);

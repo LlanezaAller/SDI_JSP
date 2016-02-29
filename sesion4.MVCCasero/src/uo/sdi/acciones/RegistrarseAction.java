@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import uo.sdi.acciones.util.Asserts;
+import uo.sdi.acciones.util.SdiUtil;
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.User;
 import uo.sdi.model.type.UserStatus;
@@ -31,9 +31,9 @@ public class RegistrarseAction implements Accion {
 		String rePassword = request.getParameter("repeatPassword");
 		
 		//Comprobaciones
-		state = Asserts.assertCampos(name,surname
+		state = SdiUtil.assertCampos(name,surname
 				,email,login,password,rePassword);
-		state = Asserts.isEmail(email);
+		state = SdiUtil.isEmail(email);
 		state = password.equals(rePassword);
 		
 		HttpSession session = request.getSession();

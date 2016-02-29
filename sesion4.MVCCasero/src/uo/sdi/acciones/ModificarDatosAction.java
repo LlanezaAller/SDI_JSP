@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import uo.sdi.acciones.util.Asserts;
+import uo.sdi.acciones.util.SdiUtil;
 import uo.sdi.infraestructure.factories.Factories;
 import uo.sdi.model.User;
 import uo.sdi.view.Message;
@@ -34,7 +34,7 @@ public class ModificarDatosAction implements Accion {
 			String newPassword = request.getParameter("password");
 			String reNewPassword = request.getParameter("repeatPassword");
 
-			status = Asserts.assertCampos(oldPassword, newPassword,
+			status = SdiUtil.assertCampos(oldPassword, newPassword,
 					reNewPassword);
 
 			try {
@@ -49,7 +49,7 @@ public class ModificarDatosAction implements Accion {
 						return "FRACASO";
 					}	
 				}
-				if (Asserts.isEmail(newEmail)){
+				if (SdiUtil.isEmail(newEmail)){
 					usuario.setEmail(newEmail);
 				}else {
 					Message m = new Message(Message.ERROR, "Email no válido.");

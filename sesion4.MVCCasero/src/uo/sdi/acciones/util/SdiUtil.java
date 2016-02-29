@@ -1,8 +1,13 @@
 package uo.sdi.acciones.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
-public class Asserts {
+import alb.util.log.Log;
+
+public class SdiUtil {
 	
 	public static boolean assertCampos(String... o){
 		for (int i=0 ; i < o.length ; i++) {
@@ -18,5 +23,18 @@ public class Asserts {
 				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 		Pattern pattern = Pattern.compile(email_pattern);
 		return pattern.matcher(e).matches();
+	}
+	
+	public static Date getDate(String s){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm");
+		Date limitDatetime = null;
+		try {
+			limitDatetime = simpleDateFormat.parse(s.replace('T', ' '));
+			return limitDatetime;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
