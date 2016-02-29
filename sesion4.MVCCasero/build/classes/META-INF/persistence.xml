@@ -14,8 +14,8 @@
 			<property name="jdbc.initial.size" value="1"/>
 
 			 <!-- 
-			  -->
 			<property name="hibernate.hbm2ddl.auto" value="create"/> 
+			  -->
 			
 
 <!-- 
