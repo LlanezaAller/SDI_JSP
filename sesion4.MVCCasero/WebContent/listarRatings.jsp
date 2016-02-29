@@ -60,7 +60,7 @@
 		<footer> </footer>
 	</div>
 	<script type="text/javascript"
-		src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
+		src="js/datatables.min.js"></script>
 	<script type="text/javascript" src="js/datatables.js"></script>
 	<script type="text/javascript" src="js/messages.js"></script>
 </body>
