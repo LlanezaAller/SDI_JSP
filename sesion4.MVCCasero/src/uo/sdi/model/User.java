@@ -163,13 +163,19 @@ public class User {
 	}
 
 	// Fin de aplicación
-	public void finAplicacion(Long id) {
+	public void finAplicacion(Trip trip) {
 		for (Trip t : aplicaciones) {
-			if (t.getId().equals(id)) {
+			if (t.equals(trip)) {
 				t._getApplications().remove(this);
 				aplicaciones.remove(t);
 			}
 		}
+	}
+	
+	//Usuario intenta aplicar
+	public void aplicar(Trip t){
+		aplicaciones.add(t);
+		t._getApplications().add(this);
 	}
 
 }
