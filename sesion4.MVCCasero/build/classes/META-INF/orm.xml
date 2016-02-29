@@ -32,12 +32,12 @@
 			]]>
 		</query>
 	</named-query>
-	<named-query name="User.findAllAplicantsByTrip">
+	<named-query name="User.findAllAplicantsByUser">
 		<query>
 			<![CDATA[
 			select u 
-			from User u 
-				join u.aplicaciones a 
+			from Trip u 
+				join u.aplicadores a 
 				where a.id = ?1 
 				group by u
 			]]>
