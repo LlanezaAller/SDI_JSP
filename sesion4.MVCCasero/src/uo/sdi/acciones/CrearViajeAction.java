@@ -36,21 +36,11 @@ public class CrearViajeAction implements Accion {
 			if (!hasAllData)
 				return faltanCampos(request);
 
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-					"yyyy-MM-dd HH:mm");
 
 			int freeSeats = Integer.parseInt(request.getParameter("freeSeats"));
 			double totalCost = Float.parseFloat(request
 					.getParameter("totalCost"));
-			Log.debug(request.getParameter("limitDatetime"));
-			Date limitDatetime = null;
-			try {
-				limitDatetime = simpleDateFormat.parse(request.getParameter(
-						"limitDatetime").replace('T', ' '));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Log.debug(limitDatetime.toString());
+			Date limitDatetime = SdiUtil.getDate(request.getParameter("limitDatetime"));
 			// Departure
 			String departureCountry = request.getParameter("departureCountry");
 			String departureState = request.getParameter("departureState");
@@ -67,13 +57,7 @@ public class CrearViajeAction implements Accion {
 				departureLon = Float.parseFloat(request
 						.getParameter("departureLon"));
 			}
-			Date departureDatetime = null;
-			try {
-				departureDatetime = simpleDateFormat.parse(request
-						.getParameter("departureDatetime").replace('T', ' '));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			Date departureDatetime = SdiUtil.getDate(request.getParameter("departureDatetime"));
 			// Destination
 			String arrivalCountry = request.getParameter("arrivalCountry");
 			String arrivalState = request.getParameter("arrivalState");
@@ -89,13 +73,7 @@ public class CrearViajeAction implements Accion {
 				arrivalLon = Float.parseFloat(request
 						.getParameter("arrivalLon"));
 			}
-			Date arrivalDatetime = null;
-			try {
-				arrivalDatetime = simpleDateFormat.parse(request.getParameter(
-						"arrivalDatetime").replace('T', ' '));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			Date arrivalDatetime = SdiUtil.getDate(request.getParameter("arrivalDatetime"));
 			// Description
 			String description = request.getParameter("description");
 
