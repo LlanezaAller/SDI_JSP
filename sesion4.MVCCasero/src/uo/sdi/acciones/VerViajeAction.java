@@ -35,7 +35,7 @@ public class VerViajeAction implements Accion {
 					return "FRACASO";
 				}
 				User user = (User) request.getSession().getAttribute("user");
-
+				
 				boolean hasSeatOrApplication = false;
 				boolean isParticipante = false;
 				boolean hasRated = false;

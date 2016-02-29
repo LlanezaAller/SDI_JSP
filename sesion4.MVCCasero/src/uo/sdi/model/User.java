@@ -22,34 +22,35 @@ import uo.sdi.model.type.UserStatus;
  * 
  * @see Data Transfer Object pattern
  * @author alb
- *
+ * 
  */
 @Entity
-@Table (name="TUSERS")
+@Table(name = "TUSERS")
 public class User {
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
-	
+
 	private String login;
 	private String password;
 	private String name;
 	private String surname;
 	private String email;
-	
+
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
-	
-	@ManyToMany(mappedBy="aplicadores")
+
+	@ManyToMany(mappedBy = "aplicadores")
 	private Set<Trip> aplicaciones = new HashSet<>();
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private Set<Seat> seats = new HashSet<>();
-	
-	@OneToMany(mappedBy="promoter")
+
+	@OneToMany(mappedBy = "promoter")
 	private Set<Trip> trips = new HashSet<>();
-	
-	
-	public User(){};
+
+	public User() {
+	};
 
 	public String getEmail() {
 		return email;
@@ -103,8 +104,6 @@ public class User {
 		this.surname = surname;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -132,42 +131,45 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id 
-				+ ", login=" + login 
-				+ ", password=" + password 
-				+ ", name=" + name 
-				+ ", surname=" + surname 
-				+ ", status=" + status 
-				+ ", email=" + email
-			+ "]";
+		return "User [id=" + id + ", login=" + login + ", password=" + password
+				+ ", name=" + name + ", surname=" + surname + ", status="
+				+ status + ", email=" + email + "]";
 	}
 
-	//Metodos de relacion 
-	
+	// Metodos de relacion
+
 	Set<Trip> _getApplications() {
 		return aplicaciones;
 	}
-	
-	public Set<Trip> getApplications(){
+
+	public Set<Trip> getApplications() {
 		return Collections.unmodifiableSet(aplicaciones);
 	}
-	
+
 	Set<Seat> _getSeats() {
 		return seats;
 	}
-	
-	public Set<Seat> getSeats(){
+
+	public Set<Seat> getSeats() {
 		return Collections.unmodifiableSet(seats);
 	}
 
-	Set<Trip> _getTrips(){
+	Set<Trip> _getTrips() {
 		return trips;
 	}
-	
-	public Set<Trip> getTrips(){
+
+	public Set<Trip> getTrips() {
 		return Collections.unmodifiableSet(trips);
 	}
-	
-	
-	
+
+	// Fin de aplicación
+	public void finAplicacion(Long id) {
+		for (Trip t : aplicaciones) {
+			if (t.getId().equals(id)) {
+				t._getApplications().remove(this);
+				aplicaciones.remove(t);
+			}
+		}
+	}
+
 }
