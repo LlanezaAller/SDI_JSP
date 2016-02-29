@@ -21,6 +21,7 @@ public class SolicitarPlaza implements Accion {
 			HttpServletResponse response) {
 		if(request.getSession().getAttribute("user")!=null){//Usuario en sesión
 			User user = (User) request.getSession().getAttribute("user");
+			user = Factories.persistence.createUserGateway().findByLogin(user.getLogin());
 			Trip viaje = Factories.persistence.createTripGateway().findById(Long.valueOf(request.getParameter("viajeID")));
 			boolean hasSeatOrApplication = false;
 			for(Seat s: viaje.getSeats())
@@ -33,7 +34,7 @@ public class SolicitarPlaza implements Accion {
 			}
 			if(!hasSeatOrApplication){//El usuario no tiene plaza pedida
 				if(viaje.getAvailablePax()>0){//Hay hueco en el viaje
-					//viaje.getApplications().add(user);
+					user.aplicar(viaje);
 					Message info = new Message(Message.OK,
 							"Has solicitado tu plaza con éxito.");
 					request.setAttribute("message", info);
@@ -45,7 +46,7 @@ public class SolicitarPlaza implements Accion {
 					Log.debug("No quedan huecos en el viaje [%d]", viaje.getId());
 					return "FRACASO";
 				}
-			}else{
+			}else {
 				Message error = new Message(Message.ERROR,
 						"Ya has solicitado una plaza.");
 				request.setAttribute("message", error);

@@ -23,7 +23,7 @@ public class ListarViajesAction implements Accion {
 			viajes = Factories.persistence.createTripGateway().findAllStatus(TripStatus.OPEN);
 			Date today = new Date();
 			for(int i=0;i<viajes.size();i++){
-				if(viajes.get(i).getClosingDate().before(today))
+				if(viajes.get(i).getClosingDate().before(today) || viajes.get(i).getAvailablePax()<0 || viajes.get(i).getStatus()==TripStatus.CANCELLED)
 					viajes.remove(i);
 			}
 			request.setAttribute("listaViajes", viajes);

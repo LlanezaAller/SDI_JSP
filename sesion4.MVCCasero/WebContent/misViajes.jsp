@@ -52,7 +52,7 @@
 						<td>${trip.destination.city}</td>
 						<td>${trip.departureDate}</td>
 						<td><c:choose>
-								<c:when test="${trip.closingDate.time < today.time}">
+								<c:when test="${trip.closingDate.time > today.time}">
       Pendiente
     </c:when>
 								<c:otherwise>
@@ -69,7 +69,7 @@
 						<td>${seat.trip.destination.city}</td>
 						<td>${seat.trip.departureDate}</td>
 						<td><c:choose>
-								<c:when test="${seat.user.id == user.id}">
+								<c:when test="${seat.trip.promoter.id == user.id}">
       Promotor
     </c:when>
 								<c:when test="${seat.status == 'ACCEPTED'}">

@@ -63,7 +63,7 @@ public class VerViajeAction implements Accion {
 				}
 
 				request.setAttribute("seats", viaje.getSeats());
-				request.setAttribute("applicants", viaje.getApplications());
+				request.setAttribute("applicants", viaje.getApplications().toArray(new User[viaje.getApplications().size()]));
 				request.setAttribute("viaje", viaje);
 				request.setAttribute("today", new Date());
 				request.setAttribute("hasSeatOrApplication",

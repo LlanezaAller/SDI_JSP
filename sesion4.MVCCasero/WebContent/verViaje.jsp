@@ -53,9 +53,19 @@
 					<td>${viaje.destination.country}</td>
 				</tr>
 				<tr>
+					<td class="titleColumn">Estado:</td>
+					<td>${viaje.departure.state}</td>
+					<td>${viaje.destination.state}</td>
+				</tr>
+				<tr>
 					<td class="titleColumn">Ciudad:</td>
 					<td>${viaje.departure.city}</td>
 					<td>${viaje.destination.city}</td>
+				</tr>
+				<tr>
+					<td class="titleColumn">Calle:</td>
+					<td>${viaje.departure.address}</td>
+					<td>${viaje.destination.address}</td>
 				</tr>
 				<tr>
 					<td class="titleColumn">Fecha:</td>
@@ -64,6 +74,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<h1>Descripción</h1>
+		<p>${viaje.comments}</p>
 		<h1>Viajeros</h1>
 		<table class="table">
 			<thead>
@@ -97,15 +109,19 @@
 										Excluido
 									</c:otherwise>
 								</c:choose> <c:if test="${seat.user.id != viaje.promoter.id}">
-									<form method="POST">
-										<input type="hidden" value="${seat.user.id}" name="userID">
-										<input type="hidden" value="${viaje.id}" name="tripID">
-										<button type="submit" formaction="aceptarUsuarioViaje">
+									<form method="POST" style="float:right;">
+										<input type="hidden" value="${seat.user.login}" name="userLogin">
+										<input type="hidden" value="${viaje.id}" name="viajeID">
+										<c:if test="${seat.status=='EXCLUDED' }">
+										<button class="button" type="submit" formaction="aceptarUsuarioViaje" style="width:46px;">
 											<i class="fa fa-check"></i>
 										</button>
-										<button type="submit" formaction="excluirUsuarioViaje">
+										</c:if>
+										<c:if test="${seat.status=='ACCEPTED' }">
+										<button class="button" type="submit" formaction="excluirUsuarioViaje" style="width:46px;">
 											<i class="fa fa-times"></i>
 										</button>
+										</c:if>
 									</form>
 								</c:if></td>
 						</c:if>
@@ -129,7 +145,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%--<c:forEach var="u" items="${applicants}">
+					<%--
+					--%>
+					<c:forEach var="u" items="${applicants}">
 						<tr>
 							<td>${u.name}</td>
 							<td>${u.surname}</td>
@@ -138,20 +156,20 @@
 							<c:if
 								test="${viaje.closingDate.time > today.time and viaje.promoter.id == user.id}">
 								<td>
-									<form method="POST">
-										<input type="hidden" value="${u.id}" name="userID"> <input
-											type="hidden" value="${viaje.id}" name="tripID">
-										<button type="submit" formaction="aceptarUsuarioViaje">
+									<form method="POST" style="float:right;">
+										<input type="hidden" value="${u.login}" name="userLogin"> <input
+											type="hidden" value="${viaje.id}" name="viajeID">
+										<button type="submit" formaction="aceptarUsuarioViaje" style="width:46px;">
 											<i class="fa fa-check"></i>
 										</button>
-										<button type="submit" formaction="excluirUsuarioViaje">
+										<button type="submit" formaction="excluirUsuarioViaje" style="width:46px;">
 											<i class="fa fa-times"></i>
 										</button>
 									</form>
 								</td>
 							</c:if>
 						</tr>
-					</c:forEach>--%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</c:if> <c:choose>
@@ -166,7 +184,7 @@
 								class="button" value="Modificar viaje" />
 						</form>
 						<form method="POST" action="cancelarViaje" class="formDark">
-							<input type="hidden" value="${viaje.id}" /> <input type="submit"
+							<input type="hidden" value="${viaje.id}" name="viajeID"/> <input type="submit"
 								class="button" value="Cancelar viaje" />
 						</form>
 					</c:when>
