@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import uo.sdi.persistence.util.Jpa;
+import uo.sdi.infraestructure.factories.Factories;
 
 public class SdiUtil {
 
@@ -38,6 +38,6 @@ public class SdiUtil {
 	}
 
 	public void generateDatabaseElements() {
-		
+		Factories.persistence.createSystemGateway().deleteAll();
 	}
 }

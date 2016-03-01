@@ -52,7 +52,7 @@ public class RegistrarseAction implements Accion {
 				newUser.setPassword(rePassword);
 				newUser.setSurname(surname);
 				
-				uf.save(newUser);
+				uf.newUser(newUser);
 				
 				//Introducimos el usuario en sesion
 				session.setAttribute("user", newUser);

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -38,10 +39,10 @@ public class Seat {
 	@Enumerated(EnumType.STRING)
 	private SeatStatus status;
 	
-	@OneToMany(mappedBy="fromSeat")
+	@OneToMany(mappedBy="fromSeat", cascade=(CascadeType.REMOVE))
 	private Set<Rating> ratingsFrom = new HashSet<>();
 	
-	@OneToMany(mappedBy="aboutSeat")
+	@OneToMany(mappedBy="aboutSeat", cascade=(CascadeType.REMOVE))
 	private Set<Rating> ratingsAbout = new HashSet<>();
 
 	public Seat(){};

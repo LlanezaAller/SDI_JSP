@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -88,11 +89,11 @@ public class Trip {
 
 
 	//Relaciones
-	@ManyToMany
+	@ManyToMany(cascade=(CascadeType.REMOVE))
 	@JoinTable(name="TAPLICATIONS")
 	private Set<User> aplicadores = new HashSet<>();
 	
-	@OneToMany(mappedBy="trip")
+	@OneToMany(mappedBy="trip", cascade=(CascadeType.REMOVE))
 	private Set<Seat> seats = new HashSet<>();
 
 	@ManyToOne

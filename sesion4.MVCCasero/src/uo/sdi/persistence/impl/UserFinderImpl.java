@@ -41,7 +41,7 @@ public class UserFinderImpl implements UserFinder {
 
 
 	@Override
-	public void save(User usuario){
+	public void newUser(User usuario){
 		Jpa.getManager().persist(usuario);
 	}
 }

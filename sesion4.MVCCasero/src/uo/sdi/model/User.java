@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -43,14 +44,29 @@ public class User {
 	@ManyToMany(mappedBy = "aplicadores")
 	private Set<Trip> aplicaciones = new HashSet<>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade=(CascadeType.REMOVE))
 	private Set<Seat> seats = new HashSet<>();
 
-	@OneToMany(mappedBy = "promoter")
+	@OneToMany(mappedBy = "promoter", cascade=(CascadeType.REMOVE))
 	private Set<Trip> trips = new HashSet<>();
 
 	public User() {
 	};
+	
+	
+
+	public User(String login, String password, String name, String surname,
+			String email, UserStatus status) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.status = status;
+	}
+
+
 
 	public String getEmail() {
 		return email;
