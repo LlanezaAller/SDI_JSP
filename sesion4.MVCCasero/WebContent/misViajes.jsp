@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="snippets/comprobarNavegacion.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +86,7 @@
 			</tbody>
 		</table>
 		</main>
-		<footer> </footer>
+		<jsp:include page="snippets/footer.jsp"/>
 	</div>
 
 	<script type="text/javascript"

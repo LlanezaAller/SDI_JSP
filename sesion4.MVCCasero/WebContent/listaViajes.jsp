@@ -74,15 +74,15 @@ if(request.getAttribute("listaViajes")==null){
 			</tbody>
 		</table>
 		</main>
-		<footer> </footer>
+		<jsp:include page="snippets/footer.jsp"/>
 	</div>
 <!-- Comentar/Descomentar desde aqui para los test -->
 <!-- 
+ -->
 	<script type="text/javascript"
 		src="js/datatables.min.js"></script>
 	<script type="text/javascript" src="js/datatables.js"></script>
 	<script type="text/javascript" src="js/messages.js"></script>
- -->
 <!-- Comentar/Descomentar hasta aqui para los test  -->
 	
 </body>

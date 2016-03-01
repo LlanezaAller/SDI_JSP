@@ -2,13 +2,7 @@
 <%@ page import="uo.sdi.acciones.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%
-	if (request.getAttribute("listaViajes") == null) {
-		ActionExecuter executor = new ActionExecuter();
-		ListarViajesAction action = new ListarViajesAction();
-		executor.execute(action, request, response);
-	}
-%>
+<jsp:include page="snippets/comprobarNavegacion.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +84,7 @@
 			</div>
 		</form>
 		</main>
-		<footer> </footer>
+		<jsp:include page="snippets/comprobarNavegacion.jsp"/>
 	</div>
 
 	<script type="text/javascript"

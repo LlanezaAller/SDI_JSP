@@ -200,11 +200,19 @@ main > p {
 	color:rgb(45,45,45);
 	margin-bottom:15px;
 }
-footer{
+footer {
 	background:rgba(25,25,25,.8);
 	box-shadow: 0px 0px 10px 0px rgba(0,0,0,.5);
 	height:75px;
+	line-height:75px;
+	padding:0 50px;
 	width:100%;
+}
+footer a {
+	float:left;
+}
+footer p {
+	float:right;
 }
 /**Message*/
 .message {

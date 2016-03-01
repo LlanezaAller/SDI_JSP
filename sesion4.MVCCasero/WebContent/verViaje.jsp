@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="snippets/comprobarNavegacion.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -223,7 +224,7 @@
 				</c:if>
 			</c:otherwise>
 		</c:choose></main>
-		<footer> </footer>
+		<jsp:include page="snippets/comprobarNavegacion.jsp"/>
 	</div>
 	<script type="text/javascript"
 		src="js/datatables.min.js"></script>

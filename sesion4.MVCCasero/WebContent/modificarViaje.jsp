@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="snippets/comprobarNavegacion.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,7 +185,7 @@
 			</div>
 		</form>
 		</main>
-		<footer> </footer>
+		<jsp:include page="snippets/footer.jsp"/>
 	</div>
 
 	<script type="text/javascript" src="js/datatables.min.js"></script>

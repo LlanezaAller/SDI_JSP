@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="snippets/comprobarNavegacion.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -174,7 +175,7 @@
 			<div class="inputLine"><input type="submit" value="Crear viaje" class="button" style="width:100%;"></div>
 		</form>
 		</main>
-		<footer> </footer>
+		<jsp:include page="snippets/footer.jsp"/>
 	</div>
 
 	<script type="text/javascript"
