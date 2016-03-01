@@ -179,8 +179,8 @@
 					<c:when test="${viaje.promoter.id == user.id}">
 						<%-- El usuario es promotor --%>
 						<h1>Administrar viaje</h1>
-						<form method="POST" action="modificarViaje" class="formDark">
-							<input type="hidden" value="${viaje.id}" /> <input type="submit"
+						<form method="POST" action="conseguirViaje" class="formDark">
+							<input type="hidden" value="${viaje.id}" name="viajeID"/> <input type="submit"
 								class="button" value="Modificar viaje" />
 						</form>
 						<form method="POST" action="cancelarViaje" class="formDark">

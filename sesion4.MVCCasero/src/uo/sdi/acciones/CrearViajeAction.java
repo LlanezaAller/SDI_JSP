@@ -87,10 +87,9 @@ public class CrearViajeAction implements Accion {
 					departureCity, departureZip, departureStreet,
 					arrivalCountry, arrivalState, arrivalCity, arrivalZip,
 					arrivalStreet);
-			hasAllData = departureDatetime.before(arrivalDatetime)
+			hasAllData &= departureDatetime.before(arrivalDatetime)
 					&& closingDatetime.before(departureDatetime);
 			if (hasAllData) {
-				// TODO Pala db
 				user = Factories.persistence.createUserGateway().findByLogin(
 						user.getLogin());
 				AddressPoint departure = new AddressPoint(departureStreet,
@@ -105,6 +104,14 @@ public class CrearViajeAction implements Accion {
 							freeSeats + 1, estimatedCost, comments,
 							TripStatus.OPEN, user);
 					Factories.persistence.createTripGateway().newTrip(viaje);
+					Seat seat = new Seat(user, viaje);
+					seat.setStatus(SeatStatus.ACCEPTED);
+
+					Factories.persistence.createSeatGateway().newSeat(seat);
+
+					Message ok = new Message(Message.OK, "Viaje creado con éxito");
+					request.setAttribute("message", ok);
+					return "EXITO";
 				} else {
 										
 					viaje.setArrivalDate(arrivalDatetime);
@@ -114,16 +121,12 @@ public class CrearViajeAction implements Accion {
 					viaje.setDestination(destination);
 					viaje.setEstimatedCost(estimatedCost);
 					
+					Message ok = new Message(Message.OK, "Viaje modificado con éxito");
+					request.setAttribute("message", ok);
+					return "EXITO";
 				}
 
-				Seat seat = new Seat(user, viaje);
-				seat.setStatus(SeatStatus.ACCEPTED);
-
-				Factories.persistence.createSeatGateway().newSeat(seat);
-
-				Message ok = new Message(Message.OK, "Viaje creado con éxito");
-				request.setAttribute("message", ok);
-				return "EXITO";
+				
 			} else {
 				return faltanCampos(request);
 			}
