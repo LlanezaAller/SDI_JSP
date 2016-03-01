@@ -34,7 +34,7 @@ if(request.getAttribute("listaViajes")==null){
 								class="fa fa-2x fa-car"></i>Viajes</a></li>
 						<li><a href="listarMisViajes"><i class="fa fa-2x fa-users"></i>Mis
 								Viajes</a></li>
-						<li><a href="crearViaje.jsp"><i class="fa fa-2x fa-plus-circle"></i>Crear
+						<li><a id="crearViaje"  href="crearViaje.jsp"><i class="fa fa-2x fa-plus-circle"></i>Crear
 								Viaje</a></li>
 					</ul>
 					<jsp:include page="snippets/menu.jsp" />
@@ -78,11 +78,11 @@ if(request.getAttribute("listaViajes")==null){
 	</div>
 <!-- Comentar/Descomentar desde aqui para los test -->
 <!-- 
- -->
 	<script type="text/javascript"
 		src="js/datatables.min.js"></script>
 	<script type="text/javascript" src="js/datatables.js"></script>
 	<script type="text/javascript" src="js/messages.js"></script>
+ -->
 <!-- Comentar/Descomentar hasta aqui para los test  -->
 	
 </body>

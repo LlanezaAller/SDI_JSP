@@ -60,9 +60,10 @@ public class RegistrarseAction implements Accion {
 				Message error = new Message(Message.OK, "Bienvenido,  " + name);
 				request.setAttribute("message", error);
 			} else {
-				Message error = new Message(Message.ERROR, "El nombre de usuario " + name + " ya está en uso.");
+				Message error = new Message(Message.ERROR,
+						"El nombre de usuario " + login + " ya está en uso.");
 				request.setAttribute("message", error);
-				Log.info("Fallo en registro, login [%s] en uso", name);
+				Log.info("Fallo en registro, login [%s] en uso", login);
 				resultado = "FRACASO";
 			}
 		} else {
