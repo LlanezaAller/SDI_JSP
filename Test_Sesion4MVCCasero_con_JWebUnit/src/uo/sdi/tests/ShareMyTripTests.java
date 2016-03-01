@@ -1,23 +1,36 @@
 package uo.sdi.tests;
 
-import org.junit.*;
+import static net.sourceforge.jwebunit.junit.JWebUnit.assertTextInElement;
+import static net.sourceforge.jwebunit.junit.JWebUnit.assertTextPresent;
+import static net.sourceforge.jwebunit.junit.JWebUnit.assertTitleEquals;
+import static net.sourceforge.jwebunit.junit.JWebUnit.beginAt;
+import static net.sourceforge.jwebunit.junit.JWebUnit.clickLink;
+import static net.sourceforge.jwebunit.junit.JWebUnit.setBaseUrl;
+import static net.sourceforge.jwebunit.junit.JWebUnit.setTextField;
+import static net.sourceforge.jwebunit.junit.JWebUnit.submit;
 
-import static net.sourceforge.jwebunit.junit.JWebUnit.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ShareMyTripTests {
 	@Before
 	public void prepare() {
 		setBaseUrl("http://localhost:8280/IglesiasJavier-LlanezaInigo");
+		
 	}
+	@AfterClass
+	public static void cleanUp(){
+		beginAt("/dataBaseReset");
+	}
+
 
 	@Test
 	public void testListarViajes() {
 		beginAt("/"); // Navegar a la URL
 		assertTitleEquals("Viajes"); // Comprobar título de la página
-
-		// La base de datos contiene 3 viajes tal y como se entrega pero no se
-		// muestran
-		// Debido al conflicto con el datatables.
+		assertTextPresent("ciudad21"); // Comprobamos que aparece el viaje
+										// posible
 	}
 
 	@Test
@@ -33,11 +46,6 @@ public class ShareMyTripTests {
 		assertTitleEquals("Viajes");
 		assertTextPresent("¡Bienvenido de nuevo, usuario1!");
 	}
-
-	// assertTextInElement("name", "Fernando"); // Comprobar cierto elemento
-	// contiene cierto texto
-	// assertTextPresent("Es Vd el usuario número:"); // Comprobar cierto texto
-	// está presente
 
 	@Test
 	public void testIniciarSesionSinExito() {
@@ -88,33 +96,26 @@ public class ShareMyTripTests {
 		submit(); // Enviar formulario
 		assertTitleEquals("Viajes");
 		assertTextPresent("¡Bienvenido de nuevo, usuario1!");
-		//beginAt("/crearViaje.jsp"); // Navegar a la URL
 		clickLink("crearViaje");
 		assertTitleEquals("Crear Viaje");
 		setTextField("freeSeats", "2");
 		setTextField("totalCost", "5.0");
-		setTextField("limitDatetime", "20-10-2017T10:00");
+		setTextField("limitDatetime", "20/10/2015T22:33");
 		setTextField("departureCountry", "Spain");
 		setTextField("departureState", "Asturias");
 		setTextField("departureCity", "Gijon");
 		setTextField("departureZip", "33200");
 		setTextField("departureStreet", "C/ Salida");
-		setTextField("departureDatetime", "21-10-2017T10:00");
+		setTextField("departureDatetime", "21/10/2015T10:00");
 		setTextField("arrivalCountry", "Spain");
 		setTextField("arrivalState", "Asturias");
 		setTextField("arrivalCity", "Oviedo");
 		setTextField("arrivalZip", "33300");
 		setTextField("arrivalStreet", "C/ Llegada");
-		setTextField("arrivalDatetime", "21-10-2017T10:40");
+		setTextField("arrivalDatetime", "21/10/2015T10:00");
 		setTextField("description", "Asunto: Examen");
 		submit();
 		assertTitleEquals("Viajes");
-		assertTextPresent("Gijon");
-	}
-
-	@Test
-	public void resetearDB() {
-		beginAt("/dataBaseReset"); // Navegar a la URL
 	}
 
 }
