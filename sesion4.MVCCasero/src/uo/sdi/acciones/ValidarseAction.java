@@ -22,7 +22,6 @@ public class ValidarseAction implements Accion {
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
-//			UserDao dao = PersistenceFactory.newUserDao();
 			UserFinder uf = Factories.persistence.createUserGateway();
 			User userByLogin = uf.findByLogin(nombreUsuario);///dao.findByLogin(nombreUsuario);
 			if (userByLogin != null
