@@ -1,7 +1,5 @@
 package uo.sdi.acciones;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,17 +33,18 @@ public class CrearViajeAction implements Accion {
 					request.getParameter("arrivalDatetime"));
 			if (!hasAllData)
 				return faltanCampos(request);
-			
+
 			String viajeID = request.getParameter("viajeID");
-			Trip viaje=null;
-			if(SdiUtil.assertCampos(viajeID))
-				viaje = Factories.persistence.createTripGateway().findById(Long.valueOf(viajeID));
-				
+			Trip viaje = null;
+			if (SdiUtil.assertCampos(viajeID))
+				viaje = Factories.persistence.createTripGateway().findById(
+						Long.valueOf(viajeID));
 
 			int freeSeats = Integer.parseInt(request.getParameter("freeSeats"));
-			double totalCost = Float.parseFloat(request
+			double estimatedCost = Float.parseFloat(request
 					.getParameter("totalCost"));
-			Date limitDatetime = SdiUtil.getDate(request.getParameter("limitDatetime"));
+			Date closingDatetime = SdiUtil.getDate(request
+					.getParameter("limitDatetime"));
 			// Departure
 			String departureCountry = request.getParameter("departureCountry");
 			String departureState = request.getParameter("departureState");
@@ -62,7 +61,8 @@ public class CrearViajeAction implements Accion {
 				departureLon = Float.parseFloat(request
 						.getParameter("departureLon"));
 			}
-			Date departureDatetime = SdiUtil.getDate(request.getParameter("departureDatetime"));
+			Date departureDatetime = SdiUtil.getDate(request
+					.getParameter("departureDatetime"));
 			// Destination
 			String arrivalCountry = request.getParameter("arrivalCountry");
 			String arrivalState = request.getParameter("arrivalState");
@@ -78,14 +78,17 @@ public class CrearViajeAction implements Accion {
 				arrivalLon = Float.parseFloat(request
 						.getParameter("arrivalLon"));
 			}
-			Date arrivalDatetime = SdiUtil.getDate(request.getParameter("arrivalDatetime"));
+			Date arrivalDatetime = SdiUtil.getDate(request
+					.getParameter("arrivalDatetime"));
 			// Description
-			String description = request.getParameter("description");
+			String comments = request.getParameter("description");
 
 			hasAllData = SdiUtil.assertCampos(departureCountry, departureState,
 					departureCity, departureZip, departureStreet,
 					arrivalCountry, arrivalState, arrivalCity, arrivalZip,
 					arrivalStreet);
+			hasAllData = departureDatetime.before(arrivalDatetime)
+					&& closingDatetime.before(departureDatetime);
 			if (hasAllData) {
 				// TODO Pala db
 				user = Factories.persistence.createUserGateway().findByLogin(
@@ -93,21 +96,25 @@ public class CrearViajeAction implements Accion {
 				AddressPoint departure = new AddressPoint(departureStreet,
 						departureCity, departureState, departureCountry,
 						departureZip, new Waypoint(departureLat, departureLon));
-				AddressPoint arrival = new AddressPoint(arrivalStreet,
+				AddressPoint destination = new AddressPoint(arrivalStreet,
 						arrivalCity, arrivalState, arrivalCountry, arrivalZip,
 						new Waypoint(arrivalLat, arrivalLon));
-				if(viaje==null) {
-					viaje = new Trip(departure, arrival, arrivalDatetime,
-						departureDatetime, limitDatetime, freeSeats,
-						freeSeats + 1, totalCost, description, TripStatus.OPEN,
-						user);
+				if (viaje == null) {
+					viaje = new Trip(departure, destination, arrivalDatetime,
+							departureDatetime, closingDatetime, freeSeats,
+							freeSeats + 1, estimatedCost, comments,
+							TripStatus.OPEN, user);
 					Factories.persistence.createTripGateway().newTrip(viaje);
 				} else {
+										
 					viaje.setArrivalDate(arrivalDatetime);
-					viaje.setClosingDate(closingDate);
+					viaje.setClosingDate(closingDatetime);
+					viaje.setComments(comments);
+					viaje.setDeparture(departure);
+					viaje.setDestination(destination);
+					viaje.setEstimatedCost(estimatedCost);
+					
 				}
-
-				
 
 				Seat seat = new Seat(user, viaje);
 				seat.setStatus(SeatStatus.ACCEPTED);

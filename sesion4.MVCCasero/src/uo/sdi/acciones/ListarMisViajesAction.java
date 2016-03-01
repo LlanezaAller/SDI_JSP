@@ -1,6 +1,5 @@
 package uo.sdi.acciones;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 import uo.sdi.view.Message;
-import alb.util.log.Log;
 
 public class ListarMisViajesAction implements Accion {
 

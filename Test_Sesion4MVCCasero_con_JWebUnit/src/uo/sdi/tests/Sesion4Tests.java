@@ -36,11 +36,19 @@ public class Sesion4Tests {
         assertTextInElement("password","user1");
         submit(); // Enviar formulario
         assertTitleEquals("Viajes");  // Comprobar título de la página
-        assertTextInElement("message okMessage", "¡Bienvenido de nuevo, user1!");  // Comprobar cierto elemento contiene cierto texto
-        //assertTextInElement("name", "Fernando");  // Comprobar cierto elemento contiene cierto texto
-        //assertTextPresent("Es Vd el usuario número:"); // Comprobar cierto texto está presente
+        assertTextPresent( "¡Bienvenido de nuevo, user1!");  // Comprobar cierto elemento contiene cierto texto
     }
+    //assertTextInElement("name", "Fernando");  // Comprobar cierto elemento contiene cierto texto
+    //assertTextPresent("Es Vd el usuario número:"); // Comprobar cierto texto está presente
 
+    @Test
+    public void testIniciarSesionSinExito() {
+    	// Rellenando el formulario HTML
+        beginAt("/login.jsp");  // Navegar a la URL
+    	setTextField("user", "yoNoExisto"); // Rellenar primer campo de formulario
+    	submit(); // Enviar formulario
+    	assertTitleEquals("Entrar");  // Comprobar título de la página
+    }
     @Test
     public void testIniciarSesionConExitoConQueryString() {
     	// Rellenando el formulario HTML
@@ -51,13 +59,5 @@ public class Sesion4Tests {
         assertTextPresent("Es Vd el usuario número:"); // Comprobar cierto texto está presente
     }
     
-    @Test
-    public void testIniciarSesionSinExito() {
-    	// Rellenando el formulario HTML
-        beginAt("/");  // Navegar a la URL
-        setTextField("nombreUsuario", "yoNoExisto"); // Rellenar primer campo de formulario
-        submit(); // Enviar formulario
-        assertTitleEquals("ShareMyTrip - Inicie sesión");  // Comprobar título de la página
-    }
 
 }

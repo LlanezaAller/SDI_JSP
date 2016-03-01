@@ -3,6 +3,7 @@ package uo.sdi.persistence.impl;
 import uo.sdi.persistence.PersistenceFactory;
 import uo.sdi.persistence.RatingFinder;
 import uo.sdi.persistence.SeatFinder;
+import uo.sdi.persistence.SystemFinder;
 import uo.sdi.persistence.TripFinder;
 import uo.sdi.persistence.UserFinder;
 
@@ -22,5 +23,9 @@ public class JpaPersistenceFactory implements PersistenceFactory{
 	@Override
 	public UserFinder createUserGateway() {
 		return new UserFinderImpl();
+	}
+	@Override
+	public SystemFinder createSystemGateway() {
+		return new SystemFinderImpl();
 	}
 }
