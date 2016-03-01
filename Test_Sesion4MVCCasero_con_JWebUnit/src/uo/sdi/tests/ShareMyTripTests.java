@@ -4,11 +4,11 @@ import org.junit.*;
 
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 
-public class Sesion4Tests {
+public class ShareMyTripTests {
 	//TODO cambiar el nombre al proyecto
     @Before
     public void prepare() {
-        setBaseUrl("http://localhost:8280/sesion4.MVCCasero");
+        setBaseUrl("http://localhost:8280/IglesiasJavier-LlanezaInigo");
     }
 
     @Test
@@ -30,10 +30,10 @@ public class Sesion4Tests {
     	// Rellenando el formulario HTML
     	
         beginAt("/login.jsp");  // Navegar a la URL
-        setTextField("user", "user1"); // Rellenar primer campo de formulario
-        setTextField("password", "user1");
-        assertTextInElement("user","user1");
-        assertTextInElement("password","user1");
+        setTextField("user", "usuario1"); // Rellenar primer campo de formulario
+        setTextField("password", "usuario1");
+        assertTextInElement("user","usuario1");
+        assertTextInElement("password","usuario1");
         submit(); // Enviar formulario
         assertTitleEquals("Viajes");  // Comprobar título de la página
         assertTextPresent( "¡Bienvenido de nuevo, user1!");  // Comprobar cierto elemento contiene cierto texto
