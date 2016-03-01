@@ -24,7 +24,7 @@ import uo.sdi.acciones.ListarViajesAction;
 import uo.sdi.acciones.LogoutAction;
 import uo.sdi.acciones.ModificarDatosAction;
 import uo.sdi.acciones.RegistrarseAction;
-import uo.sdi.acciones.SolicitarPlaza;
+import uo.sdi.acciones.SolicitarPlazaAction;
 import uo.sdi.acciones.ValidarseAction;
 import uo.sdi.acciones.ValorarAction;
 import uo.sdi.acciones.VerViajeAction;
@@ -128,7 +128,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("crearViaje", new CrearViajeAction());
 		mapaRegistrado.put("verViaje", new VerViajeAction());
 		mapaRegistrado.put("valorarViaje", new ValorarAction());
-		mapaRegistrado.put("solicitarPlaza", new SolicitarPlaza());
+		mapaRegistrado.put("solicitarPlaza", new SolicitarPlazaAction());
 		mapaRegistrado.put("aceptarUsuarioViaje", new AceptarUsuarioAction());
 		mapaRegistrado.put("excluirUsuarioViaje", new ExcluirUsuarioAction());
 		mapaRegistrado.put("conseguirViaje", new ConseguirViajeAction());

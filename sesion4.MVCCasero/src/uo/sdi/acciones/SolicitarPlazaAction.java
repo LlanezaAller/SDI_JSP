@@ -10,7 +10,7 @@ import uo.sdi.model.User;
 import uo.sdi.view.Message;
 import alb.util.log.Log;
 
-public class SolicitarPlaza implements Accion {
+public class SolicitarPlazaAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
