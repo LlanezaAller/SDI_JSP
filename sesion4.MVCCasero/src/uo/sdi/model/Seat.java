@@ -18,39 +18,37 @@ import javax.xml.crypto.Data;
 import uo.sdi.model.keys.SeatKey;
 import uo.sdi.model.type.SeatStatus;
 
-/**
- * This class is not an entity, it is a DTO with the same fields as a row in the
- * table
- * 
- * @see Data Transfer Object pattern
- * @author alb
- *
- */
+
 @Entity
-@Table (name ="TSEATS")
-@IdClass (SeatKey.class)
+@Table(name = "TSEATS")
+@IdClass(SeatKey.class)
 public class Seat {
 
-	@Id @ManyToOne private User user;
-	@Id @ManyToOne private Trip trip;
+	@Id
+	@ManyToOne
+	private User user;
+	@Id
+	@ManyToOne
+	private Trip trip;
 
 	private String comment;
 
 	@Enumerated(EnumType.STRING)
 	private SeatStatus status;
-	
-	@OneToMany(mappedBy="fromSeat", cascade=(CascadeType.REMOVE))
+
+	@OneToMany(mappedBy = "fromSeat", cascade = (CascadeType.REMOVE))
 	private Set<Rating> ratingsFrom = new HashSet<>();
-	
-	@OneToMany(mappedBy="aboutSeat", cascade=(CascadeType.REMOVE))
+
+	@OneToMany(mappedBy = "aboutSeat", cascade = (CascadeType.REMOVE))
 	private Set<Rating> ratingsAbout = new HashSet<>();
 
-	public Seat(){};
-	
-	public Seat(User user, Trip trip){
+	public Seat() {
+	};
+
+	public Seat(User user, Trip trip) {
 		this.user = user;
 		this.trip = trip;
-		
+
 		user._getSeats().add(this);
 		trip._getSeats().add(this);
 	}
@@ -89,37 +87,34 @@ public class Seat {
 
 	@Override
 	public String toString() {
-		return "Seat [userId=" + user + ", tripId=" 
-				+ trip + ", comment=" + comment 
-				+ ", status=" + status + "]";
+		return "Seat [userId=" + user + ", tripId=" + trip + ", comment="
+				+ comment + ", status=" + status + "]";
 	}
-	
-	//Relaciones
-	
+
+	// Relaciones
+
 	Set<Rating> _getRatingsFrom() {
 		return ratingsFrom;
 	}
-	
-	public void unlink(){
+
+	public void unlink() {
 		user._getApplications().remove(this);
 		trip._getApplications().remove(this);
 		this.user = null;
 		this.trip = null;
 	}
-	
-	public Set<Rating> getRatingsFrom(){
+
+	public Set<Rating> getRatingsFrom() {
 		return Collections.unmodifiableSet(ratingsFrom);
 	}
-	
-	Set<Rating> _getRatingsAbout(){
+
+	Set<Rating> _getRatingsAbout() {
 		return ratingsAbout;
 	}
-	
-	public Set<Rating> getRatingsAbout(){
+
+	public Set<Rating> getRatingsAbout() {
 		return Collections.unmodifiableSet(ratingsAbout);
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -129,8 +124,6 @@ public class Seat {
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -154,5 +147,4 @@ public class Seat {
 		return true;
 	}
 
-	
 }

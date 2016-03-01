@@ -17,14 +17,7 @@ import javax.xml.crypto.Data;
 
 import uo.sdi.model.type.UserStatus;
 
-/**
- * This class is not an entity, it is a DTO with the same fields as a row in the
- * table
- * 
- * @see Data Transfer Object pattern
- * @author alb
- * 
- */
+
 @Entity
 @Table(name = "TUSERS")
 public class User {
@@ -44,16 +37,14 @@ public class User {
 	@ManyToMany(mappedBy = "aplicadores")
 	private Set<Trip> aplicaciones = new HashSet<>();
 
-	@OneToMany(mappedBy = "user", cascade=(CascadeType.REMOVE))
+	@OneToMany(mappedBy = "user", cascade = (CascadeType.REMOVE))
 	private Set<Seat> seats = new HashSet<>();
 
-	@OneToMany(mappedBy = "promoter", cascade=(CascadeType.REMOVE))
+	@OneToMany(mappedBy = "promoter", cascade = (CascadeType.REMOVE))
 	private Set<Trip> trips = new HashSet<>();
 
 	public User() {
 	};
-	
-	
 
 	public User(String login, String password, String name, String surname,
 			String email, UserStatus status) {
@@ -65,8 +56,6 @@ public class User {
 		this.email = email;
 		this.status = status;
 	}
-
-
 
 	public String getEmail() {
 		return email;
@@ -187,9 +176,9 @@ public class User {
 			}
 		}
 	}
-	
-	//Usuario intenta aplicar
-	public void aplicar(Trip t){
+
+	// Usuario intenta aplicar
+	public void aplicar(Trip t) {
 		aplicaciones.add(t);
 		t._getApplications().add(this);
 	}

@@ -26,7 +26,8 @@ public class ListarRatingsAction implements Accion {
 					.findRatingsByUserAboutId(u.getId());
 			request.setAttribute("listaRatings", ratings);
 			Log.debug(
-					"Obtenida lista de valoraciones de [%s] conteniendo [%d] valoraciones",
+					"Obtenida lista de valoraciones de [%s] "
+					+ "conteniendo [%d] valoraciones",
 					u.getName(), ratings.size());
 		} else {
 			Message m = new Message(Message.ERROR,

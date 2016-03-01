@@ -4,26 +4,18 @@ import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 
 
-
-/**
- * This class represents a value type
- * 
- * @author alb
- */
 @Embeddable
 public class AddressPoint {
-	
+
 	private String address;
 	private String city;
 	private String state;
 	private String country;
 	private String zipCode;
-	
+
 	@Embedded
 	private Waypoint waypoint;
-	
 
-	
 	public AddressPoint(String address, String city, String state,
 			String country, String zipCode, Waypoint waypoint) {
 
@@ -37,7 +29,7 @@ public class AddressPoint {
 	}
 
 	public AddressPoint() {
-	};	
+	};
 
 	public void setAddress(String address) {
 		this.address = address;
@@ -62,7 +54,6 @@ public class AddressPoint {
 	public void setWaypoint(Waypoint waypoint) {
 		this.waypoint = waypoint;
 	}
-
 
 	public String getAddress() {
 		return address;

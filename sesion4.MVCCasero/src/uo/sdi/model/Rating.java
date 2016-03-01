@@ -5,16 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.xml.crypto.Data;
 
-/**
- * This class is not an entity, it is a DTO with the same fields as 
- * a row in the table
- * 
- * @see Data Transfer Object pattern
- * @author alb
- *
- */
+
 @Entity
 @Table (name= "TRATING")
 public class Rating {

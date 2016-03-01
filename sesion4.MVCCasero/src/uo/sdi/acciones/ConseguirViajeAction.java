@@ -13,8 +13,9 @@ public class ConseguirViajeAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 
-		if(SdiUtil.assertCampos(request.getParameter("viajeID"))){
-			Trip v = Factories.persistence.createTripGateway().findById(Long.valueOf(request.getParameter("viajeID")));
+		if (SdiUtil.assertCampos(request.getParameter("viajeID"))) {
+			Trip v = Factories.persistence.createTripGateway().findById(
+					Long.valueOf(request.getParameter("viajeID")));
 			request.setAttribute("viaje", v);
 			return "EXITO";
 		}

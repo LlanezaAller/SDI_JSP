@@ -17,12 +17,12 @@ public class RatingFinderImpl implements RatingFinder {
 				.getResultList();
 		return (ratings.size() > 0) ? ratings.get(0) : null;
 	}
+
 	@Override
 	public Rating findByAboutFromAndTripID(Long fromUserId, Long fromTripId) {
 		List<Rating> ratings = Jpa.getManager()
 				.createNamedQuery("Rating.findByUserAndTrip", Rating.class)
-				.setParameter(1, fromUserId)
-				.setParameter(2, fromTripId)
+				.setParameter(1, fromUserId).setParameter(2, fromTripId)
 				.getResultList();
 		return (ratings.size() > 0) ? ratings.get(0) : null;
 	}
@@ -34,6 +34,7 @@ public class RatingFinderImpl implements RatingFinder {
 				.createNamedQuery("Rating.findRatingsByUserAboutId",
 						Rating.class).setParameter(1, id).getResultList();
 	}
+
 	@Override
 	public List<Rating> findRatingsByUserFromId(Long id) {
 		return Jpa

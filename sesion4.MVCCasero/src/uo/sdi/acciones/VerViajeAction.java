@@ -35,7 +35,7 @@ public class VerViajeAction implements Accion {
 					return "FRACASO";
 				}
 				User user = (User) request.getSession().getAttribute("user");
-				
+
 				boolean hasSeatOrApplication = false;
 				boolean isParticipante = false;
 				boolean hasRated = false;
@@ -50,7 +50,7 @@ public class VerViajeAction implements Accion {
 										.createRatingGateway()
 										.findByAboutFromAndTripID(user.getId(),
 												viaje.getId());
-								if(ratedTrip != null)
+								if (ratedTrip != null)
 									hasRated = true;
 							}
 						}
@@ -63,7 +63,8 @@ public class VerViajeAction implements Accion {
 				}
 
 				request.setAttribute("seats", viaje.getSeats());
-				request.setAttribute("applicants", viaje.getApplications().toArray(new User[viaje.getApplications().size()]));
+				request.setAttribute("applicants", viaje.getApplications()
+						.toArray(new User[viaje.getApplications().size()]));
 				request.setAttribute("viaje", viaje);
 				request.setAttribute("today", new Date());
 				request.setAttribute("hasSeatOrApplication",

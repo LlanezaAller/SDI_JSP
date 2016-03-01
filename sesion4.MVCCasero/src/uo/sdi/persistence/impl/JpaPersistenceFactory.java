@@ -7,23 +7,27 @@ import uo.sdi.persistence.SystemFinder;
 import uo.sdi.persistence.TripFinder;
 import uo.sdi.persistence.UserFinder;
 
-public class JpaPersistenceFactory implements PersistenceFactory{
+public class JpaPersistenceFactory implements PersistenceFactory {
 	@Override
 	public TripFinder createTripGateway() {
 		return new TripFinderImpl();
 	}
+
 	@Override
 	public SeatFinder createSeatGateway() {
 		return new SeatFinderImpl();
 	}
+
 	@Override
 	public RatingFinder createRatingGateway() {
 		return new RatingFinderImpl();
 	}
+
 	@Override
 	public UserFinder createUserGateway() {
 		return new UserFinderImpl();
 	}
+
 	@Override
 	public SystemFinder createSystemGateway() {
 		return new SystemFinderImpl();

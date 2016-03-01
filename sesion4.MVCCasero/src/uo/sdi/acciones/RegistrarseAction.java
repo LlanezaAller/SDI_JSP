@@ -19,9 +19,9 @@ public class RegistrarseAction implements Accion {
 			HttpServletResponse response) {
 
 		boolean state = true;
-		
-		//Obtencion de datos
-		
+
+		// Obtencion de datos
+
 		String resultado = "EXITO";
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
@@ -29,21 +29,21 @@ public class RegistrarseAction implements Accion {
 		String login = request.getParameter("user");
 		String password = request.getParameter("password");
 		String rePassword = request.getParameter("repeatPassword");
-		
-		//Comprobaciones
-		state = SdiUtil.assertCampos(name,surname
-				,email,login,password,rePassword);
+
+		// Comprobaciones
+		state = SdiUtil.assertCampos(name, surname, email, login, password,
+				rePassword);
 		state = SdiUtil.isEmail(email);
 		state = password.equals(rePassword);
-		
+
 		HttpSession session = request.getSession();
 		if (state) {
-//			UserDao dao = PersistenceFactory.newUserDao();
+			// UserDao dao = PersistenceFactory.newUserDao();
 			UserFinder uf = Factories.persistence.createUserGateway();
-			User newUser = uf.findByLogin(login);//dao.findByLogin(login);
-			if (newUser == null  ) {
-				
-				//Definicion de caracteristicas
+			User newUser = uf.findByLogin(login);// dao.findByLogin(login);
+			if (newUser == null) {
+
+				// Definicion de caracteristicas
 				newUser = new User();
 				newUser.setEmail(email);
 				newUser.setLogin(login);
@@ -51,10 +51,10 @@ public class RegistrarseAction implements Accion {
 				newUser.setStatus(UserStatus.ACTIVE);
 				newUser.setPassword(rePassword);
 				newUser.setSurname(surname);
-				
+
 				uf.newUser(newUser);
-				
-				//Introducimos el usuario en sesion
+
+				// Introducimos el usuario en sesion
 				session.setAttribute("user", newUser);
 				Log.info("El usuario [%s] ha creado su cuenta", name);
 				Message error = new Message(Message.OK, "Bienvenido,  " + name);
@@ -68,7 +68,8 @@ public class RegistrarseAction implements Accion {
 			}
 		} else {
 			Log.info("Fallo en el registro, parametros erroneos");
-			Message error = new Message(Message.ERROR, "No ha sido posible crear tu cuenta, revisa los campos.");
+			Message error = new Message(Message.ERROR,
+					"No ha sido posible crear tu cuenta, revisa los campos.");
 			request.setAttribute("message", error);
 			resultado = "FRACASO";
 		}
@@ -79,5 +80,5 @@ public class RegistrarseAction implements Accion {
 	public String toString() {
 		return getClass().getName();
 	}
-	
+
 }

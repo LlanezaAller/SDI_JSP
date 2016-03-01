@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="snippets/comprobarNavegacion.jsp"/>
+<jsp:include page="snippets/comprobarNavegacion.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +42,8 @@
 					<th>Origen</th>
 					<th>Destino</th>
 					<th>Fecha</th>
+					<th>Promotor</th>
+					<th>Estado Viaje</th>
 					<th>Rol</th>
 					<th></th>
 				</tr>
@@ -52,6 +54,21 @@
 						<td>${trip.departure.city}</td>
 						<td>${trip.destination.city}</td>
 						<td>${trip.departureDate}</td>
+						<td>${trip.promoter.name}</td>
+						<td><c:choose>
+								<c:when test="${trip.status == 'DONE'}">
+      Realizado
+    </c:when>
+								<c:when test="${trip.status == 'CANCELLED'}">
+      Cancelado
+    </c:when>
+								<c:when test="${trip.status == 'OPEN'}">
+      Abierto
+    </c:when>
+								<c:when test="${trip.status == 'CLOSED'}">
+      Cerrado
+    </c:when>
+							</c:choose></td>
 						<td><c:choose>
 								<c:when test="${trip.closingDate.time > today.time}">
       Pendiente
@@ -59,7 +76,6 @@
 								<c:otherwise>
        Sin plaza
     </c:otherwise>
-
 							</c:choose></td>
 						<td><a href="verViaje?viajeID=${trip.id}">Ver</a></td>
 					</tr>
@@ -69,6 +85,21 @@
 						<td>${seat.trip.departure.city}</td>
 						<td>${seat.trip.destination.city}</td>
 						<td>${seat.trip.departureDate}</td>
+						<td>${seat.trip.promoter.name}</td>
+						<td><c:choose>
+								<c:when test="${seat.trip.status == 'DONE'}">
+      Realizado
+    </c:when>
+								<c:when test="${seat.trip.status == 'CANCELLED'}">
+      Cancelado
+    </c:when>
+								<c:when test="${seat.trip.status == 'OPEN'}">
+      Abierto
+    </c:when>
+								<c:when test="${seat.trip.status == 'CLOSED'}">
+      Cerrado
+    </c:when>
+							</c:choose></td>
 						<td><c:choose>
 								<c:when test="${seat.trip.promoter.id == user.id}">
       Promotor
@@ -81,18 +112,22 @@
     </c:when>
 							</c:choose></td>
 						<td><a href="verViaje?viajeID=${seat.trip.id}">Ver</a></td>
+
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		</main>
-		<jsp:include page="snippets/footer.jsp"/>
+		<jsp:include page="snippets/footer.jsp" />
 	</div>
-
+	<!-- Comentar/Descomentar desde aqui para los test -->
+	<!-- 
+ -->
 	<script type="text/javascript"
 		src="js/datatables.min.js"></script>
 	<script type="text/javascript" src="js/datatables.js"></script>
 	<script type="text/javascript" src="js/messages.js"></script>
+<!-- Comentar/Descomentar hasta aqui para los test  -->
 </body>
 </div>
 </html>

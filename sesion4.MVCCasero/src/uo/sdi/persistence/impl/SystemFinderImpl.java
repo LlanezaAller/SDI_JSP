@@ -60,16 +60,16 @@ public class SystemFinderImpl implements SystemFinder {
 						"country22", "2222", new Waypoint(22.0, 22.0)),
 				new Date(System.currentTimeMillis() + d1 * 3), new Date(
 						System.currentTimeMillis() + d1 * 2), new Date(
-						System.currentTimeMillis()+ d1), 2, 3, 10.0, "comment1",
-				TripStatus.OPEN, usuario2);
+						System.currentTimeMillis() + d1), 2, 3, 10.0,
+				"comment1", TripStatus.OPEN, usuario2);
 		Trip trip3 = new Trip(new AddressPoint("direccion31", "ciudad31",
 				"state31", "country31", "3311", new Waypoint(31.0, 31.0)),
 				new AddressPoint("direccion32", "ciudad32", "state32",
 						"country32", "3322", new Waypoint(32.0, 32.0)),
 				new Date(System.currentTimeMillis() + d1 * 3), new Date(
 						System.currentTimeMillis() + d1 * 2), new Date(
-						System.currentTimeMillis()+ d1), 3, 4, 10.0, "comment1",
-				TripStatus.CANCELLED, usuario3);
+						System.currentTimeMillis() + d1), 3, 4, 10.0,
+				"comment1", TripStatus.CANCELLED, usuario3);
 
 		Factories.persistence.createTripGateway().newTrip(trip1);
 		Factories.persistence.createTripGateway().newTrip(trip2);

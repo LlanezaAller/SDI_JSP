@@ -30,7 +30,7 @@ public class ListarMisViajesAction implements Accion {
 					u.getId());
 			applications = Factories.persistence.createTripGateway()
 					.findAllAplicantsByUserId(u.getId());
-		
+
 			request.setAttribute("today", new Date());
 			request.setAttribute("listaSeats", seats);
 			request.setAttribute("listaApplications", applications);

@@ -27,81 +27,68 @@ import javax.xml.crypto.Data;
 import uo.sdi.model.type.AddressPoint;
 import uo.sdi.model.type.TripStatus;
 
-/**
- * This class is not an entity, it is a DTO with the same fields as 
- * a row in the table
- * 
- * @see Data Transfer Object pattern
- * @author alb
- *
- */
+
 @Entity
-@Table (name="TTRIPS")
+@Table(name = "TTRIPS")
 public class Trip {
 
-	
-
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
-	
-	
+
 	@AttributeOverrides({
-	@AttributeOverride(name="address",column=@Column(name="departure_address")),
-	@AttributeOverride(name = "city", column = @Column(name = "departure_city")),
-	@AttributeOverride(name = "state", column = @Column(name = "departure_state")),
-	@AttributeOverride(name = "country", column = @Column(name = "departure_country")),
-	@AttributeOverride(name = "waypoint.lat", column = @Column(name = "departure_wpt_lat")),
-	@AttributeOverride(name = "waypoint.lon", column = @Column(name = "departure_wpt_lon")),
-	@AttributeOverride(name = "zipCode", column = @Column(name = "departure_zipCode"))
-	})
+			@AttributeOverride(name = "address", column = @Column(name = "departure_address")),
+			@AttributeOverride(name = "city", column = @Column(name = "departure_city")),
+			@AttributeOverride(name = "state", column = @Column(name = "departure_state")),
+			@AttributeOverride(name = "country", column = @Column(name = "departure_country")),
+			@AttributeOverride(name = "waypoint.lat", column = @Column(name = "departure_wpt_lat")),
+			@AttributeOverride(name = "waypoint.lon", column = @Column(name = "departure_wpt_lon")),
+			@AttributeOverride(name = "zipCode", column = @Column(name = "departure_zipCode")) })
 	@Embedded
 	private AddressPoint departure;
-	
-	
-	@AttributeOverrides( {
-	@AttributeOverride(name = "address", column = @Column(name = "destination_address")),
-	@AttributeOverride(name = "city", column = @Column(name = "destination_city")),
-	@AttributeOverride(name = "state", column = @Column(name = "destination_state")),
-	@AttributeOverride(name = "country", column = @Column(name = "destination_country")),
-	@AttributeOverride(name = "waypoint.lat", column = @Column(name = "destination_wpt_lat")),
-	@AttributeOverride(name = "waypoint.lon", column = @Column(name = "destination_wpt_lon")),
-	@AttributeOverride(name = "zipCode", column = @Column(name = "destination_zipCode"))
-	})
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "address", column = @Column(name = "destination_address")),
+			@AttributeOverride(name = "city", column = @Column(name = "destination_city")),
+			@AttributeOverride(name = "state", column = @Column(name = "destination_state")),
+			@AttributeOverride(name = "country", column = @Column(name = "destination_country")),
+			@AttributeOverride(name = "waypoint.lat", column = @Column(name = "destination_wpt_lat")),
+			@AttributeOverride(name = "waypoint.lon", column = @Column(name = "destination_wpt_lon")),
+			@AttributeOverride(name = "zipCode", column = @Column(name = "destination_zipCode")) })
 	@Embedded
 	private AddressPoint destination;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date arrivalDate;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date departureDate;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date closingDate;
-	
-	private Integer availablePax = 0; 
+
+	private Integer availablePax = 0;
 	private Integer maxPax = 0;
 	private Double estimatedCost = 0.0;
 	private String comments;
-	
+
 	@Enumerated(EnumType.STRING)
 	private TripStatus status;
 
-
-	//Relaciones
-	@ManyToMany(cascade=(CascadeType.REMOVE))
-	@JoinTable(name="TAPLICATIONS")
+	// Relaciones
+	@ManyToMany(cascade = (CascadeType.REMOVE))
+	@JoinTable(name = "TAPLICATIONS")
 	private Set<User> aplicadores = new HashSet<>();
-	
-	@OneToMany(mappedBy="trip", cascade=(CascadeType.REMOVE))
+
+	@OneToMany(mappedBy = "trip", cascade = (CascadeType.REMOVE))
 	private Set<Seat> seats = new HashSet<>();
 
 	@ManyToOne
 	private User promoter;
-	
-	
-	public Trip(){};
-	
+
+	public Trip() {
+	};
+
 	public Trip(AddressPoint departure, AddressPoint destination,
 			Date arrivalDate, Date departureDate, Date closingDate,
 			Integer availablePax, Integer maxPax, Double estimatedCost,
@@ -121,7 +108,6 @@ public class Trip {
 		this.promoter = promoter;
 		promoter._getTrips().add(this);
 	}
-	
 
 	public AddressPoint getDeparture() {
 		return departure;
@@ -207,8 +193,6 @@ public class Trip {
 		this.comments = comments;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -224,7 +208,6 @@ public class Trip {
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -260,48 +243,41 @@ public class Trip {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Trip [id=" + id 
-				+ ", departure=" + departure 
-				+ ", destination=" + destination 
-				+ ", arrivalDate=" + arrivalDate 
-				+ ", departureDate=" + departureDate 
-				+ ", closingDate=" + closingDate 
-				+ ", availablePax=" + availablePax 
-				+ ", maxPax=" + maxPax 
-				+ ", estimatedCost=" + estimatedCost 
-				+ ", comments=" + comments 
-				+ ", status=" + status
-				+ ", promoterId=" + promoter 
-			+ "]";
+		return "Trip [id=" + id + ", departure=" + departure + ", destination="
+				+ destination + ", arrivalDate=" + arrivalDate
+				+ ", departureDate=" + departureDate + ", closingDate="
+				+ closingDate + ", availablePax=" + availablePax + ", maxPax="
+				+ maxPax + ", estimatedCost=" + estimatedCost + ", comments="
+				+ comments + ", status=" + status + ", promoterId=" + promoter
+				+ "]";
 	}
 
 	// Metodos de relacion
-	
+
 	Set<User> _getApplications() {
 		return aplicadores;
 	}
-	
-	public Set<User> getApplications(){
+
+	public Set<User> getApplications() {
 		return Collections.unmodifiableSet(aplicadores);
 	}
 
 	Set<Seat> _getSeats() {
 		return seats;
 	}
-	
-	public Set<Seat> getSeats(){
+
+	public Set<Seat> getSeats() {
 		return Collections.unmodifiableSet(seats);
 	}
-	
-	public User getPromoter(){
+
+	public User getPromoter() {
 		return promoter;
 	}
-	
-	void _setPromoter(User promoter){
+
+	void _setPromoter(User promoter) {
 		this.promoter = promoter;
 	}
-	
+
 }

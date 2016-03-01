@@ -2,17 +2,16 @@ package uo.sdi.model.keys;
 
 import java.io.Serializable;
 
+public class SeatKey implements Serializable {
 
-public class SeatKey implements Serializable{
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	Long user;
 	Long trip;
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -43,6 +42,5 @@ public class SeatKey implements Serializable{
 			return false;
 		return true;
 	}
-	
 
 }

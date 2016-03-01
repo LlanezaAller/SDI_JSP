@@ -22,6 +22,8 @@
 				<div class="inputLine"><input type="submit" value="Entrar" class="button"></div>
 				<p> o </p>
 				<a href="registro.jsp">Crear una cuenta</a>
+				<p> o </p>
+				<a href="listarViajes">Volver</a>
 			</form>
 		</div>
 	</div>

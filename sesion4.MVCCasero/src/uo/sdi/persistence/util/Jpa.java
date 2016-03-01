@@ -10,8 +10,8 @@ public class Jpa {
 
 	private static EntityManagerFactory emf = null;
 	private static ThreadLocal<EntityManager> emThread = 
-		new ThreadLocal<EntityManager>();
-	
+			new ThreadLocal<EntityManager>();
+
 	public static EntityManager createEntityManager() {
 		EntityManager entityManager = getEmf().createEntityManager();
 		emThread.set(entityManager);
@@ -23,7 +23,7 @@ public class Jpa {
 	}
 
 	private static EntityManagerFactory getEmf() {
-		if (emf == null){
+		if (emf == null) {
 			emf = jndiFind("java:/ForumJpaFactory");
 		}
 		return emf;
@@ -33,13 +33,13 @@ public class Jpa {
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			
+
 			return (EntityManagerFactory) ctx.lookup(name);
-			
+
 		} catch (NamingException e) {
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 }

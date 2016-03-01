@@ -20,12 +20,12 @@ public class CancelarViajeAction implements Accion {
 			if (SdiUtil.assertCampos(request.getParameter("viajeID"))) {
 				User user = (User) request.getSession().getAttribute("user");
 				Long viajeID = Long.valueOf(request.getParameter("viajeID"));
-				Trip viaje = Factories.persistence.createTripGateway().findById(viajeID);
-				
-				if(viaje.getPromoter().getId() == user.getId()){
+				Trip viaje = Factories.persistence.createTripGateway()
+						.findById(viajeID);
+
+				if (viaje.getPromoter().getId() == user.getId()) {
 					viaje.setStatus(TripStatus.CANCELLED);
-					Message error = new Message(Message.OK,
-							"Viaje cancelado");
+					Message error = new Message(Message.OK, "Viaje cancelado");
 					request.setAttribute("message", error);
 					return "EXITO";
 				} else {
@@ -33,7 +33,7 @@ public class CancelarViajeAction implements Accion {
 							"No estás autorizado a cancelar el viaje");
 					request.setAttribute("message", error);
 					return "FRACASO";
-				}		
+				}
 			} else {
 				Message error = new Message(Message.ERROR,
 						"Error con la id del viaje o del usuario");

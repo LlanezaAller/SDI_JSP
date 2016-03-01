@@ -38,20 +38,21 @@ public class ModificarDatosAction implements Accion {
 					reNewPassword);
 
 			try {
-				
-				if (status){
-					if( usuario.getPassword().equals(oldPassword)
-						&& newPassword.equals(reNewPassword)) {
-					usuario.setPassword(newPassword);
-					}else {
-						Message m = new Message(Message.ERROR, "Debes introducir tu contraseña vieja, y confirmar la nueva.");
+
+				if (status) {
+					if (usuario.getPassword().equals(oldPassword)
+							&& newPassword.equals(reNewPassword)) {
+						usuario.setPassword(newPassword);
+					} else {
+						Message m = new Message(Message.ERROR,
+								"Debes introducir tu contraseña vieja, y confirmar la nueva.");
 						request.setAttribute("message", m);
 						return "FRACASO";
-					}	
+					}
 				}
-				if (SdiUtil.isEmail(newEmail)){
+				if (SdiUtil.isEmail(newEmail)) {
 					usuario.setEmail(newEmail);
-				}else {
+				} else {
 					Message m = new Message(Message.ERROR, "Email no válido.");
 					request.setAttribute("message", m);
 					return "FRACASO";

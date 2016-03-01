@@ -2,22 +2,21 @@ package uo.sdi.model.type;
 
 import javax.persistence.Embeddable;
 
-/**
- * This class represents a value type
- * @author alb
- */
+
 @Embeddable
 public class Waypoint {
 
 	private Double lat;
 	private Double lon;
-	
+
 	public Waypoint(Double lat, Double lon) {
 		super();
 		this.lat = lat;
 		this.lon = lon;
 	}
-	public Waypoint(){};
+
+	public Waypoint() {
+	};
 
 	public Double getLat() {
 		return lat;
@@ -32,7 +31,6 @@ public class Waypoint {
 		return "Waypoint [lat=" + lat + ", lon=" + lon + "]";
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -19,17 +19,15 @@ public class ListarAplicacionesAction implements Accion {
 		Long tripId = Long.parseLong(request.getParameter("viajeId"));
 
 		if (tripId != null) {
-			List<User> aplicantes = Factories
-					.persistence.createUserGateway().findUsersByTrip(tripId);
-			
-			
+			List<User> aplicantes = Factories.persistence.createUserGateway()
+					.findUsersByTrip(tripId);
+
 			request.setAttribute("listaAplicantes", aplicantes);
 			Log.debug(
 					"Obtenida lista de usuarios aplicantes al trip con id [%s]",
 					tripId);
 		} else {
-			Message m = new Message(Message.ERROR,
-					"No existe trip para ese Id");
+			Message m = new Message(Message.ERROR, "No existe trip para ese Id");
 			request.setAttribute("message", m);
 		}
 		return "EXITO";

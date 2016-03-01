@@ -109,24 +109,25 @@ public class CrearViajeAction implements Accion {
 
 					Factories.persistence.createSeatGateway().newSeat(seat);
 
-					Message ok = new Message(Message.OK, "Viaje creado con éxito");
+					Message ok = new Message(Message.OK,
+							"Viaje creado con éxito");
 					request.setAttribute("message", ok);
 					return "EXITO";
 				} else {
-										
+
 					viaje.setArrivalDate(arrivalDatetime);
 					viaje.setClosingDate(closingDatetime);
 					viaje.setComments(comments);
 					viaje.setDeparture(departure);
 					viaje.setDestination(destination);
 					viaje.setEstimatedCost(estimatedCost);
-					
-					Message ok = new Message(Message.OK, "Viaje modificado con éxito");
+
+					Message ok = new Message(Message.OK,
+							"Viaje modificado con éxito");
 					request.setAttribute("message", ok);
 					return "EXITO";
 				}
 
-				
 			} else {
 				return faltanCampos(request);
 			}

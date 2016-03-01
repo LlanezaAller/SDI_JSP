@@ -23,8 +23,7 @@ public class ValorarAction implements Accion {
 				User user = (User) request.getSession().getAttribute("user");
 				Trip viaje = Factories.persistence
 						.createTripGateway()
-						.findById(
-								Long.valueOf(request.getParameter("viajeID")));
+						.findById(Long.valueOf(request.getParameter("viajeID")));
 				boolean canRate = false;
 				Seat mySeat = null;
 				for (Seat s : viaje.getSeats())
@@ -48,14 +47,15 @@ public class ValorarAction implements Accion {
 							if (ratingString == null) {
 								Message error = new Message(Message.ERROR,
 										"Necesitas valorar"
-										+ " a toda la gente del viaje");
+												+ " a toda la gente del viaje");
 								request.setAttribute("message", error);
 								return "FRACASO";
 							}
 							int ratingValue = Integer.valueOf(ratingString);
 							Factories.persistence.createRatingGateway()
-							.newRating(new Rating(mySeat, s, comment,
-									ratingValue));
+									.newRating(
+											new Rating(mySeat, s, comment,
+													ratingValue));
 						}
 					}
 					Message error = new Message(Message.OK,

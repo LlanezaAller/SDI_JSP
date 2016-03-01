@@ -56,6 +56,7 @@ if(request.getAttribute("listaViajes")==null){
 					<th>Fecha de llegada</th>
 					<th>Fecha límite</th>
 					<th>Plazas libres</th>
+					<c:if test="${not empty user}"><th>Promotor</th></c:if>
 					<th>Ver</th>
 				</tr>
 			</thead>
@@ -68,6 +69,7 @@ if(request.getAttribute("listaViajes")==null){
 						<td>${viaje.arrivalDate}</td>
 						<td>${viaje.closingDate}</td>
 						<td>${viaje.availablePax}</td>
+						<c:if test="${not empty user}"><td>${viaje.promoter.name}</td></c:if>
 						<td><a href="verViaje?viajeID=${viaje.id}">Ver</a></td>
 					</tr>
 				</c:forEach>
@@ -78,11 +80,11 @@ if(request.getAttribute("listaViajes")==null){
 	</div>
 <!-- Comentar/Descomentar desde aqui para los test -->
 <!-- 
+ -->
 	<script type="text/javascript"
 		src="js/datatables.min.js"></script>
 	<script type="text/javascript" src="js/datatables.js"></script>
 	<script type="text/javascript" src="js/messages.js"></script>
- -->
 <!-- Comentar/Descomentar hasta aqui para los test  -->
 	
 </body>
